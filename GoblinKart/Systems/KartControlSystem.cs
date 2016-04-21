@@ -1,40 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameEngine.InputDefs;
 using GameEngine;
 using Microsoft.Xna.Framework;
 
 namespace GoblinKart
 {
-    class ChopperControlSystem : IUpdateSystem
+    class KartControlSystem : IUpdateSystem
     {
         ECSEngine engine;
 
-        public ChopperControlSystem(ECSEngine engine)
+        public KartControlSystem(ECSEngine engine)
         {
             this.engine = engine;
         }
+
         public void Update(GameTime gameTime)
         {
             List<Entity> sceneEntities = SceneManager.Instance.GetActiveScene().GetAllEntities();
-            Entity chopper = ComponentManager.Instance.GetEntityWithTag("Chopper",sceneEntities);
-            TransformComponent t = ComponentManager.Instance.GetEntityComponent<TransformComponent>(chopper);
-            ModelComponent chopModel = ComponentManager.Instance.GetEntityComponent<ModelComponent>(chopper);
+            Entity kart = ComponentManager.Instance.GetEntityWithTag("Kart", sceneEntities);
+            TransformComponent t = ComponentManager.Instance.GetEntityComponent<TransformComponent>(kart);
+            ModelComponent kartModel = ComponentManager.Instance.GetEntityComponent<ModelComponent>(kart);
 
             Entity terrain = ComponentManager.Instance.GetEntityWithTag("Terrain", sceneEntities);
             TerrainMapComponent tcomp = ComponentManager.Instance.GetEntityComponent<TerrainMapComponent>(terrain);
            
-            engine.SetWindowTitle("Chopper x:" + t.position.X + "Chopper y:" + t.position.Y + "Chopper z:" +t.position.Z + "Map height:" + tcomp.GetTerrainHeight(t.position.X, Math.Abs(t.position.Z)));
+            engine.SetWindowTitle("Kart x: " + t.position.X + " Kart y: " + t.position.Y + " Kart z: " + t.position.Z + " Map height: " + tcomp.GetTerrainHeight(t.position.X, Math.Abs(t.position.Z)));
 
-            //lås modellen till heightmap höjd
-            t.position = new Vector3(t.position.X, 1.7f+tcomp.GetTerrainHeight(t.position.X, Math.Abs(t.position.Z)), t.position.Z);
+            //lock model to height
+            t.position = new Vector3(t.position.X, 1.7f + tcomp.GetTerrainHeight(t.position.X, Math.Abs(t.position.Z)), t.position.Z);
 
             //set the mesh transforms to zero
-            chopModel.SetMeshTransform(1, Matrix.CreateRotationY(0.0f));
-            chopModel.SetMeshTransform(3, Matrix.CreateRotationY(0.0f));
+            kartModel.SetMeshTransform(1, Matrix.CreateRotationY(0.0f));
+            kartModel.SetMeshTransform(3, Matrix.CreateRotationY(0.0f));
 
             Entity kb = ComponentManager.Instance.GetEntityWithTag("keyboard", sceneEntities);
             if (kb != null)
@@ -90,8 +88,8 @@ namespace GoblinKart
 
                     if(moving == true)
                     {
-                        chopModel.SetMeshTransform(1, Matrix.CreateRotationY(0.08f));
-                        chopModel.SetMeshTransform(3, Matrix.CreateRotationY(0.1f));
+                        kartModel.SetMeshTransform(1, Matrix.CreateRotationY(0.08f));
+                        kartModel.SetMeshTransform(3, Matrix.CreateRotationY(0.1f));
                     }
                 }
             }
