@@ -17,6 +17,9 @@ namespace GameEngine
         public Vector3 vRotation { get; set; }
         public Vector3 forward { get; set; }
 
+        // Maybe move me
+        public Vector3 Velocity;
+
         public TransformComponent()
         {
             scale = Vector3.One;

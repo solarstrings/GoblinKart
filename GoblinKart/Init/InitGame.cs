@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
+using GameEngine.Source.Systems;
 using Microsoft.Xna.Framework.Input;
 
 namespace GoblinKart.Init {
@@ -16,6 +17,7 @@ namespace GoblinKart.Init {
 
             sm.RegisterSystem("Game", new TransformSystem());
             sm.RegisterSystem("Game", new ModelRenderSystem());
+            sm.RegisterSystem("Game", new PhysicsSystem());
 
             InitKeyboard();
             InitKart(engine);

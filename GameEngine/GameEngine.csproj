@@ -96,10 +96,12 @@
     <Compile Include="Source\Systems\ISystem.cs" />
     <Compile Include="Source\Systems\IUpdateSystem.cs" />
     <Compile Include="Source\Systems\KeyBoardSystem.cs" />
+    <Compile Include="Source\Systems\ModelCollisionSystem.cs" />
     <Compile Include="Source\Systems\ModelRenderSystem.cs" />
     <Compile Include="Source\Systems\MouseSystem.cs" />
     <Compile Include="Source\Systems\MoveSystem.cs" />
     <Compile Include="Source\Systems\ParentSystem.cs" />
+    <Compile Include="Source\Systems\PhysicsSystem.cs" />
     <Compile Include="Source\Systems\SpriteRenderSystem.cs" />
     <Compile Include="Source\Systems\TerrainMapRenderSystem.cs" />
     <Compile Include="Source\Systems\TerrainRenderSystem.cs" />

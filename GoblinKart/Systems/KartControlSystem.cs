@@ -64,8 +64,9 @@ namespace GoblinKart {
                         moving = true;
                     }
                     if (Utilities.CheckKeyboardAction("forward", BUTTON_STATE.HELD, k)) {
-                        trsComp.position += trsComp.forward * 100f * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        moving = true;
+                        trsComp.Velocity += new Vector3(2f, 0, 0);
+                        //trsComp.position += trsComp.forward * 100f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        //moving = true;
                     }
                     if (Utilities.CheckKeyboardAction("back", BUTTON_STATE.HELD, k)) {
                         trsComp.position += trsComp.forward * -100f * (float)gameTime.ElapsedGameTime.TotalSeconds;

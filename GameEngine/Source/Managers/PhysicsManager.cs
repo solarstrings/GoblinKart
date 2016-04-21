@@ -9,6 +9,11 @@ namespace GameEngine
 {
     class PhysicsManager
     {
+        // Maybe move us
+        public float Friction = 1.5f;
+        public float Gravity = 9.82f;
+
+
         private PhysicsManager() { }
         private static PhysicsManager instance = null;
 
