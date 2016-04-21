@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/grasstile.png</SourceFile>
-  <SourceTime>2016-04-21T10:18:48.4818738+02:00</SourceTime>
-  <DestFile>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/bin/Windows/grasstile.xnb</DestFile>
-  <DestTime>2016-04-21T10:20:06.1593167+02:00</DestTime>
+  <SourceFile>C:/GoblinKart/GoblinKart/Content/grasstile.png</SourceFile>
+  <SourceTime>2016-04-19T12:35:54.001+02:00</SourceTime>
+  <DestFile>C:/GoblinKart/GoblinKart/Content/bin/Windows/grasstile.xnb</DestFile>
+  <DestTime>2016-04-21T15:32:15.7701233+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-03-30T08:36:08+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

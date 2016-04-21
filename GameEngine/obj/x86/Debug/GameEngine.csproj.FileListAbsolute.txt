@@ -70,7 +70,6 @@ C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
 C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.XInput.xml
 C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.RawInput.xml
 C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
-C:\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.csprojResolveAssemblyReference.cache
 C:\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.dll
 C:\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.pdb
 C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GameEngine\bin\Windows\x86\Debug\GameEngine.dll

@@ -77,6 +77,11 @@ namespace GameEngine
                 foreach (BasicEffect effect in mesh.Effects)
                 {
                     effect.EnableDefaultLighting();
+                    if (modelComp.textured == true)
+                    {
+                        effect.TextureEnabled = true;
+                        effect.Texture = modelComp.texture;
+                    }
 
                     effect.World = transforms[mesh.ParentBone.Index] * t.world;
                     effect.View = c.viewMatrix;
