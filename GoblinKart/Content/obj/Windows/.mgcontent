@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/GoblinKart/GoblinKart/Content/canyon.png</File>
+    <File>C:/GoblinKart/GoblinKart/Content/Chopper.fbx</File>
+    <File>C:/GoblinKart/GoblinKart/Content/grass.png</File>
+    <File>C:/GoblinKart/GoblinKart/Content/grasstile.png</File>
+    <File>C:/GoblinKart/GoblinKart/Content/horizontalroad.png</File>
+    <File>C:/GoblinKart/GoblinKart/Content/LBCornerroad.png</File>
+    <File>C:/GoblinKart/GoblinKart/Content/LTCornerroad.png</File>
+    <File>C:/GoblinKart/GoblinKart/Content/RBCornerroad.png</File>
+    <File>C:/GoblinKart/GoblinKart/Content/RTCornerroad.png</File>
+    <File>C:/GoblinKart/GoblinKart/Content/verticalroad.png</File>
+  </SourceFiles>
+</SourceFileCollection>

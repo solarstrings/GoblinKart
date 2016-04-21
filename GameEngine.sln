@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameEngine", "GameEngine\GameEngine.csproj", "{538B6139-9AC8-4119-8464-C6FB08AB52CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoblinKart", "GoblinKart\GoblinKart.csproj", "{AF81E5FC-91BA-461F-8901-2CF7F10774AC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{538B6139-9AC8-4119-8464-C6FB08AB52CC}.Debug|x86.ActiveCfg = Debug|x86
+		{538B6139-9AC8-4119-8464-C6FB08AB52CC}.Debug|x86.Build.0 = Debug|x86
+		{538B6139-9AC8-4119-8464-C6FB08AB52CC}.Release|x86.ActiveCfg = Release|x86
+		{538B6139-9AC8-4119-8464-C6FB08AB52CC}.Release|x86.Build.0 = Release|x86
+		{AF81E5FC-91BA-461F-8901-2CF7F10774AC}.Debug|x86.ActiveCfg = Debug|x86
+		{AF81E5FC-91BA-461F-8901-2CF7F10774AC}.Debug|x86.Build.0 = Debug|x86
+		{AF81E5FC-91BA-461F-8901-2CF7F10774AC}.Release|x86.ActiveCfg = Release|x86
+		{AF81E5FC-91BA-461F-8901-2CF7F10774AC}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
