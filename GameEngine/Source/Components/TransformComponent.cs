@@ -23,5 +23,9 @@ namespace GameEngine
             rotation = Quaternion.Identity;
             position = Vector3.Zero;
         }
+
+        public void LockModelToHeight(TerrainMapComponent terComp) {
+            position = new Vector3(position.X, 1.7f + terComp.GetTerrainHeight(position.X, Math.Abs(position.Z)), position.Z);
+        }
     }
 }

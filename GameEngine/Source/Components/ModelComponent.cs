@@ -42,5 +42,10 @@ namespace GameEngine
                 MeshTransforms.Remove(bone);
             }
         }
+
+        public void ResetMeshTransforms() {
+            SetMeshTransform(1, Matrix.CreateRotationY(0.0f));
+            SetMeshTransform(3, Matrix.CreateRotationY(0.0f));
+        }
     }
 }

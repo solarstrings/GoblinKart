@@ -4,90 +4,75 @@ using GameEngine.InputDefs;
 using GameEngine;
 using Microsoft.Xna.Framework;
 
-namespace GoblinKart
-{
-    class KartControlSystem : IUpdateSystem
-    {
+namespace GoblinKart {
+    class KartControlSystem : IUpdateSystem {
         ECSEngine engine;
 
-        public KartControlSystem(ECSEngine engine)
-        {
+        public KartControlSystem(ECSEngine engine) {
             this.engine = engine;
         }
 
-        public void Update(GameTime gameTime)
-        {
+        public void Update(GameTime gameTime) {
             List<Entity> sceneEntities = SceneManager.Instance.GetActiveScene().GetAllEntities();
             Entity kart = ComponentManager.Instance.GetEntityWithTag("Kart", sceneEntities);
-            TransformComponent t = ComponentManager.Instance.GetEntityComponent<TransformComponent>(kart);
+            TransformComponent trsComp = ComponentManager.Instance.GetEntityComponent<TransformComponent>(kart);
             ModelComponent kartModel = ComponentManager.Instance.GetEntityComponent<ModelComponent>(kart);
 
             Entity terrain = ComponentManager.Instance.GetEntityWithTag("Terrain", sceneEntities);
-            TerrainMapComponent tcomp = ComponentManager.Instance.GetEntityComponent<TerrainMapComponent>(terrain);
-           
-            engine.SetWindowTitle("Kart x: " + t.position.X + " Kart y: " + t.position.Y + " Kart z: " + t.position.Z + " Map height: " + tcomp.GetTerrainHeight(t.position.X, Math.Abs(t.position.Z)));
+            TerrainMapComponent terComp = ComponentManager.Instance.GetEntityComponent<TerrainMapComponent>(terrain);
 
-            //lock model to height
-            t.position = new Vector3(t.position.X, 1.7f + tcomp.GetTerrainHeight(t.position.X, Math.Abs(t.position.Z)), t.position.Z);
+            engine.SetWindowTitle("Kart x: " + trsComp.position.X + " Kart y: " + trsComp.position.Y + " Kart z: " + trsComp.position.Z + " Map height: " +
+                terComp.GetTerrainHeight(trsComp.position.X, Math.Abs(trsComp.position.Z)));
 
-            //set the mesh transforms to zero
-            kartModel.SetMeshTransform(1, Matrix.CreateRotationY(0.0f));
-            kartModel.SetMeshTransform(3, Matrix.CreateRotationY(0.0f));
+            trsComp.LockModelToHeight(terComp);
+            kartModel.ResetMeshTransforms();
+            MoveKart(gameTime, sceneEntities, trsComp, kartModel);
+        }
 
+        private void MoveKart(GameTime gameTime, List<Entity> sceneEntities, TransformComponent trsComp, ModelComponent kartModel) {
             Entity kb = ComponentManager.Instance.GetEntityWithTag("keyboard", sceneEntities);
-            if (kb != null)
-            {
+            Vector3 newRot = Vector3.Zero;
+            bool moving = false;
+
+            if (kb != null) {
                 KeyBoardComponent k = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(kb);
-                if (k != null)
-                {
-                    Vector3 newRot = Vector3.Zero;
-                    bool moving = false;
 
-                    if (Utilities.CheckKeyboardAction("right", BUTTON_STATE.HELD, k))
-                    {
+                if (k != null) {
+                    if (Utilities.CheckKeyboardAction("right", BUTTON_STATE.HELD, k)) {
                         newRot = new Vector3(-2.8f, 0f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        t.vRotation = newRot;
+                        trsComp.vRotation = newRot;
                         moving = true;
                     }
-                    else if (Utilities.CheckKeyboardAction("left", BUTTON_STATE.HELD, k))
-                    {
-                        newRot = new Vector3(2.8f, 0f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds; 
-                        t.vRotation = newRot;
+                    else if (Utilities.CheckKeyboardAction("left", BUTTON_STATE.HELD, k)) {
+                        newRot = new Vector3(2.8f, 0f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        trsComp.vRotation = newRot;
                         moving = true;
                     }
-                    else
-                    {
-                        t.vRotation = Vector3.Zero;
+                    else {
+                        trsComp.vRotation = Vector3.Zero;
                     }
 
-                    if (Utilities.CheckKeyboardAction("up", BUTTON_STATE.HELD, k))
-                    {
-                        t.position += new Vector3(0f, 70f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    if (Utilities.CheckKeyboardAction("up", BUTTON_STATE.HELD, k)) {
+                        trsComp.position += new Vector3(0f, 70f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
                         moving = true;
                     }
-
-                    if (Utilities.CheckKeyboardAction("quit", BUTTON_STATE.RELEASED, k))
-                    {
+                    if (Utilities.CheckKeyboardAction("quit", BUTTON_STATE.RELEASED, k)) {
                         System.Environment.Exit(0);
                     }
-                    if (Utilities.CheckKeyboardAction("down", BUTTON_STATE.HELD, k))
-                    {
-                        t.position += new Vector3(0f, -70f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    if (Utilities.CheckKeyboardAction("down", BUTTON_STATE.HELD, k)) {
+                        trsComp.position += new Vector3(0f, -70f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
                         moving = true;
                     }
-                    if (Utilities.CheckKeyboardAction("forward", BUTTON_STATE.HELD, k))
-                    {
-                        t.position += t.forward * 100f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    if (Utilities.CheckKeyboardAction("forward", BUTTON_STATE.HELD, k)) {
+                        trsComp.position += trsComp.forward * 100f * (float)gameTime.ElapsedGameTime.TotalSeconds;
                         moving = true;
                     }
-                    if (Utilities.CheckKeyboardAction("back", BUTTON_STATE.HELD, k))
-                    {
-                        t.position += t.forward * -100f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    if (Utilities.CheckKeyboardAction("back", BUTTON_STATE.HELD, k)) {
+                        trsComp.position += trsComp.forward * -100f * (float)gameTime.ElapsedGameTime.TotalSeconds;
                         moving = true;
                     }
 
-                    if(moving == true)
-                    {
+                    if (moving == true) {
                         kartModel.SetMeshTransform(1, Matrix.CreateRotationY(0.08f));
                         kartModel.SetMeshTransform(3, Matrix.CreateRotationY(0.1f));
                     }

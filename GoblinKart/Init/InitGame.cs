@@ -8,11 +8,11 @@ using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
 using Microsoft.Xna.Framework.Input;
 
-namespace GoblinKart.Init{
-    class InitGame{
+namespace GoblinKart.Init {
+    class InitGame {
         private SystemManager sm = SystemManager.Instance;
 
-        public InitGame(ECSEngine engine){
+        public InitGame(ECSEngine engine) {
 
             sm.RegisterSystem("Game", new TransformSystem());
             sm.RegisterSystem("Game", new ModelRenderSystem());
