@@ -75,3 +75,6 @@ C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\obj\x8
 C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\basichouse.xnb
 C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\basichouse_texture1.xnb
 C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\basichouse_texture2.xnb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\basichouse.xnb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\basichouse_texture1.xnb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\basichouse_texture2.xnb

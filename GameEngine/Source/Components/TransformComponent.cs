@@ -28,7 +28,7 @@ namespace GameEngine
         }
 
         public void LockModelToHeight(TerrainMapComponent terComp) {
-            position = new Vector3(position.X, 1.7f + terComp.GetTerrainHeight(position.X, Math.Abs(position.Z)), position.Z);
+            position = new Vector3(position.X, 1.7f + TerrainMapRenderSystem.GetTerrainHeight(terComp, position.X, Math.Abs(position.Z)), position.Z);
         }
     }
 }

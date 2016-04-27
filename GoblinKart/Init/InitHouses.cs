@@ -42,7 +42,7 @@ namespace GoblinKart.Init
                 float minz = rnd.Next(128, 900);
                 float houseHeight = (float)rnd.Next(8, 12) / 100;
                 t.position = new Vector3(minx, 0.0f, -minz);
-                t.position = new Vector3(t.position.X, tcomp.GetTerrainHeight(t.position.X, Math.Abs(t.position.Z)), t.position.Z);
+                t.position = new Vector3(t.position.X, TerrainMapRenderSystem.GetTerrainHeight(tcomp, t.position.X, Math.Abs(t.position.Z)), t.position.Z);
                 t.vRotation = new Vector3(0, 0, 0);
                 t.scale = new Vector3(0.08f, houseHeight, 0.08f);
                 ComponentManager.Instance.AddComponentToEntity(e, t);

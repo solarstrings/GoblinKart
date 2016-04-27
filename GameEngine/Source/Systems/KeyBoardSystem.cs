@@ -8,58 +8,60 @@ using Microsoft.Xna.Framework.Input;
 
 using GameEngine.InputDefs;
 
-namespace GameEngine
-{
-    public class KeyBoardSystem : IUpdateSystem
-    {
-        public void Update(GameTime gameTime)
-        {
+namespace GameEngine {
+    public class KeyBoardSystem : IUpdateSystem {
+        public void Update(GameTime gameTime) {
             List<Entity> entities = SceneManager.Instance.GetActiveScene().GetAllEntities();
             List<KeyBoardComponent> keyboardComps = ComponentManager.Instance.GetComponentsFromEntities<KeyBoardComponent>(entities);
 
             if (keyboardComps == null) return;
-            foreach (KeyBoardComponent keyboardComp in keyboardComps)
-            {
+            foreach (KeyBoardComponent keyboardComp in keyboardComps) {
                 UpdateState(keyboardComp);
                 UpdateActionStates(keyboardComp);
             }
         }
 
-        public void UpdateState(KeyBoardComponent keyboardComp)
-        {
+        public void UpdateState(KeyBoardComponent keyboardComp) {
             keyboardComp.OldState = keyboardComp.NewState;
             keyboardComp.NewState = Keyboard.GetState();
         }
 
-        public void UpdateActionStates(KeyBoardComponent keyboardComp)
-        {
-            foreach (string action in keyboardComp.Actions.Keys)
-            {
-                foreach (Keys key in keyboardComp.Actions[action])
-                {
+        public void UpdateActionStates(KeyBoardComponent keyboardComp) {
+            foreach (string action in keyboardComp.Actions.Keys) {
+                foreach (Keys key in keyboardComp.Actions[action]) {
                     bool newState = keyboardComp.NewState.IsKeyDown(key);
                     bool oldState = keyboardComp.OldState.IsKeyDown(key);
 
-                    if (newState && !oldState)
-                    {
+                    if (newState && !oldState) {
                         keyboardComp.ActionStates[action] = BUTTON_STATE.PRESSED;
                         break;
                     }
-                    else if (newState && oldState)
-                    {
+                    else if (newState && oldState) {
                         keyboardComp.ActionStates[action] = BUTTON_STATE.HELD;
                         break;
                     }
-                    else if (!newState && oldState)
-                    {
+                    else if (!newState && oldState) {
                         keyboardComp.ActionStates[action] = BUTTON_STATE.RELEASED;
                         break;
                     }
-                    else
-                    {
+                    else {
                         keyboardComp.ActionStates[action] = BUTTON_STATE.NOT_PRESSED;
                     }
                 }
+            }
+        }
+
+        public static void AddKeyToAction(ref KeyBoardComponent k, string action, Keys key) {
+            if (!k.Actions.ContainsKey(action)) {
+                k.Actions[action] = new List<Keys>();
+                k.ActionStates[action] = BUTTON_STATE.NOT_PRESSED;
+            }
+            k.Actions[action].Add(key);
+        }
+
+        public static void RemoveKeyFromAction(ref KeyBoardComponent k, string action, Keys key) {
+            if (k.Actions.ContainsKey(action)) {
+                k.Actions[action].Remove(key);
             }
         }
 
