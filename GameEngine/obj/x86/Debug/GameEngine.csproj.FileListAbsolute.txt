@@ -48,30 +48,6 @@ C:\DatorGrafik\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
 C:\DatorGrafik\GameEngine\obj\x86\Debug\GameEngine.csprojResolveAssemblyReference.cache
 C:\DatorGrafik\GameEngine\obj\x86\Debug\GameEngine.dll
 C:\DatorGrafik\GameEngine\obj\x86\Debug\GameEngine.pdb
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\GameEngine.dll
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\GameEngine.pdb
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\MonoGame.Framework.dll
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.dll
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.DXGI.dll
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.XInput.dll
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.RawInput.dll
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\MonoGame.Framework.xml
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.xml
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.DXGI.xml
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.XInput.xml
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.RawInput.xml
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
-C:\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.dll
-C:\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.pdb
 C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GameEngine\bin\Windows\x86\Debug\GameEngine.dll
 C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GameEngine\bin\Windows\x86\Debug\GameEngine.pdb
 C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GameEngine\bin\Windows\x86\Debug\MonoGame.Framework.dll
@@ -97,3 +73,28 @@ C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GameEngine\bin\Wi
 C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.csprojResolveAssemblyReference.cache
 C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.dll
 C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.pdb
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\GameEngine.dll
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\GameEngine.pdb
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\MonoGame.Framework.dll
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.dll
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.XInput.dll
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.RawInput.dll
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\MonoGame.Framework.xml
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.xml
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.XInput.xml
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.RawInput.xml
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+C:\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.dll
+C:\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.pdb
+C:\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.csprojResolveAssemblyReference.cache

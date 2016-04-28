@@ -72,11 +72,8 @@ namespace GoblinKart {
                         trsComp.position += trsComp.forward * -100f * (float)gameTime.ElapsedGameTime.TotalSeconds;
                         moving = true;
                     }
-
-                    if (moving == true) {
-                        kartModel.SetMeshTransform(1, Matrix.CreateRotationY(0.08f));
-                        kartModel.SetMeshTransform(3, Matrix.CreateRotationY(0.1f));
-                    }
+                    kartModel.SetMeshTransform(1, Matrix.CreateRotationY(0.08f));
+                    kartModel.SetMeshTransform(3, Matrix.CreateRotationY(0.1f));
                 }
             }
         }

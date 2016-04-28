@@ -162,11 +162,11 @@ namespace GameEngine
                 for (clipY = 0; clipY < hmHeight-1; clipY += clipH)
                 {
                     //use this line to see the chunks (don't use in real game)
-                    //TerrainChunk t = new TerrainChunk(graphicsDevice, terrainHeightMap, new Rectangle(clipX, clipY, clipW, clipH ),
-                    //                 new Vector3(clipX, 0, -clipY), GetVertexTextureNormals(new Rectangle(clipX, clipY, clipW , clipH )));
+                    TerrainChunk t = new TerrainChunk(graphicsDevice, terrainHeightMap, new Rectangle(clipX, clipY, clipW, clipH ),
+                                     new Vector3(clipX, 0, -clipY), GetVertexTextureNormals(new Rectangle(clipX, clipY, clipW , clipH )));
                     Rectangle clipRect = new Rectangle(clipX, clipY, clipW + 1, clipH + 1);
-                    TerrainChunk t = new TerrainChunk(graphicsDevice, terrainHeightMap, clipRect, 
-                                     new Vector3(clipX,0,-clipY),GetVertexTextureNormals(clipRect));
+                    //TerrainChunk t = new TerrainChunk(graphicsDevice, terrainHeightMap, clipRect, 
+                    //                 new Vector3(clipX,0,-clipY),GetVertexTextureNormals(clipRect));
 
                     //apply the default texture to the chunk, so that it is visible
                     t.SetTexture(defaultTexture);
