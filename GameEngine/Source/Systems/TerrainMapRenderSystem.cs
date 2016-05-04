@@ -78,8 +78,8 @@ namespace GameEngine {
                 }
             }
 
-            terrain.vertices = InitTerrainVertices(terrain);
-            InitIndices(ref terrain);
+            terrain.vertices = InitTerrainVertices(terrain.heightInfo, width, height);
+            terrain.indices = InitIndices(width, height);
             InitNormals(ref terrain);
 
             //setup the terrain chunks
@@ -87,26 +87,27 @@ namespace GameEngine {
             CorrectChunkPositions(ref terrain);
         }
 
-        private static void InitIndices(ref TerrainMapComponent terrain) {
-            terrain.indices = new int[(terrain.hmWidth - 1) * (terrain.hmHeight - 1) * 6];
-            int indicesCount = 0;
+        internal static int[] InitIndices(int width, int height) {
+            int[] indices = new int[(width - 1) * (height - 1) * 6];
+            int indicesCount = 0; ;
 
-            for (int y = 0; y < terrain.hmHeight - 1; ++y) {
-                for (int x = 0; x < terrain.hmWidth - 1; ++x) {
-                    int botLeft = x + y * terrain.hmWidth;
-                    int botRight = (x + 1) + y * terrain.hmWidth;
-                    int topLeft = x + (y + 1) * terrain.hmWidth;
-                    int topRight = (x + 1) + (y + 1) * terrain.hmWidth;
+            for (int y = 0; y < height - 1; ++y) {
+                for (int x = 0; x < width - 1; ++x) {
+                    int botLeft = x + y * width;
+                    int botRight = (x + 1) + y * width;
+                    int topLeft = x + (y + 1) * width;
+                    int topRight = (x + 1) + (y + 1) * width;
 
-                    terrain.indices[indicesCount++] = topLeft;
-                    terrain.indices[indicesCount++] = botRight;
-                    terrain.indices[indicesCount++] = botLeft;
+                    indices[indicesCount++] = topLeft;
+                    indices[indicesCount++] = botRight;
+                    indices[indicesCount++] = botLeft;
 
-                    terrain.indices[indicesCount++] = topLeft;
-                    terrain.indices[indicesCount++] = topRight;
-                    terrain.indices[indicesCount++] = botRight;
+                    indices[indicesCount++] = topLeft;
+                    indices[indicesCount++] = topRight;
+                    indices[indicesCount++] = botRight;
                 }
             }
+            return indices;
         }
 
         private static void InitNormals(ref TerrainMapComponent terrain) {
@@ -136,17 +137,16 @@ namespace GameEngine {
             }
         }
 
-        private static VertexPositionNormalTexture[] InitTerrainVertices(TerrainMapComponent terrain) {
-            VertexPositionNormalTexture[] terrainVerts = new VertexPositionNormalTexture[terrain.hmWidth * terrain.hmHeight];
+        internal static VertexPositionNormalTexture[] InitTerrainVertices(float[,] heightInfo, int width, int height) {
+            VertexPositionNormalTexture[] terrainVerts = new VertexPositionNormalTexture[width * height];
 
-            for (int x = 0; x < terrain.hmWidth; x++) {
-                for (int y = 0; y < terrain.hmHeight; y++) {
-                    terrainVerts[x + y * terrain.hmHeight].Position = new Vector3(x, terrain.heightInfo[x, y], -y);
-                    terrainVerts[x + y * terrain.hmHeight].TextureCoordinate.X = (float)x / 30.0f;
-                    terrainVerts[x + y * terrain.hmHeight].TextureCoordinate.Y = (float)y / 30.0f;
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    terrainVerts[x + y * height].Position = new Vector3(x, heightInfo[x, y], -y);
+                    terrainVerts[x + y * height].TextureCoordinate.X = x / (width - 1.0f);
+                    terrainVerts[x + y * height].TextureCoordinate.Y = y / (height - 1.0f);
                 }
             }
-
             return terrainVerts;
         }
 
