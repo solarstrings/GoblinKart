@@ -14,6 +14,7 @@ namespace GoblinKart {
 
         public void Update(GameTime gameTime) {
             List<Entity> sceneEntities = SceneManager.Instance.GetActiveScene().GetAllEntities();
+
             Entity kart = ComponentManager.Instance.GetEntityWithTag("Kart", sceneEntities);
             TransformComponent trsComp = ComponentManager.Instance.GetEntityComponent<TransformComponent>(kart);
             ModelComponent kartModel = ComponentManager.Instance.GetEntityComponent<ModelComponent>(kart);

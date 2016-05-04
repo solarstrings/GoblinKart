@@ -11,6 +11,7 @@ namespace GameEngine {
         public void Render(GraphicsDevice graphicsDevice, GameTime gameTime) {
             Entity e = ComponentManager.Instance.GetFirstEntityOfType<TerrainMapComponent>();
             Entity c = ComponentManager.Instance.GetFirstEntityOfType<CameraComponent>();
+
             CameraComponent camera = ComponentManager.Instance.GetEntityComponent<CameraComponent>(c);
             TerrainMapComponent terrainComponent = ComponentManager.Instance.GetEntityComponent<TerrainMapComponent>(e);
             TransformComponent transformComponent = ComponentManager.Instance.GetEntityComponent<TransformComponent>(e);

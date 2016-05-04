@@ -13,12 +13,11 @@ namespace GameEngine
         {
             List<Entity> entities = SceneManager.Instance.GetActiveScene().GetAllEntities();
 
-            foreach(Entity e in entities)
-            {
-                TransformComponent t = ComponentManager.Instance.GetEntityComponent<TransformComponent>(e);
+            List<TransformComponent> transformComponents =
+                ComponentManager.Instance.GetComponentsFromEntities<TransformComponent>(entities);
 
-                if (t != null)
-                {
+            foreach(TransformComponent t in transformComponents)
+            {
                     var qRotation = Quaternion.CreateFromYawPitchRoll(t.vRotation.X, t.vRotation.Y, t.vRotation.Z);
                     t.rotation *= qRotation;
                     t.forward = Vector3.Transform(Vector3.Forward, t.rotation);
@@ -26,7 +25,6 @@ namespace GameEngine
                     t.world = Matrix.CreateScale(t.scale)
                               * Matrix.CreateFromQuaternion(t.rotation)
                               * Matrix.CreateTranslation(t.position);
-                }
             }
         }
     }

@@ -4,18 +4,18 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/canyon.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/Chopper.fbx</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/grass.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/grasstile.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/horizontalroad.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/LBCornerroad.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/LTCornerroad.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/RBCornerroad.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/RTCornerroad.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/verticalroad.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/basichouse.fbx</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/basichouse_texture1.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/basichouse_texture2.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart4/GoblinKart/Content/canyon.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart4/GoblinKart/Content/Chopper.fbx</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart4/GoblinKart/Content/grass.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart4/GoblinKart/Content/grasstile.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart4/GoblinKart/Content/horizontalroad.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart4/GoblinKart/Content/LBCornerroad.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart4/GoblinKart/Content/LTCornerroad.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart4/GoblinKart/Content/RBCornerroad.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart4/GoblinKart/Content/RTCornerroad.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart4/GoblinKart/Content/verticalroad.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart4/GoblinKart/Content/basichouse.fbx</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart4/GoblinKart/Content/basichouse_texture1.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart4/GoblinKart/Content/basichouse_texture2.png</File>
   </SourceFiles>
 </SourceFileCollection>

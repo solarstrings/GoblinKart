@@ -11,13 +11,14 @@ namespace GameEngine
     {
         public void Update(GameTime gameTime)
         {
-            List<Entity> entities = SceneManager.Instance.GetActiveScene().GetAllEntities();
 
-            foreach (Entity enitity in entities)
+
+            List<Entity> entities = SceneManager.Instance.GetActiveScene().GetAllEntities();
+            List<AnimationComponent> animComponents =
+                ComponentManager.Instance.GetComponentsFromEntities<AnimationComponent>(entities);
+
+            foreach (AnimationComponent anim in animComponents)
             {
-                AnimationComponent anim = ComponentManager.Instance.GetEntityComponent<AnimationComponent>(enitity);
-                if (anim == null)
-                    continue;
 
                 if (anim.CurrentAnimation == null)
                     continue;
