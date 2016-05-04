@@ -20,7 +20,7 @@ namespace GoblinKart
         public override void Initialise()
         {
             new InitGame(this);
-            new InitHouses(this);
+            new InitHouses(this);            
             SceneManager.Instance.SetActiveScene("Game");
         }
     }

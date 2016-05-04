@@ -58,6 +58,8 @@
     <Compile Include="Source\Components\ModelComponent.cs" />
     <Compile Include="Source\Components\ModelCountComponent.cs" />
     <Compile Include="Source\Components\MouseComponent.cs" />
+    <Compile Include="Source\Components\NetworkClientComponent.cs" />
+    <Compile Include="Source\Components\NetworkServerComponent.cs" />
     <Compile Include="Source\Components\ParentComponent.cs" />
     <Compile Include="Source\Components\Position2DComponent.cs" />
     <Compile Include="Source\Components\RectangleCollisionComponent.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Source\Engine\ErrorLogger.cs" />
     <Compile Include="Source\Engine\InputDefines.cs" />
     <Compile Include="Source\Engine\Music.cs" />
+    <Compile Include="Source\Engine\PacketType.cs" />
     <Compile Include="Source\Engine\Scene.cs" />
     <Compile Include="Source\Managers\ComponentManager.cs" />
     <Compile Include="Source\Managers\InputManager.cs" />
@@ -87,6 +90,7 @@
     <Compile Include="Source\Managers\SceneManager.cs" />
     <Compile Include="Source\Managers\SoundManager.cs" />
     <Compile Include="Source\Managers\SystemManager.cs" />
+    <Compile Include="Source\Network\LoginInformation.cs" />
     <Compile Include="Source\Scripts\IScript.cs" />
     <Compile Include="Source\Systems\AISystem.cs" />
     <Compile Include="Source\Systems\AnimateSystem.cs" />
@@ -103,6 +107,7 @@
     <Compile Include="Source\Systems\ModelRenderSystem.cs" />
     <Compile Include="Source\Systems\MouseSystem.cs" />
     <Compile Include="Source\Systems\MoveSystem.cs" />
+    <Compile Include="Source\Systems\NetworkServerSystem.cs" />
     <Compile Include="Source\Systems\ParentSystem.cs" />
     <Compile Include="Source\Systems\PhysicsSystem.cs" />
     <Compile Include="Source\Systems\SpriteRenderSystem.cs" />
@@ -114,6 +119,7 @@
     <Compile Include="Source\VertexPositionColorNormal.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Lidgren.Network, Version=3.5.1.1679, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>

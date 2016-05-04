@@ -13,7 +13,7 @@ namespace GameEngine.Source.Systems
         {
             // This system detects when two models collide
             // Does the old collisionComponent work or should we create a new one?
-            List<Entity> entities = SceneManager.Instance.GetActiveScene().GetAllEntities();
+            List<Entity> entities = ComponentManager.Instance.GetAllEntitiesWithComponentType<ModelComponent>();
 
             foreach (var entity1 in entities)
             {
