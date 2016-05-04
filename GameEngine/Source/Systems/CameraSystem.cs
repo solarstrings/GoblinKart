@@ -18,7 +18,10 @@ namespace GameEngine {
             //get the camera component
             CameraComponent c = ComponentManager.Instance.GetEntityComponent<CameraComponent>(camera);
 
-            if (c.targetEntity != null) {
+            //update the bounding frustum
+            c.cameraFrustrum = new BoundingFrustum(c.viewMatrix * c.projectionMatrix);
+
+            if (c.targetEntity != null){
                 List<Entity> elist = ComponentManager.Instance.GetAllEntitiesWithComponentType<ModelComponent>();
                 Entity e = ComponentManager.Instance.GetEntityWithTag(c.targetEntity, elist);
 
@@ -42,7 +45,7 @@ namespace GameEngine {
                 c.viewMatrix = Matrix.CreateLookAt(pos, t.position, cameraUp);
 
                 //update the projection
-                // c.projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, c.aspectRatio, c.nearClipPlane, c.farClipPlane);
+                //c.projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, c.aspectRatio, c.nearClipPlane, c.farClipPlane);
             }
             //Else, a static camera that looks at origo is set up.
             else {
@@ -76,7 +79,7 @@ namespace GameEngine {
             }
         }
 
-        public void SetNearClipPlane(float value) {
+        public static void SetNearClipPlane(float value) {
             List<Entity> entities = ComponentManager.Instance.GetAllEntitiesWithComponentType<CameraComponent>();
             foreach (Entity enitity in entities) {
                 CameraComponent c = ComponentManager.Instance.GetEntityComponent<CameraComponent>(enitity);
@@ -89,8 +92,21 @@ namespace GameEngine {
             }
         }
 
-        public void SetFarClipPlane(float value) {
+        public static void SetFarClipPlane(ref CameraComponent camera, float value) {
+            if (value >= 10000) {
+                camera.farClipPlane = 10000;
+            }
+            else if (value < 50) {
+                camera.farClipPlane = 50;
+            }
+            else {
+                camera.farClipPlane = value;
+            }
+        }
+
+        public static void SetFarClipPlane(float value) {
             List<Entity> entities = ComponentManager.Instance.GetAllEntitiesWithComponentType<CameraComponent>();
+
             foreach (Entity enitity in entities) {
                 CameraComponent c = ComponentManager.Instance.GetEntityComponent<CameraComponent>(enitity);
 

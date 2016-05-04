@@ -15,6 +15,7 @@ namespace GameEngine {
             List<KeyBoardComponent> keyboardComps = ComponentManager.Instance.GetComponentsFromEntities<KeyBoardComponent>(entities);
 
             if (keyboardComps == null) return;
+
             foreach (KeyBoardComponent keyboardComp in keyboardComps) {
                 UpdateState(keyboardComp);
                 UpdateActionStates(keyboardComp);

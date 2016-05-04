@@ -17,6 +17,7 @@ namespace GameEngine {
 
         public VertexPositionNormalTexture[] vertices { get; set; }
         public int[] indices { get; set; }
+        public int numChunksInView { get; set; }
 
         public TerrainMapComponent(GraphicsDevice graphicsDevice, Texture2D HeightmapTexture, Texture2D defaultTexture, int numChunks) {
             terrainChunks = new List<TerrainChunk>();

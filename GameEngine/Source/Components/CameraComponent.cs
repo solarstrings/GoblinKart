@@ -15,6 +15,7 @@ namespace GameEngine {
         public string targetEntity { get; set; }    //target entity to chase / look at
         public Vector3 camChasePosition { get; set; }
         public int cameraMode { get; set; }
+        public BoundingFrustum cameraFrustrum { get; set; }
 
         public CameraComponent(GraphicsDeviceManager graphics, Vector3 position, Vector3 direction) {
             aspectRatio = graphics.PreferredBackBufferWidth / (float)graphics.PreferredBackBufferHeight;

@@ -54,7 +54,9 @@
     <Compile Include="Source\Components\IComponent.cs" />
     <Compile Include="Source\Components\InputComponent.cs" />
     <Compile Include="Source\Components\KeyBoardComponent.cs" />
+    <Compile Include="Source\Components\ModelBoundingBoxComponent.cs" />
     <Compile Include="Source\Components\ModelComponent.cs" />
+    <Compile Include="Source\Components\ModelCountComponent.cs" />
     <Compile Include="Source\Components\MouseComponent.cs" />
     <Compile Include="Source\Components\ParentComponent.cs" />
     <Compile Include="Source\Components\Position2DComponent.cs" />
@@ -68,8 +70,11 @@
     <Compile Include="Source\Components\TransformComponent.cs" />
     <Compile Include="Source\Components\TriggerComponent.cs" />
     <Compile Include="Source\Components\Velocity2DComponent.cs" />
+    <Compile Include="Source\Engine\BoundingBoxToWorldSpace.cs" />
     <Compile Include="Source\Engine\CollisionArea.cs" />
     <Compile Include="Source\Engine\CollisionRectangle.cs" />
+    <Compile Include="Source\Engine\DebugRenderBoundingBox.cs" />
+    <Compile Include="Source\Engine\DebugRenderBoundingSphere.cs" />
     <Compile Include="Source\Engine\Entity.cs" />
     <Compile Include="Source\Engine\EntityFactory.cs" />
     <Compile Include="Source\Engine\ErrorLogger.cs" />
