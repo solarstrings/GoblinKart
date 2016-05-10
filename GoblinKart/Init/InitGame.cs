@@ -87,7 +87,7 @@ namespace GoblinKart.Init {
             Entity skyboxEnt = EntityFactory.Instance.NewEntityWithTag("Skybox");
             SkyboxComponent skyboxComp = new SkyboxComponent(engine.LoadContent<Model>("skyboxes/cube"),
                 engine.LoadContent<TextureCube>("skyboxes/Sunset"),
-                engine.LoadContent<Effect>("skyboxes/skybox"), 300);
+                engine.LoadContent<Effect>("skyboxes/skybox"), 570);
 
             ComponentManager.Instance.AddComponentToEntity(skyboxEnt, skyboxComp);
             SceneManager.Instance.AddEntityToSceneOnLayer("Game", 0, skyboxEnt);
