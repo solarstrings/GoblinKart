@@ -3,7 +3,7 @@
 namespace GameEngine {
     public class CameraComponent : IComponent {
         public float nearClipPlane = 1f;
-        public float farClipPlane = 500f;
+        public float farClipPlane { get; set; }
         public Matrix projectionMatrix;
         public Matrix viewMatrix;
 
@@ -22,6 +22,7 @@ namespace GameEngine {
             fieldOfView = MathHelper.PiOver4;
             upDirection = Vector3.Up;
             viewMatrix = Matrix.CreateLookAt(position, direction, upDirection);
+            farClipPlane = 500;
             Matrix.CreatePerspectiveFieldOfView(fieldOfView, aspectRatio, nearClipPlane, farClipPlane, out projectionMatrix);
             targetEntity = null;
             cameraMode = 0;
@@ -35,10 +36,12 @@ namespace GameEngine {
             target = Vector3.Zero;
             position = new Vector3(10, 20, 200);
             viewMatrix = Matrix.CreateLookAt(position, target, upDirection);
+            farClipPlane = 500;
             Matrix.CreatePerspectiveFieldOfView(fieldOfView, aspectRatio, nearClipPlane, farClipPlane, out projectionMatrix);
             targetEntity = null;
             cameraMode = 0;
             camChasePosition = Vector3.Zero;
         }
+
     }
 }

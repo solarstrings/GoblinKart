@@ -14,7 +14,6 @@ namespace GoblinKart {
 
         public void Update(GameTime gameTime) {
             List<Entity> sceneEntities = SceneManager.Instance.GetActiveScene().GetAllEntities();
-
             Entity kart = ComponentManager.Instance.GetEntityWithTag("Kart", sceneEntities);
             TransformComponent trsComp = ComponentManager.Instance.GetEntityComponent<TransformComponent>(kart);
             ModelComponent kartModel = ComponentManager.Instance.GetEntityComponent<ModelComponent>(kart);
@@ -73,11 +72,8 @@ namespace GoblinKart {
                         trsComp.position += trsComp.forward * -100f * (float)gameTime.ElapsedGameTime.TotalSeconds;
                         moving = true;
                     }
-
-                    if (moving == true) {
-                        ModelRenderSystem.SetMeshTransform(ref kartModel, 1, Matrix.CreateRotationY(0.08f));
-                        ModelRenderSystem.SetMeshTransform(ref kartModel, 3, Matrix.CreateRotationY(0.1f));
-                    }
+                    ModelRenderSystem.SetMeshTransform(ref kartModel, 1, Matrix.CreateRotationY(0.08f));
+                    ModelRenderSystem.SetMeshTransform(ref kartModel, 3, Matrix.CreateRotationY(0.1f));
                 }
             }
         }

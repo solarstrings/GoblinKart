@@ -51,6 +51,7 @@
     <Compile Include="Source\Components\CircleCollisionComponent.cs" />
     <Compile Include="Source\Components\ClientComponent.cs" />
     <Compile Include="Source\Components\CollisionComponent.cs" />
+    <Compile Include="Source\Components\DefaultFogComponent.cs" />
     <Compile Include="Source\Components\GamePadComponent.cs" />
     <Compile Include="Source\Components\IComponent.cs" />
     <Compile Include="Source\Components\InputComponent.cs" />
@@ -65,6 +66,8 @@
     <Compile Include="Source\Components\Position2DComponent.cs" />
     <Compile Include="Source\Components\RectangleCollisionComponent.cs" />
     <Compile Include="Source\Components\Render2DComponent.cs" />
+    <Compile Include="Source\Components\ShadingEffectComponent.cs" />
+    <Compile Include="Source\Components\SkyboxComponent.cs" />
     <Compile Include="Source\Components\TagComponent.cs" />
     <Compile Include="Source\Components\TerrainChunk.cs" />
     <Compile Include="Source\Components\TerrainMapComponent.cs" />
@@ -112,6 +115,7 @@
     <Compile Include="Source\Systems\NetworkServerSystem.cs" />
     <Compile Include="Source\Systems\ParentSystem.cs" />
     <Compile Include="Source\Systems\PhysicsSystem.cs" />
+    <Compile Include="Source\Systems\SkyboxRenderSystem.cs" />
     <Compile Include="Source\Systems\SpriteRenderSystem.cs" />
     <Compile Include="Source\Systems\TerrainMapRenderSystem.cs" />
     <Compile Include="Source\Systems\TextRenderSystem.cs" />

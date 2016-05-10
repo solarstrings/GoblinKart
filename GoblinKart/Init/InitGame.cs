@@ -23,6 +23,7 @@ namespace GoblinKart.Init {
             InitKart(engine);
             InitCamera(engine);
             InitTerrain(engine);
+            InitSkybox(engine);
 
             SceneManager.Instance.SetActiveScene("Game");
             SystemManager.Instance.Category = "Game";
@@ -70,14 +71,26 @@ namespace GoblinKart.Init {
             Entity camera = EntityFactory.Instance.NewEntityWithTag("3DCamera");
             CameraComponent cc = new CameraComponent(engine.GetGraphicsDeviceManager());
             cc.position = new Vector3(0, 20, 60);
-
             cc.camChasePosition = new Vector3(0f, 30f, 70f);
 
             ComponentManager.Instance.AddComponentToEntity(camera, cc);
             ComponentManager.Instance.AddComponentToEntity(camera, new TransformComponent());
             CameraSystem.SetTargetEntity("Kart");
-
             SceneManager.Instance.AddEntityToSceneOnLayer("Game", 6, camera);
+            CameraSystem.SetFarClipPlane(1000);
+        }
+
+        private void InitSkybox(ECSEngine engine)
+        {
+            sm.RegisterSystem("Game", new SkyboxRenderSystem());
+
+            Entity skyboxEnt = EntityFactory.Instance.NewEntityWithTag("Skybox");
+            SkyboxComponent skyboxComp = new SkyboxComponent(engine.LoadContent<Model>("skyboxes/cube"),
+                engine.LoadContent<TextureCube>("skyboxes/Sunset"),
+                engine.LoadContent<Effect>("skyboxes/skybox"), 570);
+
+            ComponentManager.Instance.AddComponentToEntity(skyboxEnt, skyboxComp);
+            SceneManager.Instance.AddEntityToSceneOnLayer("Game", 0, skyboxEnt);
         }
 
         private void InitTerrain(ECSEngine engine) {

@@ -21,7 +21,7 @@ namespace GameEngine {
             //update the bounding frustum
             c.cameraFrustrum = new BoundingFrustum(c.viewMatrix * c.projectionMatrix);
 
-            if (c.targetEntity != null){
+            if (c.targetEntity != null) {
                 List<Entity> elist = ComponentManager.Instance.GetAllEntitiesWithComponentType<ModelComponent>();
                 Entity e = ComponentManager.Instance.GetEntityWithTag(c.targetEntity, elist);
 
@@ -37,6 +37,8 @@ namespace GameEngine {
                 //move the camera to the object position
                 pos += t.position;
 
+                c.position = pos;
+
                 //update the camera up position
                 Vector3 cameraUp = new Vector3(0, 1, 0);
                 cameraUp = Vector3.Transform(cameraUp, Matrix.CreateFromQuaternion(t.rotation));
@@ -45,7 +47,7 @@ namespace GameEngine {
                 c.viewMatrix = Matrix.CreateLookAt(pos, t.position, cameraUp);
 
                 //update the projection
-                //c.projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, c.aspectRatio, c.nearClipPlane, c.farClipPlane);
+                // c.projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, c.aspectRatio, c.nearClipPlane, c.farClipPlane);
             }
             //Else, a static camera that looks at origo is set up.
             else {
@@ -92,33 +94,20 @@ namespace GameEngine {
             }
         }
 
-        public static void SetFarClipPlane(ref CameraComponent camera, float value) {
-            if (value >= 10000) {
-                camera.farClipPlane = 10000;
-            }
-            else if (value < 50) {
-                camera.farClipPlane = 50;
-            }
-            else {
-                camera.farClipPlane = value;
-            }
-        }
-
         public static void SetFarClipPlane(float value) {
             List<Entity> entities = ComponentManager.Instance.GetAllEntitiesWithComponentType<CameraComponent>();
-
             foreach (Entity enitity in entities) {
                 CameraComponent c = ComponentManager.Instance.GetEntityComponent<CameraComponent>(enitity);
 
                 if (value >= 10000) {
-                    c.farClipPlane = 10000;
+                    value = 10000;
                 }
                 else if (value < 50) {
-                    c.farClipPlane = 50;
+                    value = 50;
                 }
-                else {
-                    c.farClipPlane = value;
-                }
+
+                c.farClipPlane = value;
+                Matrix.CreatePerspectiveFieldOfView(c.fieldOfView, c.aspectRatio, c.nearClipPlane, c.farClipPlane, out c.projectionMatrix);
             }
         }
     }

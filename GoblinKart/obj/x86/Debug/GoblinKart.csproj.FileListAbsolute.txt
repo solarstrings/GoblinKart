@@ -1,0 +1,87 @@
+C:\GoblinKart\GoblinKart\obj\x86\Debug\GoblinKart.csprojResolveAssemblyReference.cache
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\canyon.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\Chopper.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\grass.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\grasstile.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\horizontalroad.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\LBCornerroad.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\LTCornerroad.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\RBCornerroad.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\RTCornerroad.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\verticalroad.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\GoblinKart.exe
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\GoblinKart.pdb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\GameEngine.dll
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\MonoGame.Framework.dll
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.dll
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.XInput.dll
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.RawInput.dll
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\GameEngine.pdb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\MonoGame.Framework.xml
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.xml
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.XInput.xml
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.RawInput.xml
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+C:\GoblinKart\GoblinKart\obj\x86\Debug\GoblinKart.exe
+C:\GoblinKart\GoblinKart\obj\x86\Debug\GoblinKart.pdb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\obj\x86\Debug\GoblinKart.exe
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\obj\x86\Debug\GoblinKart.pdb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\canyon.xnb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\Chopper.xnb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\grass.xnb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\grasstile.xnb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\horizontalroad.xnb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\LBCornerroad.xnb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\LTCornerroad.xnb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\RBCornerroad.xnb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\RTCornerroad.xnb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\verticalroad.xnb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\GoblinKart.exe
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\GoblinKart.pdb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\GameEngine.dll
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\MonoGame.Framework.dll
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.dll
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.XInput.dll
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.RawInput.dll
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\GameEngine.pdb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\MonoGame.Framework.xml
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.xml
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.XInput.xml
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.RawInput.xml
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\obj\x86\Debug\GoblinKart.csprojResolveAssemblyReference.cache
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\basichouse.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\basichouse_texture1.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\basichouse_texture2.xnb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\basichouse.xnb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\basichouse_texture1.xnb
+C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\basichouse_texture2.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\shaderAmbientLight.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\skybox.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\skyboxes\cube.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\skyboxes\skybox.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\skyboxes\Sunset.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Lidgren.Network.dll
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Lidgren.Network.xml
