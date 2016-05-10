@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameEngine;
+using GameEngine.Source.Components;
 using GameEngine.Source.Engine;
 using GameEngine.Source.Network;
 using Lidgren.Network;
@@ -29,7 +31,12 @@ namespace GoblinKart.Init
             outmsg.WriteAllProperties(loginInformation);
             client.Connect("localhost", 9981, outmsg);
 
-            return EstablishInfo(client);
+
+            if (!EstablishInfo(client)) return false;
+            var clientEntity = EntityFactory.Instance.NewEntityWithTag("Client");
+            var clientComponent = new NetworkClientComponent() { Client = client};
+            ComponentManager.Instance.AddComponentToEntity(clientEntity, clientComponent);
+            return true;
 
             // If the connection is successful, save it down in a component (might need it for sending information?)
         }
