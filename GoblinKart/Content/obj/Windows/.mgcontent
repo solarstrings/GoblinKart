@@ -17,5 +17,10 @@
     <File>C:/GoblinKart/GoblinKart/Content/basichouse.fbx</File>
     <File>C:/GoblinKart/GoblinKart/Content/basichouse_texture1.png</File>
     <File>C:/GoblinKart/GoblinKart/Content/basichouse_texture2.png</File>
+    <File>C:/GoblinKart/GoblinKart/Content/shaderAmbientLight.fx</File>
+    <File>C:/GoblinKart/GoblinKart/Content/skybox.fx</File>
+    <File>C:/GoblinKart/GoblinKart/Content/skyboxes/cube.fbx</File>
+    <File>C:/GoblinKart/GoblinKart/Content/skyboxes/skybox.fx</File>
+    <File>C:/GoblinKart/GoblinKart/Content/skyboxes/Sunset.dds</File>
   </SourceFiles>
 </SourceFileCollection>

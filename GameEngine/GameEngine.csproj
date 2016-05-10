@@ -50,6 +50,7 @@
     <Compile Include="Source\Components\CameraComponent.cs" />
     <Compile Include="Source\Components\CircleCollisionComponent.cs" />
     <Compile Include="Source\Components\CollisionComponent.cs" />
+    <Compile Include="Source\Components\DefaultFogComponent.cs" />
     <Compile Include="Source\Components\GamePadComponent.cs" />
     <Compile Include="Source\Components\IComponent.cs" />
     <Compile Include="Source\Components\InputComponent.cs" />
@@ -60,9 +61,10 @@
     <Compile Include="Source\Components\Position2DComponent.cs" />
     <Compile Include="Source\Components\RectangleCollisionComponent.cs" />
     <Compile Include="Source\Components\Render2DComponent.cs" />
+    <Compile Include="Source\Components\ShadingEffectComponent.cs" />
+    <Compile Include="Source\Components\SkyboxComponent.cs" />
     <Compile Include="Source\Components\TagComponent.cs" />
     <Compile Include="Source\Components\TerrainChunk.cs" />
-    <Compile Include="Source\Components\TerrainComponent.cs" />
     <Compile Include="Source\Components\TerrainMapComponent.cs" />
     <Compile Include="Source\Components\TextRenderComponent.cs" />
     <Compile Include="Source\Components\TimerComponent.cs" />
@@ -77,7 +79,6 @@
     <Compile Include="Source\Engine\InputDefines.cs" />
     <Compile Include="Source\Engine\Music.cs" />
     <Compile Include="Source\Engine\Scene.cs" />
-    <Compile Include="Source\InputDefines.cs" />
     <Compile Include="Source\Managers\ComponentManager.cs" />
     <Compile Include="Source\Managers\InputManager.cs" />
     <Compile Include="Source\Managers\PhysicsManager.cs" />
@@ -102,9 +103,9 @@
     <Compile Include="Source\Systems\MoveSystem.cs" />
     <Compile Include="Source\Systems\ParentSystem.cs" />
     <Compile Include="Source\Systems\PhysicsSystem.cs" />
+    <Compile Include="Source\Systems\SkyboxRenderSystem.cs" />
     <Compile Include="Source\Systems\SpriteRenderSystem.cs" />
     <Compile Include="Source\Systems\TerrainMapRenderSystem.cs" />
-    <Compile Include="Source\Systems\TerrainRenderSystem.cs" />
     <Compile Include="Source\Systems\TextRenderSystem.cs" />
     <Compile Include="Source\Systems\TimerSystem.cs" />
     <Compile Include="Source\Systems\TransformSystem.cs" />

@@ -22,7 +22,7 @@ namespace GoblinKart {
             TerrainMapComponent terComp = ComponentManager.Instance.GetEntityComponent<TerrainMapComponent>(terrain);
 
             engine.SetWindowTitle("Kart x: " + trsComp.position.X + " Kart y: " + trsComp.position.Y + " Kart z: " + trsComp.position.Z + " Map height: " +
-                terComp.GetTerrainHeight(trsComp.position.X, Math.Abs(trsComp.position.Z)));
+                TerrainMapRenderSystem.GetTerrainHeight(terComp, trsComp.position.X, Math.Abs(trsComp.position.Z)));
 
             trsComp.LockModelToHeight(terComp);
             kartModel.ResetMeshTransforms();

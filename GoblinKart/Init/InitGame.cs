@@ -23,6 +23,7 @@ namespace GoblinKart.Init {
             InitKart(engine);
             InitCamera(engine);
             InitTerrain(engine);
+            InitSkybox(engine);
 
             SceneManager.Instance.SetActiveScene("Game");
             SystemManager.Instance.Category = "Game";
@@ -35,13 +36,13 @@ namespace GoblinKart.Init {
             ComponentManager.Instance.AddComponentToEntity(keyboardControl, new KeyBoardComponent());
             KeyBoardComponent k = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(keyboardControl);
 
-            k.AddKeyToAction("forward", Keys.Up);
-            k.AddKeyToAction("back", Keys.Down);
-            k.AddKeyToAction("left", Keys.Left);
-            k.AddKeyToAction("right", Keys.Right);
-            k.AddKeyToAction("down", Keys.X);
-            k.AddKeyToAction("up", Keys.C);
-            k.AddKeyToAction("quit", Keys.Escape);
+            KeyBoardSystem.AddKeyToAction(ref k, "forward", Keys.Up);
+            KeyBoardSystem.AddKeyToAction(ref k, "back", Keys.Down);
+            KeyBoardSystem.AddKeyToAction(ref k, "left", Keys.Left);
+            KeyBoardSystem.AddKeyToAction(ref k, "right", Keys.Right);
+            KeyBoardSystem.AddKeyToAction(ref k, "down", Keys.X);
+            KeyBoardSystem.AddKeyToAction(ref k, "up", Keys.C);
+            KeyBoardSystem.AddKeyToAction(ref k, "quit", Keys.Escape);
 
             SceneManager.Instance.AddEntityToSceneOnLayer("Game", 0, keyboardControl);
         }
@@ -70,24 +71,39 @@ namespace GoblinKart.Init {
             Entity camera = EntityFactory.Instance.NewEntityWithTag("3DCamera");
             CameraComponent cc = new CameraComponent(engine.GetGraphicsDeviceManager());
             cc.position = new Vector3(0, 20, 60);
-
-            //Use this line instead to see the back rotor rotate, hard to see from behind :)
-            //cc.SetChaseCameraPosition(new Vector3(10f, 20f, 40f));
-            cc.SetChaseCameraPosition(new Vector3(0f, 30f, 70f));
+            cc.camChasePosition = new Vector3(0f, 30f, 70f);
 
             ComponentManager.Instance.AddComponentToEntity(camera, cc);
             ComponentManager.Instance.AddComponentToEntity(camera, new TransformComponent());
-            cc.SetTargetEntity("Kart");
-
+            CameraSystem.SetTargetEntity("Kart");
             SceneManager.Instance.AddEntityToSceneOnLayer("Game", 6, camera);
+            CameraSystem.SetFarClipPlane(1000);
+        }
+
+        private void InitSkybox(ECSEngine engine)
+        {
+            sm.RegisterSystem("Game", new SkyboxRenderSystem());
+
+            Entity skyboxEnt = EntityFactory.Instance.NewEntityWithTag("Skybox");
+            SkyboxComponent skyboxComp = new SkyboxComponent(engine.LoadContent<Model>("skyboxes/cube"),
+                engine.LoadContent<TextureCube>("skyboxes/Sunset"),
+                engine.LoadContent<Effect>("skyboxes/skybox"), 300);
+
+            ComponentManager.Instance.AddComponentToEntity(skyboxEnt, skyboxComp);
+            SceneManager.Instance.AddEntityToSceneOnLayer("Game", 0, skyboxEnt);
         }
 
         private void InitTerrain(ECSEngine engine) {
             sm.RegisterSystem("Game", new TerrainMapRenderSystem());
 
+            Texture2D terrainTex = engine.LoadContent<Texture2D>("Canyon");
+            Texture2D defaultTex = engine.LoadContent<Texture2D>("grasstile");
+
             Entity terrain = EntityFactory.Instance.NewEntityWithTag("Terrain");
-            TerrainMapComponent t = new TerrainMapComponent(engine.GetGraphicsDevice(), engine.LoadContent<Texture2D>("Canyon"), engine.LoadContent<Texture2D>("grasstile"), 10);
+            TerrainMapComponent t = new TerrainMapComponent(engine.GetGraphicsDevice(), terrainTex, defaultTex, 10);
             TransformComponent tf = new TransformComponent();
+
+            TerrainMapRenderSystem.LoadHighmap(ref t, terrainTex, defaultTex, engine.GetGraphicsDevice());
 
             t.SetTextureToChunk(0, engine.LoadContent<Texture2D>("LTCornerroad"));
             t.SetTextureToChunk(1, engine.LoadContent<Texture2D>("verticalroad"));

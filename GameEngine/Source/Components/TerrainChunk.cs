@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
+
 namespace GameEngine {
+    /// <summary>
+    /// TerrainChunk
+    /// A class which holds the information for a chunk of the terrain.
+    /// 
+    /// NOTE: THIS IS NOT A COMPONENT
+    /// </summary>
     public class TerrainChunk{
         public Vector3 offsetPosition { get; set; }
 
@@ -44,6 +51,7 @@ namespace GameEngine {
             effect.FogColor = Color.LightGray.ToVector3();
             effect.FogEnd = 400f;
 
+            //initialize the indices
             InitIndices();
             //copy the calculated normal values
             CopyNormals(vertexNormals);
