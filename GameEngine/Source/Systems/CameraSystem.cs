@@ -18,6 +18,9 @@ namespace GameEngine {
             //get the camera component
             CameraComponent c = ComponentManager.Instance.GetEntityComponent<CameraComponent>(camera);
 
+            //update the bounding frustum
+            c.cameraFrustrum = new BoundingFrustum(c.viewMatrix * c.projectionMatrix);
+
             if (c.targetEntity != null) {
                 List<Entity> elist = ComponentManager.Instance.GetAllEntitiesWithComponentType<ModelComponent>();
                 Entity e = ComponentManager.Instance.GetEntityWithTag(c.targetEntity, elist);

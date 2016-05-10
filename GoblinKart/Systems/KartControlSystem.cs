@@ -25,7 +25,7 @@ namespace GoblinKart {
                 TerrainMapRenderSystem.GetTerrainHeight(terComp, trsComp.position.X, Math.Abs(trsComp.position.Z)));
 
             trsComp.LockModelToHeight(terComp);
-            kartModel.ResetMeshTransforms();
+            ModelRenderSystem.ResetMeshTransforms(ref kartModel);
             MoveKart(gameTime, sceneEntities, trsComp, kartModel);
         }
 
@@ -72,8 +72,8 @@ namespace GoblinKart {
                         trsComp.position += trsComp.forward * -100f * (float)gameTime.ElapsedGameTime.TotalSeconds;
                         moving = true;
                     }
-                    kartModel.SetMeshTransform(1, Matrix.CreateRotationY(0.08f));
-                    kartModel.SetMeshTransform(3, Matrix.CreateRotationY(0.1f));
+                    ModelRenderSystem.SetMeshTransform(ref kartModel, 1, Matrix.CreateRotationY(0.08f));
+                    ModelRenderSystem.SetMeshTransform(ref kartModel, 3, Matrix.CreateRotationY(0.1f));
                 }
             }
         }

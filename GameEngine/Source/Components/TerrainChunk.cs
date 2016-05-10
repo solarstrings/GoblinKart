@@ -17,6 +17,7 @@ namespace GameEngine {
     public class TerrainChunk{
         public Vector3 offsetPosition { get; set; }
 
+        public BoundingBox boundingBox { get; set; }
         public VertexBuffer vBuffer { get; set; }
 
         public IndexBuffer iBuffer { get; set; }
@@ -45,6 +46,9 @@ namespace GameEngine {
             CreateHightmap(terrainMap);
 
             vertices = InitTerrainVertices();
+
+            //create the bounding box from the vertices
+            boundingBox = CreateBoundingBox(vertices);
 
             effect.FogEnabled = true;
             effect.FogStart = 10f;
@@ -155,9 +159,22 @@ namespace GameEngine {
             vBuffer.SetData(vertices);
         }
 
+        private BoundingBox CreateBoundingBox(VertexPositionNormalTexture[] vertexArray)
+        {
+            List<Vector3> points = new List<Vector3>();
+            foreach (VertexPositionNormalTexture v in vertexArray)
+            {
+                points.Add(v.Position);
+            }
+            BoundingBox b = BoundingBox.CreateFromPoints(points);
+            return b;
+        }
+
         public void SetTexture(Texture2D texture) {
             this.terrainTex = texture;
         }
+
+
 
     }
 }

@@ -51,10 +51,10 @@ namespace GoblinKart.Init {
             sm.RegisterSystem("Game", new KartControlSystem(engine));
 
             Entity kart = EntityFactory.Instance.NewEntityWithTag("Kart");
-            ModelComponent cm = new ModelComponent(engine.LoadContent<Model>("Chopper"), true);
-            cm.AddMeshTransform(1, Matrix.CreateRotationY(0.2f));
-            cm.AddMeshTransform(3, Matrix.CreateRotationY(0.5f));
-            ComponentManager.Instance.AddComponentToEntity(kart, cm);
+            ModelComponent modelComp = new ModelComponent(engine.LoadContent<Model>("Chopper"), true, false);
+            ModelRenderSystem.AddMeshTransform(ref modelComp, 1, Matrix.CreateRotationY(0.2f));
+            ModelRenderSystem.AddMeshTransform(ref modelComp, 3, Matrix.CreateRotationY(0.5f));
+            ComponentManager.Instance.AddComponentToEntity(kart, modelComp);
 
             TransformComponent kartTransform = new TransformComponent();
             kartTransform.position = new Vector3(0.0f, 0.0f, 0.0f);
@@ -103,7 +103,7 @@ namespace GoblinKart.Init {
             TerrainMapComponent t = new TerrainMapComponent(engine.GetGraphicsDevice(), terrainTex, defaultTex, 10);
             TransformComponent tf = new TransformComponent();
 
-            TerrainMapRenderSystem.LoadHighmap(ref t, terrainTex, defaultTex, engine.GetGraphicsDevice());
+            TerrainMapRenderSystem.LoadHeightMap(ref t, terrainTex, defaultTex, engine.GetGraphicsDevice());
 
             t.SetTextureToChunk(0, engine.LoadContent<Texture2D>("LTCornerroad"));
             t.SetTextureToChunk(1, engine.LoadContent<Texture2D>("verticalroad"));

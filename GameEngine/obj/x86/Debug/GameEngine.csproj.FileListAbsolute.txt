@@ -98,3 +98,5 @@ C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
 C:\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.dll
 C:\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.pdb
 C:\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.csprojResolveAssemblyReference.cache
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\Lidgren.Network.dll
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\Lidgren.Network.xml

@@ -83,3 +83,5 @@ C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\skybox.xnb
 C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\skyboxes\cube.xnb
 C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\skyboxes\skybox.xnb
 C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Content\skyboxes\Sunset.xnb
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Lidgren.Network.dll
+C:\GoblinKart\GoblinKart\bin\Windows\x86\Debug\Lidgren.Network.xml
