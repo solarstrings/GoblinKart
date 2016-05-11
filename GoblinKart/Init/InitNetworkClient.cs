@@ -40,6 +40,7 @@ namespace GoblinKart.Init
             return true;
 
             // If the connection is successful, save it down in a component (might need it for sending information?)
+            
         }
 
         private bool EstablishInfo(NetClient client)
