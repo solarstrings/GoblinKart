@@ -187,6 +187,9 @@ namespace GameEngine {
         }
 
         public static float GetTerrainHeight(TerrainMapComponent terrain, float x, float z) {
+
+            if (terrain == null)
+                return 10;
             if (x < 0
                 || z < 0
                 || x > terrain.heightInfo.GetLength(0) - 1

@@ -67,6 +67,7 @@
     <Compile Include="Source\Components\Render2DComponent.cs" />
     <Compile Include="Source\Components\ShadingEffectComponent.cs" />
     <Compile Include="Source\Components\SkyboxComponent.cs" />
+    <Compile Include="Source\Components\ParticleComponent.cs" />
     <Compile Include="Source\Components\TagComponent.cs" />
     <Compile Include="Source\Components\TerrainChunk.cs" />
     <Compile Include="Source\Components\TerrainMapComponent.cs" />
@@ -86,6 +87,8 @@
     <Compile Include="Source\Engine\InputDefines.cs" />
     <Compile Include="Source\Engine\Music.cs" />
     <Compile Include="Source\Engine\PacketType.cs" />
+    <Compile Include="Source\Engine\ParticleEmitter.cs" />
+    <Compile Include="Source\Engine\ParticleVertex.cs" />
     <Compile Include="Source\Engine\Scene.cs" />
     <Compile Include="Source\Managers\ComponentManager.cs" />
     <Compile Include="Source\Managers\InputManager.cs" />
@@ -112,6 +115,8 @@
     <Compile Include="Source\Systems\MoveSystem.cs" />
     <Compile Include="Source\Systems\NetworkServerSystem.cs" />
     <Compile Include="Source\Systems\ParentSystem.cs" />
+    <Compile Include="Source\Systems\ParticleRenderSystem.cs" />
+    <Compile Include="Source\Systems\ParticleUpdateSystem.cs" />
     <Compile Include="Source\Systems\PhysicsSystem.cs" />
     <Compile Include="Source\Systems\SkyboxRenderSystem.cs" />
     <Compile Include="Source\Systems\SpriteRenderSystem.cs" />

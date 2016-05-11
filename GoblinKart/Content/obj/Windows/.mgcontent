@@ -22,5 +22,7 @@
     <File>C:/GoblinKart/GoblinKart/Content/skyboxes/cube.fbx</File>
     <File>C:/GoblinKart/GoblinKart/Content/skyboxes/skybox.fx</File>
     <File>C:/GoblinKart/GoblinKart/Content/skyboxes/Sunset.dds</File>
+    <File>C:/GoblinKart/GoblinKart/Content/Effects/ParticleEffect.fx</File>
+    <File>C:/GoblinKart/GoblinKart/Content/smoke.png</File>
   </SourceFiles>
 </SourceFileCollection>

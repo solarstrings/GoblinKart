@@ -24,6 +24,7 @@ namespace GoblinKart.Init {
             InitCamera(engine);
             InitTerrain(engine);
             InitSkybox(engine);
+            EpicParticleFailure(engine);
 
             SceneManager.Instance.SetActiveScene("Game");
             SystemManager.Instance.Category = "Game";
@@ -93,7 +94,8 @@ namespace GoblinKart.Init {
             SceneManager.Instance.AddEntityToSceneOnLayer("Game", 0, skyboxEnt);
         }
 
-        private void InitTerrain(ECSEngine engine) {
+        private void InitTerrain(ECSEngine engine)
+        {
             sm.RegisterSystem("Game", new TerrainMapRenderSystem());
 
             Texture2D terrainTex = engine.LoadContent<Texture2D>("Canyon");
@@ -149,5 +151,17 @@ namespace GoblinKart.Init {
 
             SceneManager.Instance.AddEntityToSceneOnLayer("Game", 2, terrain);
         }
+
+        private void EpicParticleFailure(ECSEngine engine)
+        {
+            SystemManager.Instance.RegisterSystem("Game", new ParticleRenderSystem(engine.GetGraphicsDevice()));
+            SystemManager.Instance.RegisterSystem("Game", new ParticleUpdateSystem());
+            Entity SmokehParticle = EntityFactory.Instance.NewEntityWithTag("smokeh");
+            ParticleComponent pComp = new ParticleComponent();
+            ComponentManager.Instance.AddComponentToEntity(SmokehParticle, pComp);
+            ParticleRenderSystem.LoadParticleEffect(engine.GetGraphicsDevice(),engine.LoadContent<Effect>("Effects/ParticleEffect"), engine.LoadContent<Texture2D>("smoke"), ref pComp);
+            SceneManager.Instance.AddEntityToSceneOnLayer("Game", 2, SmokehParticle);
+        }
+
     }
 }

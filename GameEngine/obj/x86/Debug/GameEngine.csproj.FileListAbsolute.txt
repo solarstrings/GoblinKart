@@ -75,6 +75,7 @@ C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GameEngine\obj\x8
 C:\Users\Axel\Documents\Visual Studio 2015\Projects\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.pdb
 C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\GameEngine.dll
 C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\GameEngine.pdb
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\Lidgren.Network.dll
 C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\MonoGame.Framework.dll
 C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
 C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.dll
@@ -85,6 +86,7 @@ C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
 C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.XInput.dll
 C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.RawInput.dll
 C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\Lidgren.Network.xml
 C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\MonoGame.Framework.xml
 C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
 C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.xml
@@ -97,6 +99,3 @@ C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.RawInput.xml
 C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
 C:\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.dll
 C:\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.pdb
-C:\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.csprojResolveAssemblyReference.cache
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\Lidgren.Network.dll
-C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\Lidgren.Network.xml
