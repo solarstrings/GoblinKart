@@ -23,7 +23,7 @@ namespace GoblinKart.Init
             var serverComponent = new NetworkServerComponent() { Server = server };
             ComponentManager.Instance.AddComponentToEntity(serverEntity, serverComponent);
 
-            SystemManager.Instance.RegisterSystem("Game", new NetworkServerSystem());
+            SystemManager.Instance.RegisterSystem("Lobby", new NetworkServerSystem());
         }
     }
 }

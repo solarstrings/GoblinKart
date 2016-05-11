@@ -18,6 +18,7 @@ namespace GameEngine.Source.Systems
             var serverComponent = ComponentManager.Instance.GetAllComponentsOfType<NetworkServerComponent>()[0];
 
             NetIncomingMessage inc;
+            
             if ((inc = serverComponent.Server.ReadMessage()) != null)
             {
                 switch (inc.MessageType)
@@ -25,6 +26,7 @@ namespace GameEngine.Source.Systems
                     case NetIncomingMessageType.Error:
                         break;
                     case NetIncomingMessageType.StatusChanged:
+                        HandleConnectionStatus(inc);
                         break;
                     case NetIncomingMessageType.UnconnectedData:
                         break;
@@ -60,6 +62,7 @@ namespace GameEngine.Source.Systems
                     case NetIncomingMessageType.VerboseDebugMessage:
                         break;
                     case NetIncomingMessageType.DebugMessage:
+                        // Handle debug messages
                         break;
                     case NetIncomingMessageType.WarningMessage:
                         break;
@@ -72,6 +75,34 @@ namespace GameEngine.Source.Systems
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
+            }
+        }
+
+        // TODO implement me
+        private void HandleConnectionStatus(NetIncomingMessage message)
+        {
+            switch (message.SenderConnection.Status)
+            {
+                case NetConnectionStatus.None:
+                    break;
+                case NetConnectionStatus.InitiatedConnect:
+                    break;
+                case NetConnectionStatus.ReceivedInitiation:
+                    break;
+                case NetConnectionStatus.RespondedAwaitingApproval:
+                    break;
+                case NetConnectionStatus.RespondedConnect:
+                    break;
+                case NetConnectionStatus.Connected:
+                    // A new client has connected, do nothing? Should not be possible while in-game already?
+                    break;
+                case NetConnectionStatus.Disconnecting:
+                    break;
+                case NetConnectionStatus.Disconnected:
+                    // The client has disconnected, remove him from the "connection list"?
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }

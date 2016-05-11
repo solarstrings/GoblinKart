@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/GoblinKart/GoblinKart/Content/basichouse_texture2.png</SourceFile>
+  <SourceFile>c:/GoblinKart/GoblinKart/Content/basichouse_texture2.png</SourceFile>
   <SourceTime>2016-04-21T10:37:54.0530491+02:00</SourceTime>
-  <DestFile>C:/GoblinKart/GoblinKart/Content/bin/Windows/basichouse_texture2.xnb</DestFile>
-  <DestTime>2016-05-11T12:41:01.8109694+02:00</DestTime>
+  <DestFile>c:/GoblinKart/GoblinKart/Content/bin/Windows/basichouse_texture2.xnb</DestFile>
+  <DestTime>2016-05-11T15:28:26.7555073+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-03-30T08:36:08+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

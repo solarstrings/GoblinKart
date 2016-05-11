@@ -99,3 +99,4 @@ C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.RawInput.xml
 C:\GoblinKart\GameEngine\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
 C:\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.dll
 C:\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.pdb
+c:\GoblinKart\GameEngine\obj\x86\Debug\GameEngine.csprojResolveAssemblyReference.cache
