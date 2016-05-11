@@ -4,25 +4,25 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>c:/GoblinKart/GoblinKart/Content/canyon.png</File>
-    <File>c:/GoblinKart/GoblinKart/Content/Chopper.fbx</File>
-    <File>c:/GoblinKart/GoblinKart/Content/grass.png</File>
-    <File>c:/GoblinKart/GoblinKart/Content/grasstile.png</File>
-    <File>c:/GoblinKart/GoblinKart/Content/horizontalroad.png</File>
-    <File>c:/GoblinKart/GoblinKart/Content/LBCornerroad.png</File>
-    <File>c:/GoblinKart/GoblinKart/Content/LTCornerroad.png</File>
-    <File>c:/GoblinKart/GoblinKart/Content/RBCornerroad.png</File>
-    <File>c:/GoblinKart/GoblinKart/Content/RTCornerroad.png</File>
-    <File>c:/GoblinKart/GoblinKart/Content/verticalroad.png</File>
-    <File>c:/GoblinKart/GoblinKart/Content/basichouse.fbx</File>
-    <File>c:/GoblinKart/GoblinKart/Content/basichouse_texture1.png</File>
-    <File>c:/GoblinKart/GoblinKart/Content/basichouse_texture2.png</File>
-    <File>c:/GoblinKart/GoblinKart/Content/shaderAmbientLight.fx</File>
-    <File>c:/GoblinKart/GoblinKart/Content/skybox.fx</File>
-    <File>c:/GoblinKart/GoblinKart/Content/skyboxes/cube.fbx</File>
-    <File>c:/GoblinKart/GoblinKart/Content/skyboxes/skybox.fx</File>
-    <File>c:/GoblinKart/GoblinKart/Content/skyboxes/Sunset.dds</File>
-    <File>c:/GoblinKart/GoblinKart/Content/Effects/ParticleEffect.fx</File>
-    <File>c:/GoblinKart/GoblinKart/Content/smoke.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/canyon.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/Chopper.fbx</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/grass.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/grasstile.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/horizontalroad.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/LBCornerroad.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/LTCornerroad.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/RBCornerroad.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/RTCornerroad.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/verticalroad.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/basichouse.fbx</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/basichouse_texture1.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/basichouse_texture2.png</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/shaderAmbientLight.fx</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/skybox.fx</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/skyboxes/cube.fbx</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/skyboxes/skybox.fx</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/skyboxes/Sunset.dds</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/Effects/ParticleEffect.fx</File>
+    <File>C:/Users/Ankan/Source/Repos/GoblinKart5/GoblinKart/Content/smoke.png</File>
   </SourceFiles>
 </SourceFileCollection>

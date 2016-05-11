@@ -98,6 +98,8 @@
     <Compile Include="Source\Managers\SoundManager.cs" />
     <Compile Include="Source\Managers\SystemManager.cs" />
     <Compile Include="Source\Network\LoginInformation.cs" />
+    <Compile Include="Source\Observer\CollisionInformation.cs" />
+    <Compile Include="Source\Observer\ObserverSystem.cs" />
     <Compile Include="Source\Scripts\IScript.cs" />
     <Compile Include="Source\Systems\AISystem.cs" />
     <Compile Include="Source\Systems\AnimateSystem.cs" />
