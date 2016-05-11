@@ -16,16 +16,16 @@ namespace GameEngine
             List<TransformComponent> transformComponents =
                 ComponentManager.Instance.GetComponentsFromEntities<TransformComponent>(entities);
 
-            foreach(TransformComponent t in transformComponents)
+            Parallel.ForEach(transformComponents, t =>
             {
-                    var qRotation = Quaternion.CreateFromYawPitchRoll(t.vRotation.X, t.vRotation.Y, t.vRotation.Z);
-                    t.rotation *= qRotation;
-                    t.forward = Vector3.Transform(Vector3.Forward, t.rotation);
-                    //Update world matrix
-                    t.world = Matrix.CreateScale(t.scale)
-                              * Matrix.CreateFromQuaternion(t.rotation)
-                              * Matrix.CreateTranslation(t.position);
-            }
+                var qRotation = Quaternion.CreateFromYawPitchRoll(t.vRotation.X, t.vRotation.Y, t.vRotation.Z);
+                t.rotation *= qRotation;
+                t.forward = Vector3.Transform(Vector3.Forward, t.rotation);
+                //Update world matrix
+                t.world = Matrix.CreateScale(t.scale)
+                          *Matrix.CreateFromQuaternion(t.rotation)
+                          *Matrix.CreateTranslation(t.position);
+            });
         }
     }
 }
