@@ -47,8 +47,6 @@ C:\Users\Andreas Karlsson\Source\Repos\GoblinKart2\GoblinKart\bin\Windows\x86\De
 C:\Users\Andreas Karlsson\Source\Repos\GoblinKart2\GoblinKart\obj\x86\Debug\GoblinKart.csprojResolveAssemblyReference.cache
 C:\Users\Andreas Karlsson\Source\Repos\GoblinKart2\GoblinKart\obj\x86\Debug\GoblinKart.exe
 C:\Users\Andreas Karlsson\Source\Repos\GoblinKart2\GoblinKart\obj\x86\Debug\GoblinKart.pdb
-C:\Users\Ankan\Source\Repos\GoblinKart6\GoblinKart\obj\x86\Debug\GoblinKart.exe
-C:\Users\Ankan\Source\Repos\GoblinKart6\GoblinKart\obj\x86\Debug\GoblinKart.pdb
 C:\Users\Ankan\Source\Repos\GoblinKart6\GoblinKart\bin\Windows\x86\Debug\Content\basichouse.xnb
 C:\Users\Ankan\Source\Repos\GoblinKart6\GoblinKart\bin\Windows\x86\Debug\Content\basichouse_texture1.xnb
 C:\Users\Ankan\Source\Repos\GoblinKart6\GoblinKart\bin\Windows\x86\Debug\Content\basichouse_texture2.xnb
@@ -96,3 +94,5 @@ C:\Users\Ankan\Source\Repos\GoblinKart6\GoblinKart\bin\Windows\x86\Debug\SharpDX
 C:\Users\Ankan\Source\Repos\GoblinKart6\GoblinKart\bin\Windows\x86\Debug\SharpDX.RawInput.xml
 C:\Users\Ankan\Source\Repos\GoblinKart6\GoblinKart\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
 C:\Users\Ankan\Source\Repos\GoblinKart6\GoblinKart\obj\x86\Debug\GoblinKart.csprojResolveAssemblyReference.cache
+C:\Users\Ankan\Source\Repos\GoblinKart6\GoblinKart\obj\x86\Debug\GoblinKart.exe
+C:\Users\Ankan\Source\Repos\GoblinKart6\GoblinKart\obj\x86\Debug\GoblinKart.pdb

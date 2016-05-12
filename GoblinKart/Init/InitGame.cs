@@ -20,16 +20,11 @@ namespace GoblinKart.Init {
         {
             sm.RegisterSystem("Game", new PhysicsSystem());
             sm.RegisterSystem("Game", new TransformSystem());
-            sm.RegisterSystem("Game", new ModelRenderSystem());
+            sm.RegisterSystem("Game", new ModelRenderSystem(false));
 
             var collisionSystem = new ModelCollisionSystem();
             sm.RegisterSystem("Game", collisionSystem);
             sm.RegisterSystem("Game", new PowerupCollisionSystem(collisionSystem));
-
-            sm.RegisterSystem("Game", new PhysicsSystem());
-            sm.RegisterSystem("Game", new TransformSystem());
-            sm.RegisterSystem("Game", new ModelRenderSystem(true));
-            
 
             InitKeyboard();
             InitKart(engine);

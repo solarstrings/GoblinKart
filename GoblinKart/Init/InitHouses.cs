@@ -18,6 +18,7 @@ namespace GoblinKart.Init
             Random rnd = new Random();
             ModelComponent house = new ModelComponent(engine.LoadContent<Model>("basichouse"), true, true,true);
             ModelComponent house2 = new ModelComponent(engine.LoadContent<Model>("basichouse"), true, true,true);
+            ModelComponent powerupModel = new ModelComponent(engine.LoadContent<Model>("basichouse"), true, true, true);
             List<Entity> sceneEntities = SceneManager.Instance.GetActiveScene().GetAllEntities();
             Entity terrain = ComponentManager.Instance.GetEntityWithTag("Terrain", sceneEntities);
             TerrainMapComponent tcomp = ComponentManager.Instance.GetEntityComponent<TerrainMapComponent>(terrain);
@@ -26,8 +27,9 @@ namespace GoblinKart.Init
 
             Entity entity = EntityFactory.Instance.NewEntity();
 
-            house.SetTexture(engine.LoadContent<Texture2D>("basichouse_texture1"));
-            house.textured = true;
+            powerupModel.SetTexture(engine.LoadContent<Texture2D>("basichouse_texture1"));
+            powerupModel.textured = true;
+            powerupModel.staticModel = false;
             ComponentManager.Instance.AddComponentToEntity(entity, house);
 
             TransformComponent tt = new TransformComponent();

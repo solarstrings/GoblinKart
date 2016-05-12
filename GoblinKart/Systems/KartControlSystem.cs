@@ -51,26 +51,15 @@ namespace GoblinKart {
                     else {
                         trsComp.vRotation = Vector3.Zero;
                     }
-
-                    if (Utilities.CheckKeyboardAction("up", BUTTON_STATE.HELD, k)) {
-                        trsComp.position += new Vector3(0f, 70f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        moving = true;
-                    }
                     if (Utilities.CheckKeyboardAction("quit", BUTTON_STATE.RELEASED, k)) {
                         System.Environment.Exit(0);
                     }
-                    if (Utilities.CheckKeyboardAction("down", BUTTON_STATE.HELD, k)) {
-                        trsComp.position += new Vector3(0f, -70f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        moving = true;
-                    }
+
                     if (Utilities.CheckKeyboardAction("forward", BUTTON_STATE.HELD, k)) {
                         trsComp.Velocity += new Vector3(2f, 0, 0);
-                        //trsComp.position += trsComp.forward * 100f * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        //moving = true;
                     }
                     if (Utilities.CheckKeyboardAction("back", BUTTON_STATE.HELD, k)) {
-                        trsComp.position += trsComp.forward * -100f * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        moving = true;
+                        trsComp.Velocity += new Vector3(-2f, 0, 0);
                     }
                     ModelRenderSystem.SetMeshTransform(ref kartModel, 1, Matrix.CreateRotationY(0.08f));
                     ModelRenderSystem.SetMeshTransform(ref kartModel, 3, Matrix.CreateRotationY(0.1f));

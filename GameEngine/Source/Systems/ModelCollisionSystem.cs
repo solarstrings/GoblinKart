@@ -22,52 +22,57 @@ namespace GameEngine.Source.Systems
             // The engine will implement an util-class that helps with these other levels of collision to avoid redundant code.
             List<Entity> entities = ComponentManager.Instance.GetAllEntitiesWithComponentType<Collision3Dcomponent>();
 
+            //    foreach (var entity1 in entities)
+            //    {
+            //        foreach (var entity2 in entities)
+            //        {
+            //            ModelComponent model1 = ComponentManager.Instance.GetEntityComponent<ModelComponent>(entity1);
+            //            ModelComponent model2 = ComponentManager.Instance.GetEntityComponent<ModelComponent>(entity2);
+
+            //            var sphere1 = ComponentManager.Instance.GetEntityComponent<ModelBoundingSphereComponent>(entity1);
+            //            var sphere2 = ComponentManager.Instance.GetEntityComponent<ModelBoundingSphereComponent>(entity2);
+
+            //            if (sphere1.sphere.Intersects(sphere2.sphere));
+
+            //        }
+            //    }
+            //}
+
             foreach (var entity1 in entities)
             {
                 foreach (var entity2 in entities)
                 {
-                    ModelComponent model1 = ComponentManager.Instance.GetEntityComponent<ModelComponent>(entity1);
-                    ModelComponent model2 = ComponentManager.Instance.GetEntityComponent<ModelComponent>(entity2);
+                    if (entity1 != entity2)
+                    {
+                        ModelComponent model1 = ComponentManager.Instance.GetEntityComponent<ModelComponent>(entity1);
+                        ModelComponent model2 = ComponentManager.Instance.GetEntityComponent<ModelComponent>(entity2);
 
+                        TransformComponent transfrom1 =
+                            ComponentManager.Instance.GetEntityComponent<TransformComponent>(entity1);
+                        TransformComponent transfrom2 =
+                            ComponentManager.Instance.GetEntityComponent<TransformComponent>(entity2);
+
+                        foreach (var mesh1 in model1.model.Meshes)
+                        {
+                            BoundingSphere sphere1 = mesh1.BoundingSphere;
+                            sphere1 = sphere1.Transform(transfrom1.world);
+
+                            foreach (var mesh2 in model2.model.Meshes)
+                            {
+                                BoundingSphere sphere2 = mesh2.BoundingSphere;
+                                sphere2 = sphere2.Transform(transfrom2.world);
+
+                                if (sphere1.Intersects(sphere2))
+                                {
+                                    // Notify all observers
+                                    Notify(entity1, entity2);
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
-
-        //    foreach (var entity1 in entities)
-        //    {
-        //        foreach (var entity2 in entities)
-        //        {
-        //            if (entity1 != entity2)
-        //            {
-        //                ModelComponent model1 = ComponentManager.Instance.GetEntityComponent<ModelComponent>(entity1);
-        //                ModelComponent model2 = ComponentManager.Instance.GetEntityComponent<ModelComponent>(entity2);
-
-        //                TransformComponent transfrom1 =
-        //                    ComponentManager.Instance.GetEntityComponent<TransformComponent>(entity1);
-        //                TransformComponent transfrom2 =
-        //                    ComponentManager.Instance.GetEntityComponent<TransformComponent>(entity2);
-
-        //                foreach (var mesh1 in model1.model.Meshes)
-        //                {
-        //                    BoundingSphere sphere1 = mesh1.BoundingSphere;
-        //                    sphere1 = sphere1.Transform(transfrom1.world);
-
-        //                    foreach (var mesh2 in model2.model.Meshes)
-        //                    {
-        //                        BoundingSphere sphere2 = mesh2.BoundingSphere;
-        //                        sphere2 = sphere2.Transform(transfrom2.world);
-
-        //                        if (sphere1.Intersects(sphere2))
-        //                        {
-        //                            // Notify all observers
-        //                            Notify(entity1, entity2);
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
 
         public void Subscribe(ICollisionObserver observer)
         {

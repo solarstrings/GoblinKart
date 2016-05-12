@@ -41,7 +41,7 @@ namespace GameEngine.Source.Utilities
                                 if (sphere1.Intersects(sphere2))
                                 {
                                     // Notify all observers
-                                    Notify(entity1, entity2);
+                                    //Notify(entity1, entity2);
                                 }
                             }
                         }
@@ -49,6 +49,5 @@ namespace GameEngine.Source.Utilities
                 }
             }
         }
-    }
     }
 }

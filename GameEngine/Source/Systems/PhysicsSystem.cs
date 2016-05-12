@@ -22,12 +22,17 @@ namespace GameEngine.Source.Systems
                 foreach (var transformComponent in transformComponents)
                 {
                     //transformComponent.velocity += new Vector3(0, PhysicsManager.Instance.gravity*(float) gameTime.ElapsedGameTime.TotalSeconds, 0);
-                    transformComponent.Velocity -= new Vector3(PhysicsManager.Instance.Friction, 0, 0);
 
-                    if (transformComponent.Velocity.X < 0)
+                    // Temporary hack for the friction.
+                    if (transformComponent.Velocity.X > 0)
                     {
-                        transformComponent.Velocity.X = 0;
+                        transformComponent.Velocity -= new Vector3(PhysicsManager.Instance.Friction, 0, 0);
                     }
+                    else if (transformComponent.Velocity.X < 0)
+                    {
+                        transformComponent.Velocity += new Vector3(PhysicsManager.Instance.Friction, 0, 0);
+                    }
+
                     var forward = transformComponent.world.Forward;
                     forward *= transformComponent.Velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
