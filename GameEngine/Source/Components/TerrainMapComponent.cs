@@ -19,6 +19,8 @@ namespace GameEngine {
         public int[] indices { get; set; }
         public int numChunksInView { get; set; }
 
+        public int numModelsInView { get; set; }
+
         public TerrainMapComponent(GraphicsDevice graphicsDevice, Texture2D HeightmapTexture, Texture2D defaultTexture, int numChunks) {
             terrainChunks = new List<TerrainChunk>();
             terrainHeightMap = HeightmapTexture;

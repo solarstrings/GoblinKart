@@ -13,9 +13,21 @@ namespace GameEngine
     {
         DebugRenderBoundingBox boxRenderer;
         BoundingBoxToWorldSpace boxConvert;
+        ModelRenderMethods modelRenderMethods;
         bool renderBoxInitialised = false;
 
         private bool modelInCameraFrustrum=false;
+
+        //if the terrain system is drawing all static models belonging to chunks
+        //the model render system will only need to draw non-static models.
+        bool renderOnlyNonStaticModels;
+
+        public ModelRenderSystem(bool renderOnlyNonStaticModels)
+        {
+            this.renderOnlyNonStaticModels = renderOnlyNonStaticModels;
+            modelRenderMethods = new ModelRenderMethods();
+        }
+
 
         public void Render(GraphicsDevice graphicsDevice, GameTime gameTime) {
             if (renderBoxInitialised.Equals(false)) {
@@ -47,7 +59,7 @@ namespace GameEngine
                             //loop through all mesh transforms in the model
                             foreach (var pair in m.meshTransforms) {
                                 //update the model transforms
-                                ChangeBoneTransform(m, pair.Key, pair.Value);
+                                modelRenderMethods.ChangeBoneTransform(m, pair.Key, pair.Value);
                             }
 
                             TransformComponent t = ComponentManager.Instance.GetEntityComponent<TransformComponent>(entity);
@@ -74,7 +86,7 @@ namespace GameEngine
                                         //If the model uses monogames built-in basic effects
                                         if (m.useBasicEffect) {
                                             //render the model with basic effects
-                                            RenderBasicEffectModel(m, t, c);
+                                            modelRenderMethods.RenderBasicEffectModel(m, t, c, renderOnlyNonStaticModels);
                                         }
                                     }
                                 }
@@ -83,7 +95,7 @@ namespace GameEngine
                                     //If the model uses monogames built-in basic effects
                                     if (m.useBasicEffect) {
                                         //render the model with basic effects
-                                        RenderBasicEffectModel(m, t, c);
+                                        modelRenderMethods.RenderBasicEffectModel(m, t, c, renderOnlyNonStaticModels);
                                     }
                                 }
                             }
@@ -91,49 +103,6 @@ namespace GameEngine
                     }
                 }
             }
-        }
-
-        private void RenderBasicEffectModel(ModelComponent modelComp, TransformComponent t, CameraComponent c) {
-            /*
-            Matrix worldMatrix = Matrix.CreateScale(t.scale)    //Scale
-                * Matrix.CreateRotationY(MathHelper.Pi)         //Rotate model 180 degrees (compensate for upside-down model)
-                * Matrix.CreateFromQuaternion(t.rotation)       //Rotate
-                * Matrix.CreateTranslation(t.position);         //Translate
-                */
-            Matrix[] transforms = new Matrix[modelComp.model.Bones.Count];
-            modelComp.model.CopyAbsoluteBoneTransformsTo(transforms);
-
-            foreach (ModelMesh mesh in modelComp.model.Meshes) {
-                foreach (BasicEffect effect in mesh.Effects) {
-                    effect.EnableDefaultLighting();
-                    if (modelComp.textured) {
-                        effect.TextureEnabled = true;
-                        effect.Texture = modelComp.texture;
-                    }
-                    if (modelComp.useFog) {
-                        effect.FogEnabled = true;
-                        effect.FogColor = Color.LightGray.ToVector3();
-                        effect.FogStart = modelComp.fogStart;
-                        effect.FogEnd = modelComp.fogEnd;
-                    }
-
-                    effect.World = transforms[mesh.ParentBone.Index] * t.world;
-                    effect.View = c.viewMatrix;
-                    effect.Projection = c.projectionMatrix;
-                }
-                mesh.Draw();
-                //Console.WriteLine("Model X:" + t.position.X + " Y:" + t.position.Y +" Z:" + t.position.Z);
-            }
-        }
-
-        /// <summary>
-        /// This function rotates the given bone by the given matrix
-        /// </summary>
-        /// <param name="boneIndex"></param>
-        /// <param name="t"></param>
-        private void ChangeBoneTransform(ModelComponent modelComp,int boneIndex, Matrix t)
-        {
-            modelComp.model.Bones[boneIndex].Transform = t * modelComp.model.Bones[boneIndex].Transform;
         }
 
         public static void AddMeshTransform(ref ModelComponent model, int bone, Matrix t) {

@@ -20,6 +20,9 @@ namespace GameEngine {
         public BoundingBox boundingBox { get; set; }
         public VertexBuffer vBuffer { get; set; }
 
+        //list of the static models which stand on the chunk
+        public List<Entity> staticModels { get; set; }
+
         public IndexBuffer iBuffer { get; set; }
         public BasicEffect effect { get; set; }
 
@@ -61,6 +64,8 @@ namespace GameEngine {
             CopyNormals(vertexNormals);
 
             PrepareBuffers(graphicsDevice);
+
+            staticModels = new List<Entity>();
         }
 
         private void CopyNormals(VertexPositionNormalTexture[] vertexNormals) {
@@ -173,8 +178,6 @@ namespace GameEngine {
         public void SetTexture(Texture2D texture) {
             this.terrainTex = texture;
         }
-
-
 
     }
 }

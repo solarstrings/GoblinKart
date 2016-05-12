@@ -17,7 +17,7 @@ namespace GoblinKart.Init {
         private SystemManager sm = SystemManager.Instance;
 
         public InitGame(ECSEngine engine)
-        {         
+        {
             sm.RegisterSystem("Game", new PhysicsSystem());
             sm.RegisterSystem("Game", new TransformSystem());
             sm.RegisterSystem("Game", new ModelRenderSystem());
@@ -25,6 +25,11 @@ namespace GoblinKart.Init {
             var collisionSystem = new ModelCollisionSystem();
             sm.RegisterSystem("Game", collisionSystem);
             sm.RegisterSystem("Game", new PowerupCollisionSystem(collisionSystem));
+
+            sm.RegisterSystem("Game", new PhysicsSystem());
+            sm.RegisterSystem("Game", new TransformSystem());
+            sm.RegisterSystem("Game", new ModelRenderSystem(true));
+            
 
             InitKeyboard();
             InitKart(engine);
@@ -59,10 +64,12 @@ namespace GoblinKart.Init {
             sm.RegisterSystem("Game", new KartControlSystem(engine));
 
             Entity kart = EntityFactory.Instance.NewEntityWithTag("Kart");
-            ModelComponent modelComp = new ModelComponent(engine.LoadContent<Model>("Chopper"), true, false);
+            ModelComponent modelComp = new ModelComponent(engine.LoadContent<Model>("Chopper"), true, false,false);
+            modelComp.staticModel = false;
             ModelRenderSystem.AddMeshTransform(ref modelComp, 1, Matrix.CreateRotationY(0.2f));
             ModelRenderSystem.AddMeshTransform(ref modelComp, 3, Matrix.CreateRotationY(0.5f));
             ComponentManager.Instance.AddComponentToEntity(kart, modelComp);
+
 
             ComponentManager.Instance.AddComponentToEntity(kart, new Collision3Dcomponent());
             ComponentManager.Instance.AddComponentToEntity(kart, new PowerupComponent());

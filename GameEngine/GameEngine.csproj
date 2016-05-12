@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="ECSEngine.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Components\AIComponent.cs" />
     <Compile Include="Source\Components\AnimationComponent.cs" />
@@ -53,11 +52,13 @@
     <Compile Include="Source\Components\Collision3Dcomponent.cs" />
     <Compile Include="Source\Components\CollisionComponent.cs" />
     <Compile Include="Source\Components\DefaultFogComponent.cs" />
+    <Compile Include="Source\Components\EnvironmentmappingComponent.cs" />
     <Compile Include="Source\Components\GamePadComponent.cs" />
     <Compile Include="Source\Components\IComponent.cs" />
     <Compile Include="Source\Components\InputComponent.cs" />
     <Compile Include="Source\Components\KeyBoardComponent.cs" />
     <Compile Include="Source\Components\ModelBoundingBoxComponent.cs" />
+    <Compile Include="Source\Components\ModelBoundingSphereComponent.cs" />
     <Compile Include="Source\Components\ModelComponent.cs" />
     <Compile Include="Source\Components\ModelCountComponent.cs" />
     <Compile Include="Source\Components\MouseComponent.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Source\Components\TriggerComponent.cs" />
     <Compile Include="Source\Components\Velocity2DComponent.cs" />
     <Compile Include="Source\Engine\BoundingBoxToWorldSpace.cs" />
+    <Compile Include="Source\Engine\BoundingSphereToWorldSpace.cs" />
     <Compile Include="Source\Engine\CollisionArea.cs" />
     <Compile Include="Source\Engine\CollisionRectangle.cs" />
     <Compile Include="Source\Engine\DebugRenderBoundingBox.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Source\Engine\EntityFactory.cs" />
     <Compile Include="Source\Engine\ErrorLogger.cs" />
     <Compile Include="Source\Engine\InputDefines.cs" />
+    <Compile Include="Source\Engine\ModelRenderMethods.cs" />
     <Compile Include="Source\Engine\Music.cs" />
     <Compile Include="Source\Engine\PacketType.cs" />
     <Compile Include="Source\Engine\ParticleEmitter.cs" />
@@ -106,6 +109,7 @@
     <Compile Include="Source\Systems\AnimateSystem.cs" />
     <Compile Include="Source\Systems\CameraSystem.cs" />
     <Compile Include="Source\Systems\CollisionSystem.cs" />
+    <Compile Include="Source\Systems\EnvironmentmappingSystem.cs" />
     <Compile Include="Source\Systems\GamePadSystem.cs" />
     <Compile Include="Source\Systems\InputSystem.cs" />
     <Compile Include="Source\Systems\IRender3DSystem.cs" />

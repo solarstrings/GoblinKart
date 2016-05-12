@@ -8,12 +8,22 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameEngine {
     public class TerrainMapRenderSystem : IRender3DSystem{
-        DebugRenderBoundingBox boxRenderer;
-        BoundingBoxToWorldSpace boxConvert;
+        static DebugRenderBoundingBox boxRenderer;
+        static BoundingBoxToWorldSpace boxConvert;
+        static BoundingSphereToWorldSpace sphereConvert;
+        private ModelRenderMethods modelRenderMethods;
         bool renderBoxInitialised = false;
 
-        public void Render(GraphicsDevice graphicsDevice, GameTime gameTime) {
-            if (renderBoxInitialised.Equals(false)) {
+        public TerrainMapRenderSystem()
+        {
+            sphereConvert = new BoundingSphereToWorldSpace();
+            boxConvert = new BoundingBoxToWorldSpace();
+            modelRenderMethods = new ModelRenderMethods();
+        }
+        public void Render(GraphicsDevice graphicsDevice, GameTime gameTime)
+        {
+            if (renderBoxInitialised.Equals(false))
+            {
                 boxConvert = new BoundingBoxToWorldSpace();
                 boxRenderer = new DebugRenderBoundingBox(graphicsDevice);
                 renderBoxInitialised = true;
@@ -21,21 +31,24 @@ namespace GameEngine {
 
             Entity e = ComponentManager.Instance.GetFirstEntityOfType<TerrainMapComponent>();
             Entity c = ComponentManager.Instance.GetFirstEntityOfType<CameraComponent>();
-
             CameraComponent camera = ComponentManager.Instance.GetEntityComponent<CameraComponent>(c);
             TerrainMapComponent terrainComponent = ComponentManager.Instance.GetEntityComponent<TerrainMapComponent>(e);
             TransformComponent transformComponent = ComponentManager.Instance.GetEntityComponent<TransformComponent>(e);
 
-            if (terrainComponent != null) {
-                if (transformComponent != null) {
+            if (terrainComponent != null)
+            {
+                if (transformComponent != null)
+                {
                     /*RasterizerState r = new RasterizerState();
                     r.CullMode = CullMode.None;
                     //r.FillMode = FillMode.WireFrame;
                     graphicsDevice.RasterizerState = r;//*/
 
                     terrainComponent.numChunksInView = 0;
+                    terrainComponent.numModelsInView = 0;
 
-                    for (int i = 0; i < terrainComponent.terrainChunks.Count; ++i) {
+                    for (int i = 0; i < terrainComponent.terrainChunks.Count; ++i)
+                    {
                         terrainComponent.terrainChunks[i].effect.TextureEnabled = true;
                         terrainComponent.terrainChunks[i].effect.VertexColorEnabled = false;
                         terrainComponent.terrainChunks[i].effect.Texture = terrainComponent.terrainChunks[i].terrainTex;
@@ -46,8 +59,10 @@ namespace GameEngine {
 
                         BoundingBox box = boxConvert.ConvertBoundingBoxToWorldCoords(terrainComponent.terrainChunks[i].boundingBox, terrainComponent.terrainChunks[i].effect.World);
 
-                        if (box.Intersects(camera.cameraFrustrum)) {
-                            foreach (EffectPass p in terrainComponent.terrainChunks[i].effect.CurrentTechnique.Passes) {
+                        if (box.Intersects(camera.cameraFrustrum))
+                        {
+                            foreach (EffectPass p in terrainComponent.terrainChunks[i].effect.CurrentTechnique.Passes)
+                            {
                                 p.Apply();
                                 graphicsDevice.Indices = terrainComponent.terrainChunks[i].iBuffer;
                                 graphicsDevice.SetVertexBuffer(terrainComponent.terrainChunks[i].vBuffer);
@@ -55,6 +70,37 @@ namespace GameEngine {
                             }
                             boxRenderer.RenderBoundingBox(terrainComponent.terrainChunks[i].boundingBox, terrainComponent.terrainChunks[i].effect.World, camera.viewMatrix, camera.projectionMatrix);
                             terrainComponent.numChunksInView++;
+
+                            //go through all the entities in the current chunk
+                            foreach (Entity staticModelEnt in terrainComponent.terrainChunks[i].staticModels)
+                            {
+                                //get the transform and modelcomponent
+                                TransformComponent tComp = ComponentManager.Instance.GetEntityComponent<TransformComponent>(staticModelEnt);
+                                ModelComponent mComp = ComponentManager.Instance.GetEntityComponent<ModelComponent>(staticModelEnt);
+                                ModelBoundingSphereComponent sp = ComponentManager.Instance.GetEntityComponent<ModelBoundingSphereComponent>(staticModelEnt);
+
+                                BoundingSphere newSphere = sphereConvert.ConvertBoundingSphereToWorldCoords(sp.sphere, Matrix.CreateTranslation(tComp.position));
+                                newSphere.Radius += 0.5f;
+
+                                foreach (var pair in mComp.meshTransforms)
+                                {
+                                    //update the model transforms
+                                    modelRenderMethods.ChangeBoneTransform(mComp, pair.Key, pair.Value);
+                                }
+
+                                //if they use the basic effect
+                                if (mComp.useBasicEffect)
+                                {
+                                    //and are within the camera frustrum
+                                    if (camera.cameraFrustrum.Contains(newSphere) != ContainmentType.Disjoint)
+                                    {
+                                        terrainComponent.numModelsInView++;
+
+                                        //render the model with basic effects
+                                        modelRenderMethods.RenderBasicEffectModel(mComp, tComp, camera,false);
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -84,7 +130,6 @@ namespace GameEngine {
 
             //setup the terrain chunks
             SetupTerrainChunks(ref terrain, graphicsDevice, defaultTex);
-            CorrectChunkPositions(ref terrain);
         }
 
         internal static int[] InitIndices(int width, int height) {
@@ -182,10 +227,6 @@ namespace GameEngine {
             return terrainVerts;
         }
 
-        private static void CorrectChunkPositions(ref TerrainMapComponent terrain) {
-            terrain.terrainChunks[1].offsetPosition += new Vector3(0, 0, 0);
-        }
-
         public static float GetTerrainHeight(TerrainMapComponent terrain, float x, float z) {
 
             if (terrain == null)
@@ -232,5 +273,61 @@ namespace GameEngine {
             }
             return resultHeight;
         }
+
+        /// <summary>
+        /// This method adds the static models to the chunks they stand upon
+        /// </summary>
+        public static void AddStaticModelsToChunks()
+        {
+
+            Entity e = ComponentManager.Instance.GetFirstEntityOfType<TerrainMapComponent>();
+            if (e == null) { return; }
+
+            TerrainMapComponent terrainComponent = ComponentManager.Instance.GetEntityComponent<TerrainMapComponent>(e);
+            TransformComponent transformComponent = ComponentManager.Instance.GetEntityComponent<TransformComponent>(e);
+
+            List<Entity> entModels = ComponentManager.Instance.GetAllEntitiesWithComponentType<ModelComponent>();
+            if (entModels == null) { return; }
+
+            for (int i = 0; i < terrainComponent.terrainChunks.Count; ++i)
+            {
+                Matrix world = Matrix.CreateTranslation(terrainComponent.terrainChunks[i].offsetPosition);
+
+                //get the bounding box for the terrain chunk
+                BoundingBox box = boxConvert.ConvertBoundingBoxToWorldCoords(terrainComponent.terrainChunks[i].boundingBox, world);
+
+                for (int j = 0; j < entModels.Count; j++)
+                {
+                    TransformComponent tComp = ComponentManager.Instance.GetEntityComponent<TransformComponent>(entModels[j]);
+                    ModelBoundingSphereComponent spComp = ComponentManager.Instance.GetEntityComponent<ModelBoundingSphereComponent>(entModels[j]);
+                    ModelComponent mComp = ComponentManager.Instance.GetEntityComponent<ModelComponent>(entModels[j]);
+
+                    //If there is a transformcomponent 
+                    if (tComp != null)
+                    {
+                        BoundingSphere newSphere;
+                        //and a sphere component
+                        if (spComp != null)
+                        {
+                            newSphere = sphereConvert.ConvertBoundingSphereToWorldCoords(spComp.sphere, tComp.world);
+
+
+                            //if the box and the sphere overlaps
+                            if (box.Intersects(newSphere))
+                            {
+                                //if it's a static model
+                                if (mComp.staticModel.Equals(true))
+                                {
+                                    //add the entity to the chunk
+                                    terrainComponent.terrainChunks[i].staticModels.Add(entModels[j]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
     }
 }
