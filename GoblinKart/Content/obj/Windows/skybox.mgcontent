@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Andreas Karlsson/Source/Repos/GoblinKart2/GoblinKart/Content/skybox.fx</SourceFile>
-  <SourceTime>2016-05-11T18:20:24.6921453+02:00</SourceTime>
-  <DestFile>C:/Users/Andreas Karlsson/Source/Repos/GoblinKart2/GoblinKart/Content/bin/Windows/skybox.xnb</DestFile>
-  <DestTime>2016-05-12T01:28:00.4077835+02:00</DestTime>
+  <SourceFile>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/skybox.fx</SourceFile>
+  <SourceTime>2016-05-12T11:11:04.4398635+02:00</SourceTime>
+  <DestFile>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/bin/Windows/skybox.xnb</DestFile>
+  <DestTime>2016-05-12T11:11:51.637563+02:00</DestTime>
   <Importer>EffectImporter</Importer>
   <ImporterTime>2016-03-30T08:36:08+02:00</ImporterTime>
   <Processor>EffectProcessor</Processor>
