@@ -101,15 +101,12 @@
     <Compile Include="Source\Network\LoginInformation.cs" />
     <Compile Include="Source\Observers\ICollisionObserver.cs" />
     <Compile Include="Source\Observers\ICollisionSubject.cs" />
-    <Compile Include="Source\Observers\Observer.cs" />
-    <Compile Include="Source\Observers\Subject.cs" />
     <Compile Include="Source\Scripts\IScript.cs" />
     <Compile Include="Source\Systems\AISystem.cs" />
     <Compile Include="Source\Systems\AnimateSystem.cs" />
     <Compile Include="Source\Systems\CameraSystem.cs" />
     <Compile Include="Source\Systems\CollisionSystem.cs" />
     <Compile Include="Source\Systems\GamePadSystem.cs" />
-    <Compile Include="Source\Systems\INotifySystem.cs" />
     <Compile Include="Source\Systems\InputSystem.cs" />
     <Compile Include="Source\Systems\IRender3DSystem.cs" />
     <Compile Include="Source\Systems\IRenderSystem.cs" />
@@ -133,6 +130,7 @@
     <Compile Include="Source\Systems\TimerSystem.cs" />
     <Compile Include="Source\Systems\TransformSystem.cs" />
     <Compile Include="Source\Systems\TriggerSystem.cs" />
+    <Compile Include="Source\Utilities\MeshToMeshCollision.cs" />
     <Compile Include="Source\VertexPositionColorNormal.cs" />
   </ItemGroup>
   <ItemGroup>

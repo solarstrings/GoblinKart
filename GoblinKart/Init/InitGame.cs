@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
 using GameEngine.Source.Components;
 using GameEngine.Source.Systems;
+using GoblinKart.Components;
 using GoblinKart.Systems;
 using Microsoft.Xna.Framework.Input;
 
@@ -16,16 +17,14 @@ namespace GoblinKart.Init {
         private SystemManager sm = SystemManager.Instance;
 
         public InitGame(ECSEngine engine)
-        {
+        {         
+            sm.RegisterSystem("Game", new PhysicsSystem());
+            sm.RegisterSystem("Game", new TransformSystem());
+            sm.RegisterSystem("Game", new ModelRenderSystem());
 
             var collisionSystem = new ModelCollisionSystem();
             sm.RegisterSystem("Game", collisionSystem);
             sm.RegisterSystem("Game", new PowerupCollisionSystem(collisionSystem));
-
-            sm.RegisterSystem("Game", new PhysicsSystem());
-            sm.RegisterSystem("Game", new TransformSystem());
-            sm.RegisterSystem("Game", new ModelRenderSystem());
-            
 
             InitKeyboard();
             InitKart(engine);
@@ -66,6 +65,7 @@ namespace GoblinKart.Init {
             ComponentManager.Instance.AddComponentToEntity(kart, modelComp);
 
             ComponentManager.Instance.AddComponentToEntity(kart, new Collision3Dcomponent());
+            ComponentManager.Instance.AddComponentToEntity(kart, new PowerupComponent());
 
             TransformComponent kartTransform = new TransformComponent();
             kartTransform.position = new Vector3(0.0f, 0.0f, 0.0f);

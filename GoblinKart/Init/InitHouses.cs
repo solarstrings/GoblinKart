@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
 using GameEngine.Source.Components;
+using GoblinKart.Components;
 
 namespace GoblinKart.Init
 {
@@ -21,6 +22,27 @@ namespace GoblinKart.Init
             Entity terrain = ComponentManager.Instance.GetEntityWithTag("Terrain", sceneEntities);
             TerrainMapComponent tcomp = ComponentManager.Instance.GetEntityComponent<TerrainMapComponent>(terrain);
 
+            // Init test-powerup
+
+            Entity entity = EntityFactory.Instance.NewEntity();
+
+            house.SetTexture(engine.LoadContent<Texture2D>("basichouse_texture1"));
+            house.textured = true;
+            ComponentManager.Instance.AddComponentToEntity(entity, house);
+
+            TransformComponent tt = new TransformComponent();
+            float hh = (float)rnd.Next(8, 12) / 100;
+            tt.position = new Vector3(500, 35, -50);
+            tt.vRotation = new Vector3(0, 0, 0);
+            tt.scale = new Vector3(0.08f, hh, 0.08f);
+            ComponentManager.Instance.AddComponentToEntity(entity, tt);
+
+            ComponentManager.Instance.AddComponentToEntity(entity, new Collision3Dcomponent());
+            ComponentManager.Instance.AddComponentToEntity(entity, new PowerupModelComponent());
+
+            SceneManager.Instance.AddEntityToSceneOnLayer("Game", 1, entity);
+
+            // Init houses
             for (int i = 0; i < 1; ++i)
             {
                 Entity e = EntityFactory.Instance.NewEntity();
