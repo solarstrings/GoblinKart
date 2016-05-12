@@ -11,8 +11,6 @@ namespace GameEngine
     {
         public void Update(GameTime gameTime)
         {
-
-
             List<Entity> entities = SceneManager.Instance.GetActiveScene().GetAllEntities();
             List<AnimationComponent> animComponents =
                 ComponentManager.Instance.GetComponentsFromEntities<AnimationComponent>(entities);

@@ -12,9 +12,11 @@ namespace GameEngine {
         public float fogStart { get; private set; }
         public float fogEnd { get; private set; }
 
+        public bool staticModel { get; set; }
+
         public Dictionary<int, Matrix> meshTransforms { get; set; }
 
-        public ModelComponent(Model model, bool useBasicEffect, bool useFog) {
+        public ModelComponent(Model model, bool useBasicEffect, bool useFog,bool isStatic) {
             this.model = model;
             textured = false;
             this.useBasicEffect = useBasicEffect;
@@ -22,6 +24,7 @@ namespace GameEngine {
             fogStart = 300f;
             fogEnd = 400f; 
             meshTransforms = new Dictionary<int, Matrix>();
+            staticModel = isStatic;
         }
 
         public void SetTexture(Texture2D texture) {

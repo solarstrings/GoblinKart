@@ -22,6 +22,9 @@ namespace GoblinKart
             new InitGame(this);
             new InitHouses(this);            
             SceneManager.Instance.SetActiveScene("Game");
+            
+            //once all models entities have been loaded, add the static ones to the chunks they stand upon.
+            TerrainMapRenderSystem.AddStaticModelsToChunks();
         }
     }
 }

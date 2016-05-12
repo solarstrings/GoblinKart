@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
+using GameEngine.Source.Components;
 
 namespace GoblinKart.Init
 {
@@ -14,13 +15,13 @@ namespace GoblinKart.Init
         public InitHouses(ECSEngine engine)
         {
             Random rnd = new Random();
-            ModelComponent house = new ModelComponent(engine.LoadContent<Model>("basichouse"), true, true);
-            ModelComponent house2 = new ModelComponent(engine.LoadContent<Model>("basichouse"), true, true);
+            ModelComponent house = new ModelComponent(engine.LoadContent<Model>("basichouse"), true, true,true);
+            ModelComponent house2 = new ModelComponent(engine.LoadContent<Model>("basichouse"), true, true,true);
             List<Entity> sceneEntities = SceneManager.Instance.GetActiveScene().GetAllEntities();
             Entity terrain = ComponentManager.Instance.GetEntityWithTag("Terrain", sceneEntities);
             TerrainMapComponent tcomp = ComponentManager.Instance.GetEntityComponent<TerrainMapComponent>(terrain);
 
-            for (int i = 0; i < 100; ++i)
+            for (int i = 0; i < 5; ++i)
             {
                 Entity e = EntityFactory.Instance.NewEntity();
 
@@ -45,7 +46,14 @@ namespace GoblinKart.Init
                 t.position = new Vector3(t.position.X, TerrainMapRenderSystem.GetTerrainHeight(tcomp, t.position.X, Math.Abs(t.position.Z)), t.position.Z);
                 t.vRotation = new Vector3(0, 0, 0);
                 t.scale = new Vector3(0.08f, houseHeight, 0.08f);
+                t.world = Matrix.CreateTranslation(t.position);
+
+                //house and house2 are identical, so it's ok to use either of them
+                ModelBoundingSphereComponent sphereComp = new ModelBoundingSphereComponent(house, t.position);
+
                 ComponentManager.Instance.AddComponentToEntity(e, t);
+                ComponentManager.Instance.AddComponentToEntity(e, sphereComp);
+                ComponentManager.Instance.AddComponentToEntity(e, new Collision3Dcomponent());
 
                 SceneManager.Instance.AddEntityToSceneOnLayer("Game", 1, e);
 
