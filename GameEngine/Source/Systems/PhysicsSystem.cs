@@ -21,7 +21,7 @@ namespace GameEngine.Source.Systems
 
                 foreach (var transformComponent in transformComponents)
                 {
-                    //transformComponent.velocity += new Vector3(0, PhysicsManager.Instance.gravity*(float) gameTime.ElapsedGameTime.TotalSeconds, 0);
+                    transformComponent.Velocity += new Vector3(0, PhysicsManager.Instance.Gravity*(float) gameTime.ElapsedGameTime.TotalSeconds, 0);
 
                     // Temporary hack for the friction.
                     if (transformComponent.Velocity.X > 0)
@@ -36,10 +36,12 @@ namespace GameEngine.Source.Systems
                     var forward = transformComponent.world.Forward;
                     forward *= transformComponent.Velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                    var asdf = transformComponent.world.Down;
-                    asdf *= transformComponent.Velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    //var asdf = transformComponent.world.Down;
+                    //asdf *= transformComponent.Velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                    transformComponent.position += forward -= asdf;
+                    //transformComponent.position += forward -= asdf;
+
+                    transformComponent.position += forward;
                 }
             }
         }

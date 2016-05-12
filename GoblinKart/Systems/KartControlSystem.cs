@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 namespace GoblinKart {
     class KartControlSystem : IUpdateSystem {
         ECSEngine engine;
+        bool jumping;
 
         public KartControlSystem(ECSEngine engine) {
             this.engine = engine;
@@ -24,9 +25,21 @@ namespace GoblinKart {
             engine.SetWindowTitle("Visible Chunks:" +terComp.numChunksInView + " Num Drawed static models: "+terComp.numModelsInView + "| Kart x: " + trsComp.position.X + " Kart y: " + trsComp.position.Y + " Kart z: " + trsComp.position.Z + " Map height: " +
                 TerrainMapRenderSystem.GetTerrainHeight(terComp, trsComp.position.X, Math.Abs(trsComp.position.Z)));
 
-            trsComp.LockModelToHeight(terComp);
             ModelRenderSystem.ResetMeshTransforms(ref kartModel);
             MoveKart(gameTime, sceneEntities, trsComp, kartModel);
+
+            if (trsComp.position.Y <= TerrainMapRenderSystem.GetTerrainHeight(terComp, trsComp.position.X, Math.Abs(trsComp.position.Z)))
+            {
+                trsComp.LockModelToHeight(terComp);
+                trsComp.Velocity.Y = 0;
+                jumping = false;
+            }
+            else
+            {
+                trsComp.Velocity.Y += -100f*(float)gameTime.ElapsedGameTime.TotalSeconds;
+                trsComp.position += new Vector3(0, trsComp.Velocity.Y, 0) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                jumping = true;
+            }
         }
 
         private void MoveKart(GameTime gameTime, List<Entity> sceneEntities, TransformComponent trsComp, ModelComponent kartModel) {
@@ -60,6 +73,13 @@ namespace GoblinKart {
                     }
                     if (Utilities.CheckKeyboardAction("back", BUTTON_STATE.HELD, k)) {
                         trsComp.Velocity += new Vector3(-2f, 0, 0);
+                    }
+                    if (Utilities.CheckKeyboardAction("jump", BUTTON_STATE.RELEASED, k))
+                    {
+                        //if (jumping)
+                        //    return;
+                        trsComp.Velocity.Y += 50f;
+                        trsComp.position += new Vector3(0, trsComp.Velocity.Y, 0);
                     }
                     ModelRenderSystem.SetMeshTransform(ref kartModel, 1, Matrix.CreateRotationY(0.08f));
                     ModelRenderSystem.SetMeshTransform(ref kartModel, 3, Matrix.CreateRotationY(0.1f));

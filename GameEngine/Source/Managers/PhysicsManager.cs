@@ -11,7 +11,7 @@ namespace GameEngine
     {
         // Maybe move us
         public float Friction = 1.5f;
-        public float Gravity = 9.82f;
+        public float Gravity = -10f;
 
 
         private PhysicsManager() { }

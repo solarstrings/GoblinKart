@@ -50,6 +50,7 @@ namespace GoblinKart.Init {
             KeyBoardSystem.AddKeyToAction(ref k, "right", Keys.Right);
             KeyBoardSystem.AddKeyToAction(ref k, "down", Keys.X);
             KeyBoardSystem.AddKeyToAction(ref k, "up", Keys.C);
+            KeyBoardSystem.AddKeyToAction(ref k, "jump", Keys.Space);
             KeyBoardSystem.AddKeyToAction(ref k, "quit", Keys.Escape);
 
             SceneManager.Instance.AddEntityToSceneOnLayer("Game", 0, keyboardControl);
