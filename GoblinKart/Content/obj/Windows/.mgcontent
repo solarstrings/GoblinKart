@@ -4,7 +4,6 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-<<<<<<< HEAD
     <File>C:/GoblinKart/GoblinKart/Content/canyon.png</File>
     <File>C:/GoblinKart/GoblinKart/Content/Chopper.fbx</File>
     <File>C:/GoblinKart/GoblinKart/Content/grass.png</File>
@@ -25,27 +24,5 @@
     <File>C:/GoblinKart/GoblinKart/Content/skyboxes/Sunset.dds</File>
     <File>C:/GoblinKart/GoblinKart/Content/Effects/ParticleEffect.fx</File>
     <File>C:/GoblinKart/GoblinKart/Content/smoke.png</File>
-=======
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/canyon.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/Chopper.fbx</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/grass.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/grasstile.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/horizontalroad.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/LBCornerroad.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/LTCornerroad.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/RBCornerroad.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/RTCornerroad.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/verticalroad.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/basichouse.fbx</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/basichouse_texture1.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/basichouse_texture2.png</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/shaderAmbientLight.fx</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/skybox.fx</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/skyboxes/cube.fbx</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/skyboxes/skybox.fx</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/skyboxes/Sunset.dds</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/Effects/ParticleEffect.fx</File>
-    <File>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/smoke.png</File>
->>>>>>> 00915a27742a89554cf151ff407e8510ea473a80
   </SourceFiles>
 </SourceFileCollection>

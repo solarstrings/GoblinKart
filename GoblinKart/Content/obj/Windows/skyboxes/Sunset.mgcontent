@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<<<<<<< HEAD
   <SourceFile>C:/GoblinKart/GoblinKart/Content/skyboxes/Sunset.dds</SourceFile>
   <SourceTime>2016-05-06T11:23:44.396182+02:00</SourceTime>
   <DestFile>C:/GoblinKart/GoblinKart/Content/bin/Windows/skyboxes/Sunset.xnb</DestFile>
-  <DestTime>2016-05-12T10:02:47.7876249+02:00</DestTime>
-=======
-  <SourceFile>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/skyboxes/Sunset.dds</SourceFile>
-  <SourceTime>2016-05-12T11:11:04.4808658+02:00</SourceTime>
-  <DestFile>C:/Users/Axel/Documents/Visual Studio 2015/Projects/GoblinKart/GoblinKart/Content/bin/Windows/skyboxes/Sunset.xnb</DestFile>
-  <DestTime>2016-05-12T11:11:51.9295797+02:00</DestTime>
->>>>>>> 00915a27742a89554cf151ff407e8510ea473a80
+  <DestTime>2016-05-12T11:38:42.1067531+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-03-30T08:36:08+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
