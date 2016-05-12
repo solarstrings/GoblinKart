@@ -50,6 +50,7 @@
     <Compile Include="Source\Components\CameraComponent.cs" />
     <Compile Include="Source\Components\CircleCollisionComponent.cs" />
     <Compile Include="Source\Components\ClientComponent.cs" />
+    <Compile Include="Source\Components\Collision3Dcomponent.cs" />
     <Compile Include="Source\Components\CollisionComponent.cs" />
     <Compile Include="Source\Components\DefaultFogComponent.cs" />
     <Compile Include="Source\Components\GamePadComponent.cs" />
@@ -98,14 +99,17 @@
     <Compile Include="Source\Managers\SoundManager.cs" />
     <Compile Include="Source\Managers\SystemManager.cs" />
     <Compile Include="Source\Network\LoginInformation.cs" />
-    <Compile Include="Source\Observer\CollisionInformation.cs" />
-    <Compile Include="Source\Observer\ObserverSystem.cs" />
+    <Compile Include="Source\Observers\ICollisionObserver.cs" />
+    <Compile Include="Source\Observers\ICollisionSubject.cs" />
+    <Compile Include="Source\Observers\Observer.cs" />
+    <Compile Include="Source\Observers\Subject.cs" />
     <Compile Include="Source\Scripts\IScript.cs" />
     <Compile Include="Source\Systems\AISystem.cs" />
     <Compile Include="Source\Systems\AnimateSystem.cs" />
     <Compile Include="Source\Systems\CameraSystem.cs" />
     <Compile Include="Source\Systems\CollisionSystem.cs" />
     <Compile Include="Source\Systems\GamePadSystem.cs" />
+    <Compile Include="Source\Systems\INotifySystem.cs" />
     <Compile Include="Source\Systems\InputSystem.cs" />
     <Compile Include="Source\Systems\IRender3DSystem.cs" />
     <Compile Include="Source\Systems\IRenderSystem.cs" />

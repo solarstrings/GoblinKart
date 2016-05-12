@@ -6,18 +6,26 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
+using GameEngine.Source.Components;
 using GameEngine.Source.Systems;
+using GoblinKart.Systems;
 using Microsoft.Xna.Framework.Input;
 
 namespace GoblinKart.Init {
     class InitGame {
         private SystemManager sm = SystemManager.Instance;
 
-        public InitGame(ECSEngine engine) {
+        public InitGame(ECSEngine engine)
+        {
 
+            var collisionSystem = new ModelCollisionSystem();
+            sm.RegisterSystem("Game", collisionSystem);
+            sm.RegisterSystem("Game", new PowerupCollisionSystem(collisionSystem));
+
+            sm.RegisterSystem("Game", new PhysicsSystem());
             sm.RegisterSystem("Game", new TransformSystem());
             sm.RegisterSystem("Game", new ModelRenderSystem());
-            sm.RegisterSystem("Game", new PhysicsSystem());
+            
 
             InitKeyboard();
             InitKart(engine);
@@ -56,6 +64,8 @@ namespace GoblinKart.Init {
             ModelRenderSystem.AddMeshTransform(ref modelComp, 1, Matrix.CreateRotationY(0.2f));
             ModelRenderSystem.AddMeshTransform(ref modelComp, 3, Matrix.CreateRotationY(0.5f));
             ComponentManager.Instance.AddComponentToEntity(kart, modelComp);
+
+            ComponentManager.Instance.AddComponentToEntity(kart, new Collision3Dcomponent());
 
             TransformComponent kartTransform = new TransformComponent();
             kartTransform.position = new Vector3(0.0f, 0.0f, 0.0f);
@@ -162,6 +172,5 @@ namespace GoblinKart.Init {
             ParticleRenderSystem.LoadParticleEffect(engine.GetGraphicsDevice(),engine.LoadContent<Effect>("Effects/ParticleEffect"), engine.LoadContent<Texture2D>("smoke"), ref pComp);
             SceneManager.Instance.AddEntityToSceneOnLayer("Game", 2, SmokehParticle);
         }
-
     }
 }

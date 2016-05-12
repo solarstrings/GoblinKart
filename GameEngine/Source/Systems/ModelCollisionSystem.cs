@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameEngine.Source.Components;
+using GameEngine.Source.Observers;
 using Microsoft.Xna.Framework;
 
 namespace GameEngine.Source.Systems
 {
-    public class ModelCollisionSystem : IUpdateSystem
+    public class ModelCollisionSystem : IUpdateSystem, ICollisionSubject
     {
+        private ICollection<ICollisionObserver> _observers = new List<ICollisionObserver>(); 
+
+        // TODO This system should only check for collision and not for mesh-mesh collision.
         public void Update(GameTime gameTime)
         {
             // This system detects when two models collide
             // Does the old collisionComponent work or should we create a new one?
-            List<Entity> entities = ComponentManager.Instance.GetAllEntitiesWithComponentType<ModelComponent>();
+            List<Entity> entities = ComponentManager.Instance.GetAllEntitiesWithComponentType<Collision3Dcomponent>();
 
             foreach (var entity1 in entities)
             {
@@ -41,14 +46,31 @@ namespace GameEngine.Source.Systems
 
                                 if (sphere1.Intersects(sphere2))
                                 {
-                                    // Collision detected
-                                    // How are we supposed to handle the collision?
+                                    // Notify all observers
+                                    Notify(entity1, entity2);
                                 }
                             }
                         }
-
                     }
                 }
+            }
+        }
+
+        public void Subscribe(ICollisionObserver observer)
+        {
+            _observers.Add(observer);
+        }
+
+        public void Unsubscribe(ICollisionObserver observer)
+        {
+            _observers.Remove(observer);
+        }
+
+        public void Notify(Entity entity1, Entity entity2)
+        {
+            foreach (var observer in _observers)
+            {
+                observer.OnCollision(entity1, entity2);
             }
         }
     }

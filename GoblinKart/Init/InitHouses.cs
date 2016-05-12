@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
+using GameEngine.Source.Components;
 
 namespace GoblinKart.Init
 {
@@ -20,7 +21,7 @@ namespace GoblinKart.Init
             Entity terrain = ComponentManager.Instance.GetEntityWithTag("Terrain", sceneEntities);
             TerrainMapComponent tcomp = ComponentManager.Instance.GetEntityComponent<TerrainMapComponent>(terrain);
 
-            for (int i = 0; i < 100; ++i)
+            for (int i = 0; i < 1; ++i)
             {
                 Entity e = EntityFactory.Instance.NewEntity();
 
@@ -46,6 +47,8 @@ namespace GoblinKart.Init
                 t.vRotation = new Vector3(0, 0, 0);
                 t.scale = new Vector3(0.08f, houseHeight, 0.08f);
                 ComponentManager.Instance.AddComponentToEntity(e, t);
+
+                ComponentManager.Instance.AddComponentToEntity(e, new Collision3Dcomponent());
 
                 SceneManager.Instance.AddEntityToSceneOnLayer("Game", 1, e);
 
