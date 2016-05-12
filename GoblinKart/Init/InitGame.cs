@@ -20,7 +20,7 @@ namespace GoblinKart.Init {
         {
             sm.RegisterSystem("Game", new PhysicsSystem());
             sm.RegisterSystem("Game", new TransformSystem());
-            sm.RegisterSystem("Game", new ModelRenderSystem(false));
+            sm.RegisterSystem("Game", new ModelRenderSystem(true));
 
             var collisionSystem = new ModelCollisionSystem();
             sm.RegisterSystem("Game", collisionSystem);
