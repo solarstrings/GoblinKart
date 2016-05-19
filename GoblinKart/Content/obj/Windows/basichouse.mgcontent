@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Stella/Source/Repos/GoblinKart/GoblinKart/Content/basichouse.fbx</SourceFile>
-  <SourceTime>2016-05-12T13:14:32.5175243+02:00</SourceTime>
-  <DestFile>C:/Users/Stella/Source/Repos/GoblinKart/GoblinKart/Content/bin/Windows/basichouse.xnb</DestFile>
-  <DestTime>2016-05-12T13:15:50.7416285+02:00</DestTime>
+  <SourceFile>C:/Users/Ankan/Source/Repos/GoblinKart6/GoblinKart/Content/basichouse.fbx</SourceFile>
+  <SourceTime>2016-05-12T10:02:34.5848347+02:00</SourceTime>
+  <DestFile>C:/Users/Ankan/Source/Repos/GoblinKart6/GoblinKart/Content/bin/Windows/basichouse.xnb</DestFile>
+  <DestTime>2016-05-12T15:36:23.004473+02:00</DestTime>
   <Importer>FbxImporter</Importer>
   <ImporterTime>2016-03-30T08:36:08+02:00</ImporterTime>
   <Processor>ModelProcessor</Processor>

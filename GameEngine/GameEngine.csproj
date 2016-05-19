@@ -104,6 +104,8 @@
     <Compile Include="Source\Network\LoginInformation.cs" />
     <Compile Include="Source\Observers\ICollisionObserver.cs" />
     <Compile Include="Source\Observers\ICollisionSubject.cs" />
+    <Compile Include="Source\Observers\IMeshCollisionObserver.cs" />
+    <Compile Include="Source\Observers\IMeshCollisionSubject.cs" />
     <Compile Include="Source\Scripts\IScript.cs" />
     <Compile Include="Source\Systems\AISystem.cs" />
     <Compile Include="Source\Systems\AnimateSystem.cs" />
@@ -117,6 +119,7 @@
     <Compile Include="Source\Systems\ISystem.cs" />
     <Compile Include="Source\Systems\IUpdateSystem.cs" />
     <Compile Include="Source\Systems\KeyBoardSystem.cs" />
+    <Compile Include="Source\Systems\MeshCollisionSystem.cs" />
     <Compile Include="Source\Systems\ModelCollisionSystem.cs" />
     <Compile Include="Source\Systems\ModelRenderSystem.cs" />
     <Compile Include="Source\Systems\MouseSystem.cs" />
@@ -134,7 +137,7 @@
     <Compile Include="Source\Systems\TimerSystem.cs" />
     <Compile Include="Source\Systems\TransformSystem.cs" />
     <Compile Include="Source\Systems\TriggerSystem.cs" />
-    <Compile Include="Source\Utilities\MeshToMeshCollision.cs" />
+    <Compile Include="Source\Systems\MeshToMeshCollision.cs" />
     <Compile Include="Source\VertexPositionColorNormal.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +153,9 @@
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Source\Utilities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

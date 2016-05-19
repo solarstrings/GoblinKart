@@ -10,9 +10,9 @@ using GoblinKart.Components;
 
 namespace GoblinKart.Systems
 {
-    public class PowerupCollisionSystem :ISystem, ICollisionObserver
+    public class PowerupCollisionSystem : ISystem, IMeshCollisionObserver
     {
-        public PowerupCollisionSystem(ICollisionSubject subject)
+        public PowerupCollisionSystem(IMeshCollisionSubject subject)
         {
             subject.Subscribe(this);
         }
@@ -20,13 +20,12 @@ namespace GoblinKart.Systems
         public void OnCollision(Entity entity1, Entity entity2)
         {
             // Handle collision
-
             var powerupModelComp1 = ComponentManager.Instance.GetEntityComponent<PowerupModelComponent>(entity1);
             var powerupModelcomp2 = ComponentManager.Instance.GetEntityComponent<PowerupModelComponent>(entity2);
 
             Entity powerupEntity = null;
             PowerupModelComponent powerupModelComp = null;
-            PowerupComponent powerupComp = null;       
+            PowerupComponent powerupComp = null;
 
             if (powerupModelComp1 != null)
             {
@@ -43,7 +42,6 @@ namespace GoblinKart.Systems
 
             if (powerupModelComp != null)
             {
-                Debug.WriteLine("Wrong type of collision!");
                 // Remove powerupModel-entity from the game
                 powerupEntity.Visible = false;
                 powerupEntity.Updateable = false;
@@ -55,7 +53,7 @@ namespace GoblinKart.Systems
             else
             {
                 Debug.WriteLine("Wrong type of collision!");
-            }            
+            }
         }
     }
 }

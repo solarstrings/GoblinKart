@@ -22,9 +22,15 @@ namespace GoblinKart.Init {
             sm.RegisterSystem("Game", new TransformSystem());
             sm.RegisterSystem("Game", new ModelRenderSystem(true));
 
-            var collisionSystem = new ModelCollisionSystem();
-            sm.RegisterSystem("Game", collisionSystem);
-            sm.RegisterSystem("Game", new PowerupCollisionSystem(collisionSystem));
+            var modelCollisionSystem = new ModelCollisionSystem();
+            sm.RegisterSystem("Game", modelCollisionSystem);
+
+            var meshToMeshCollisionSystem = new MeshToMeshCollision(modelCollisionSystem);
+            sm.RegisterSystem("Game", meshToMeshCollisionSystem);
+
+            sm.RegisterSystem("Game", new PowerupCollisionSystem(meshToMeshCollisionSystem));
+
+
 
             InitKeyboard();
             InitKart(engine);
