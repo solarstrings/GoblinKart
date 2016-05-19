@@ -36,6 +36,9 @@ float2 EndSize;
 // Particle texture and sampler.
 texture Texture;
 
+float3 TransformPosition;
+float3 position;
+
 sampler Sampler = sampler_state
 {
 	Texture = (Texture);
@@ -54,7 +57,6 @@ sampler Sampler = sampler_state
 // along with some random values that affect its size and rotation.
 struct VertexShaderInput
 {
-	float3 Position : SV_POSITION;
 	float2 Corner : NORMAL0;
 	float3 Velocity : NORMAL1;
 	float4 Random : COLOR0;
@@ -65,7 +67,7 @@ struct VertexShaderInput
 // Vertex shader output structure specifies the position and color of the particle.
 struct VertexShaderOutput
 {
-	float4 Position : SV_POSITION;
+	float4 Position : POSITION;
 	float4 Color : COLOR0;
 	float2 TextureCoordinate : COLOR1;
 };
@@ -166,7 +168,7 @@ VertexShaderOutput ParticleVertexShader(VertexShaderInput input)
 	float normalizedAge = saturate(age / Duration);
 
 	// Compute the particle position, size, color, and rotation.
-	output.Position = ComputeParticlePosition(input.Position, input.Velocity,
+	output.Position = ComputeParticlePosition(position, input.Velocity,
 		age, normalizedAge);
 
 	float size = ComputeParticleSize(input.Random.y, normalizedAge);

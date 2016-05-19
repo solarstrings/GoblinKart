@@ -36,7 +36,7 @@ namespace GoblinKart.Init {
             InitCamera(engine);
             InitTerrain(engine);
             InitSkybox(engine);
-            EpicParticleFailure(engine);
+            InitParticles(engine);
 
             SceneManager.Instance.SetActiveScene("Game");
             SystemManager.Instance.Category = "Game";
@@ -170,7 +170,7 @@ namespace GoblinKart.Init {
             SceneManager.Instance.AddEntityToSceneOnLayer("Game", 2, terrain);
         }
 
-        private void EpicParticleFailure(ECSEngine engine)
+        private void InitParticles(ECSEngine engine)
         {
             SystemManager.Instance.RegisterSystem("Game", new ParticleRenderSystem(engine.GetGraphicsDevice()));
             SystemManager.Instance.RegisterSystem("Game", new ParticleUpdateSystem());

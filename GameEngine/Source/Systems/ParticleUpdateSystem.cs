@@ -26,6 +26,10 @@ namespace GameEngine
             foreach (Entity e in particlesEnt)
             {
                 ParticleComponent pc = ComponentManager.Instance.GetEntityComponent<ParticleComponent>(e);
+                var transformEntities = ComponentManager.Instance.GetAllEntitiesWithComponentType<TransformComponent>();
+                var transformEntity = ComponentManager.Instance.GetEntityWithTag("Kart", transformEntities);
+
+                TransformComponent tc = ComponentManager.Instance.GetEntityComponent<TransformComponent>(transformEntity);
 
                 pc.currentTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -45,6 +49,9 @@ namespace GameEngine
 
                 if (pc.firstRetiredParticle == pc.firstActiveParticle)
                     pc.drawCounter = 0;
+
+                pc.effect.Parameters["position"].SetValue(tc.position);
+
             }
         }
 

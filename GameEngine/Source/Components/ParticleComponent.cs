@@ -34,11 +34,11 @@ namespace GameEngine
         public float MinRotateSpeed = 0;
         public float MaxRotateSpeed = 0;
 
-        public float MinStartSize = 100;
-        public float MaxStartSize = 100;
+        public float MinStartSize = 5;
+        public float MaxStartSize = 5;
 
-        public float MinEndSize = 100;
-        public float MaxEndSize = 100;
+        public float MinEndSize = 5;
+        public float MaxEndSize = 5;
 
         public int firstActiveParticle;
         public int firstNewParticle;
