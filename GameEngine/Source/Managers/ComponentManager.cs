@@ -117,7 +117,7 @@ namespace GameEngine
         }
 
         /// <summary>
-        /// Returns the first component of the given type
+        /// Returns the first entity of the given type
         /// </summary>
         /// <typeparam name="T"> The type of the component </typeparam>
         /// <returns>A list with entities, else null </returns>
