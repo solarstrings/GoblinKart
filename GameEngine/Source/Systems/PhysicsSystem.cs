@@ -1,47 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
-namespace GameEngine.Source.Systems
-{
-    public class PhysicsSystem : IUpdateSystem
-    {
-        public void Update(GameTime gameTime)
-        {
-            // This should be for all components with a position effected by gravity
-            var entities = SceneManager.Instance.GetActiveScene().GetAllEntities();
+namespace GameEngine.Source.Systems {
+    public class PhysicsSystem : IUpdateSystem {
 
-            if (entities != null)
-            {
-                var transformComponents =
-                    ComponentManager.Instance.GetComponentsFromEntities<TransformComponent>(entities);
+        /* Updates position of entities with transformComponents by their respective velocities. */
+        public void Update(GameTime gameTime) {
+            List<Entity> entities = SceneManager.Instance.GetActiveScene().GetAllEntities();
 
-                foreach (var transformComponent in transformComponents)
-                {
-                    transformComponent.Velocity += new Vector3(0, PhysicsManager.Instance.Gravity*(float) gameTime.ElapsedGameTime.TotalSeconds, 0);
+            if (entities != null) {
+                List<TransformComponent> trsComps = ComponentManager.Instance.GetComponentsFromEntities<TransformComponent>(entities);
 
-                    // Temporary hack for the friction.
-                    if (transformComponent.Velocity.X > 0)
-                    {
-                        transformComponent.Velocity -= new Vector3(PhysicsManager.Instance.Friction, 0, 0);
-                    }
-                    else if (transformComponent.Velocity.X < 0)
-                    {
-                        transformComponent.Velocity += new Vector3(PhysicsManager.Instance.Friction, 0, 0);
-                    }
+                for(int i = 0; i < trsComps.Count; i++) {
+                    Vector3 velForward = trsComps[i].world.Forward;
+                    Vector3 velDownward = trsComps[i].world.Down;
+                    velForward *= trsComps[i].Velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    velDownward *= trsComps[i].Velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                    var forward = transformComponent.world.Forward;
-                    forward *= transformComponent.Velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-                    //var asdf = transformComponent.world.Down;
-                    //asdf *= transformComponent.Velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-                    //transformComponent.position += forward -= asdf;
-
-                    transformComponent.position += forward;
+                    trsComps[i].position += velForward;
+                    trsComps[i].position -= velDownward;
+                    //trsComps[i].position += new Vector3(0, trsComps[i].Velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds, 0);
                 }
             }
         }

@@ -7,15 +7,17 @@ using Microsoft.Xna.Framework;
 namespace GoblinKart {
     class KartControlSystem : IUpdateSystem {
         ECSEngine engine;
-        bool airBorne;
+        bool airBorne = true;
+
         const float kartGroundOffset = 1.7f;
-        const float kartAcceleration = 2f;
-        const float kartTurningAcceleration = 2.8f;
-        const float kartFriction = 0.99f;
         const float maxSpeed = 100f;
         const float maxReverseSpeed = -50f;
-        const float gravityAcceleration = -100f;
+        const float kartAcceleration = 2f;
+        const float kartTurningAcceleration = 2.8f;
+        const float gravityAcceleration = -2f;
         const float jumpingAcceleration = 75f;
+        const float kartFriction = 0.95f;
+        const float kartDrag = 0.999f;
 
         public KartControlSystem(ECSEngine engine) {
             this.engine = engine;
@@ -40,7 +42,7 @@ namespace GoblinKart {
         }
 
         /* Increases negative vertical acceleration of the kart if it is above the ground. If it only slightly above the ground
-        vertical acceleration is reduced to prevent passing through. */
+        it will still be flagged as non flying to make such detection more responsive. */
         public void ApplyGravity(TransformComponent trsComp, TerrainMapComponent terComp, GameTime gameTime) {
             float distanceToGround = -(TerrainMapRenderSystem.GetTerrainHeight(terComp, trsComp.position.X, Math.Abs(trsComp.position.Z)) - trsComp.position.Y);
 
@@ -48,27 +50,31 @@ namespace GoblinKart {
                 trsComp.LockModelToHeight(terComp, kartGroundOffset);
                 trsComp.Velocity.Y = 0;
                 airBorne = false;
+                return;
             }
-            else {
-                if(distanceToGround > -gravityAcceleration * (float)gameTime.ElapsedGameTime.TotalSeconds) {
-                    trsComp.Velocity.Y += gravityAcceleration * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                }
-                else {
-                    trsComp.Velocity.Y = distanceToGround;
-                }
-                trsComp.position += new Vector3(0, trsComp.Velocity.Y, 0) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            else if(distanceToGround > 10f) {
                 airBorne = true;
             }
+            else {
+                airBorne = false;
+            }
+            trsComp.Velocity.Y += gravityAcceleration;
         }
 
+        /* Adds friction to the kart, the amount depending on if it is in the air or not. */
         public void ApplyFriction(TransformComponent trsComp) {
-            trsComp.Velocity.X *= kartFriction;
+            if (airBorne) {
+                trsComp.Velocity.X *= kartDrag;
+            }
+            else {
+                trsComp.Velocity.X *= kartFriction;
+            }
+
         }
 
         private void MoveKart(GameTime gameTime, List<Entity> sceneEntities, TransformComponent trsComp, ModelComponent kartModel) {
             Entity kb = ComponentManager.Instance.GetEntityWithTag("keyboard", sceneEntities);
             Vector3 newRot = Vector3.Zero;
-            bool moving = false;
 
             if (kb != null) {
                 KeyBoardComponent k = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(kb);
@@ -77,12 +83,10 @@ namespace GoblinKart {
                     if (Utilities.CheckKeyboardAction("right", BUTTON_STATE.HELD, k)) {
                         newRot = new Vector3(-kartTurningAcceleration, 0f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
                         trsComp.vRotation = newRot;
-                        moving = true;
                     }
                     else if (Utilities.CheckKeyboardAction("left", BUTTON_STATE.HELD, k)) {
                         newRot = new Vector3(kartTurningAcceleration, 0f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
                         trsComp.vRotation = newRot;
-                        moving = true;
                     }
                     else {
                         trsComp.vRotation = Vector3.Zero;
@@ -92,17 +96,17 @@ namespace GoblinKart {
                     }
 
                     if (Utilities.CheckKeyboardAction("forward", BUTTON_STATE.HELD, k)) {
-                        if(trsComp.Velocity.X < maxSpeed) {
+                        if(!airBorne && trsComp.Velocity.X < maxSpeed) {
                             trsComp.Velocity += new Vector3(kartAcceleration, 0, 0);
                         }
                     }
                     if (Utilities.CheckKeyboardAction("back", BUTTON_STATE.HELD, k)) {
-                        if (trsComp.Velocity.X > maxReverseSpeed) {
+                        if (!airBorne && trsComp.Velocity.X > maxReverseSpeed) {
                             trsComp.Velocity += new Vector3(-kartAcceleration, 0, 0);
                         }
                     }
                     if (Utilities.CheckKeyboardAction("jump", BUTTON_STATE.RELEASED, k)) {
-                        if (trsComp.Velocity.Y < maxSpeed) {
+                        if (!airBorne) {
                             trsComp.Velocity.Y += jumpingAcceleration;
                         }
                     }
