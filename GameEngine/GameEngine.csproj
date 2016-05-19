@@ -109,6 +109,7 @@
     <Compile Include="Source\Scripts\IScript.cs" />
     <Compile Include="Source\Systems\AISystem.cs" />
     <Compile Include="Source\Systems\AnimateSystem.cs" />
+    <Compile Include="Source\Systems\CalcModelSphereSystem.cs" />
     <Compile Include="Source\Systems\CameraSystem.cs" />
     <Compile Include="Source\Systems\CollisionSystem.cs" />
     <Compile Include="Source\Systems\EnvironmentmappingSystem.cs" />

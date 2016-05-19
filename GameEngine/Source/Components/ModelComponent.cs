@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 namespace GameEngine {
     public class ModelComponent : IComponent {
         public Model model { get; set; }
+        public BoundingSphere Sphere { get; set; }
         public bool textured { get; set; }
         public Texture2D texture { get; set; }
         public Effect effect { get; set; }
