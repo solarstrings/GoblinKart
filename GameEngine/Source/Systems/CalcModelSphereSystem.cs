@@ -13,6 +13,7 @@ namespace GameEngine.Source.Systems
     {
         public void Update(GameTime gameTime)
         {
+            // Tror inte den skall skapa en ny sphere varje gametick, se om detta går att förändra
             var entities = ComponentManager.Instance.GetAllEntitiesWithComponentType<Collision3Dcomponent>();
 
             Parallel.ForEach(entities, e =>

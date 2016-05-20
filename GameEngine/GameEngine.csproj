@@ -62,8 +62,7 @@
     <Compile Include="Source\Components\ModelComponent.cs" />
     <Compile Include="Source\Components\ModelCountComponent.cs" />
     <Compile Include="Source\Components\MouseComponent.cs" />
-    <Compile Include="Source\Components\NetworkClientComponent.cs" />
-    <Compile Include="Source\Components\NetworkServerComponent.cs" />
+    <Compile Include="Source\Components\NetworkComponent.cs" />
     <Compile Include="Source\Components\ParentComponent.cs" />
     <Compile Include="Source\Components\Position2DComponent.cs" />
     <Compile Include="Source\Components\RectangleCollisionComponent.cs" />
@@ -97,6 +96,7 @@
     <Compile Include="Source\Engine\Scene.cs" />
     <Compile Include="Source\Managers\ComponentManager.cs" />
     <Compile Include="Source\Managers\InputManager.cs" />
+    <Compile Include="Source\Managers\NetworkManager.cs" />
     <Compile Include="Source\Managers\PhysicsManager.cs" />
     <Compile Include="Source\Managers\SceneManager.cs" />
     <Compile Include="Source\Managers\SoundManager.cs" />

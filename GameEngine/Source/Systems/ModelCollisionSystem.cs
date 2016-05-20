@@ -14,7 +14,6 @@ namespace GameEngine.Source.Systems
     {
         private readonly ICollection<ICollisionObserver> _observers = new List<ICollisionObserver>();
 
-        // TODO This system should only check for collision and not for mesh-mesh collision.
         public void Update(GameTime gameTime)
         {
             if (_observers.Count != 0)

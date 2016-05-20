@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameEngine.Source.Components;
 using GameEngine.Source.Engine;
+using GameEngine.Source.Managers;
 using GameEngine.Source.Network;
 using Lidgren.Network;
 using Microsoft.Xna.Framework;
@@ -15,11 +16,11 @@ namespace GameEngine.Source.Systems
     {
         public void Update(GameTime gameTime)
         {
-            var serverComponent = ComponentManager.Instance.GetAllComponentsOfType<NetworkServerComponent>()[0];
+            var Server = NetworkManager.Instance.Server;
 
             NetIncomingMessage inc;
             
-            if ((inc = serverComponent.Server.ReadMessage()) != null)
+            if ((inc = Server.ReadMessage()) != null)
             {
                 switch (inc.MessageType)
                 {
@@ -40,10 +41,10 @@ namespace GameEngine.Source.Systems
                             inc.ReadAllProperties(loginInformation);
                             inc.SenderConnection.Approve();
 
-                            var outmsg = serverComponent.Server.CreateMessage();
+                            var outmsg = Server.CreateMessage();
                             outmsg.Write((byte) PacketType.Login);
                             outmsg.Write(true);
-                            serverComponent.Server.SendMessage(outmsg, inc.SenderConnection,
+                            Server.SendMessage(outmsg, inc.SenderConnection,
                                 NetDeliveryMethod.ReliableOrdered, 0);
                         }
                         else
