@@ -1,14 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GameEngine
-{
-    public class TransformComponent : IComponent
-    {
+namespace GameEngine {
+    public class TransformComponent : IComponent {
         public Matrix world { get; set; }
         public Vector3 position { get; set; }
         public Vector3 scale { get; set; }
@@ -16,12 +10,13 @@ namespace GameEngine
 
         public Vector3 vRotation { get; set; }
         public Vector3 forward { get; set; }
+        public Vector3 velocity;
 
-        // Maybe move me
-        public Vector3 Velocity;
+        public float gravity { get; } = -2f;
+        public float friction = 0.95f;
+        public float drag = 0.999f;
 
-        public TransformComponent()
-        {
+        public TransformComponent() {
             scale = Vector3.One;
             rotation = Quaternion.Identity;
             position = Vector3.Zero;
