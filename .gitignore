@@ -32,7 +32,7 @@ obj/
 [Dd]ebug*/
 [Rr]elease*/
 Ankh.NoLoad
-*.mgcontent
+*.mgcontent/
 
 #Tooling
 _ReSharper*/
