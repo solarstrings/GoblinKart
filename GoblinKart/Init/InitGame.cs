@@ -31,9 +31,9 @@ namespace GoblinKart.Init {
 
             sm.RegisterSystem("Game", new PowerupCollisionSystem(meshToMeshCollisionSystem));
 
-            InitKeyboard();
             InitKart(engine);
             InitCamera(engine);
+            InitKeyboard();
             InitTerrain(engine);
             InitSkybox(engine);
             InitParticles(engine);
@@ -96,6 +96,7 @@ namespace GoblinKart.Init {
             ComponentManager.Instance.AddComponentToEntity(camera, new TransformComponent());
             CameraSystem.SetTargetEntity("Kart");
             SceneManager.Instance.AddEntityToSceneOnLayer("Game", 6, camera);
+            CameraSystem.SetCameraFrustrum();
             CameraSystem.SetFarClipPlane(1000);
         }
 
@@ -175,9 +176,10 @@ namespace GoblinKart.Init {
             SystemManager.Instance.RegisterSystem("Game", new ParticleRenderSystem(engine.GetGraphicsDevice()));
             SystemManager.Instance.RegisterSystem("Game", new ParticleUpdateSystem());
             Entity SmokehParticle = EntityFactory.Instance.NewEntityWithTag("smokeh");
-            ParticleComponent pComp = new ParticleComponent();
+            SmokeParticleComponent pComp = new SmokeParticleComponent();
             ComponentManager.Instance.AddComponentToEntity(SmokehParticle, pComp);
             ParticleRenderSystem.LoadParticleEffect(engine.GetGraphicsDevice(),engine.LoadContent<Effect>("Effects/ParticleEffect"), engine.LoadContent<Texture2D>("smoke"), ref pComp);
+            ParticleRenderSystem.setParticleOffsetPosition(ref pComp, new Vector3(0, 0, 10f));
             SceneManager.Instance.AddEntityToSceneOnLayer("Game", 2, SmokehParticle);
         }
     }

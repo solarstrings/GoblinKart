@@ -13,9 +13,9 @@ namespace GameEngine
         float timeBetweenParticles;
         Vector3 previousPosition;
         float timeLeftOver;
-        ParticleComponent particleComp;
+        SmokeParticleComponent particleComp;
 
-        public ParticleEmitter(ParticleComponent particleComp, float particlesPerSecond, Vector3 initialPosition)
+        public ParticleEmitter(SmokeParticleComponent particleComp, float particlesPerSecond, Vector3 initialPosition)
         {
             this.particleComp = particleComp;
             timeBetweenParticles = 1.0f / particlesPerSecond;

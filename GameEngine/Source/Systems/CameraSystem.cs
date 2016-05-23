@@ -110,5 +110,14 @@ namespace GameEngine {
                 Matrix.CreatePerspectiveFieldOfView(c.fieldOfView, c.aspectRatio, c.nearClipPlane, c.farClipPlane, out c.projectionMatrix);
             }
         }
+
+        public static void SetCameraFrustrum()
+        {
+            //get the camera entity
+            Entity camera = ComponentManager.Instance.GetFirstEntityOfType<CameraComponent>();
+            //get the camera component
+            CameraComponent c = ComponentManager.Instance.GetEntityComponent<CameraComponent>(camera);
+            c.cameraFrustrum = new BoundingFrustum(c.viewMatrix * c.projectionMatrix);
+        }
     }
 }

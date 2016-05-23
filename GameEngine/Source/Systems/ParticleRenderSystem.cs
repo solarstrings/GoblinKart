@@ -26,14 +26,14 @@ namespace GameEngine
 
         public void Render(GraphicsDevice graphicsDevice, GameTime gameTime)
         {
-            List<Entity> particleEnts = ComponentManager.Instance.GetAllEntitiesWithComponentType<ParticleComponent>();
+            List<Entity> particleEnts = ComponentManager.Instance.GetAllEntitiesWithComponentType<SmokeParticleComponent>();
             Entity cameraEnt = ComponentManager.Instance.GetFirstEntityOfType<CameraComponent>();
 
             CameraComponent c = ComponentManager.Instance.GetEntityComponent<CameraComponent>(cameraEnt);
 
             foreach (Entity e in particleEnts)
             {
-                ParticleComponent pc = ComponentManager.Instance.GetEntityComponent<ParticleComponent>(e);
+                SmokeParticleComponent pc = ComponentManager.Instance.GetEntityComponent<SmokeParticleComponent>(e);
                 
 
                 //// Restore the vertex buffer if context is lost
@@ -107,7 +107,7 @@ namespace GameEngine
             }
         }
 
-        void AddNewParticlesToVertexBuffer(ParticleComponent particleComp)
+        void AddNewParticlesToVertexBuffer(SmokeParticleComponent particleComp)
         {
             int stride = ParticleVertex.SizeInBytes;
 
@@ -140,7 +140,7 @@ namespace GameEngine
             particleComp.firstNewParticle = particleComp.firstFreeParticle;
         }
 
-        public static void AddParticle(ParticleComponent particleComp,Vector3 position, Vector3 velocity)
+        public static void AddParticle(SmokeParticleComponent particleComp,Vector3 position, Vector3 velocity)
         {
             // Figure out where in the circular queue to allocate the new particle.
             int nextFreeParticle = particleComp.firstFreeParticle + 1;
@@ -190,8 +190,12 @@ namespace GameEngine
             particleComp.firstFreeParticle = nextFreeParticle;
         }
 
+        public static void setParticleOffsetPosition(ref SmokeParticleComponent particleComp, Vector3 positionOffset)
+        {
+            particleComp.positionOffset = positionOffset;
+        }
 
-        public static void LoadParticleEffect(GraphicsDevice device, Effect effect, Texture2D particleTexture, ref ParticleComponent particleComp)
+        public static void LoadParticleEffect(GraphicsDevice device, Effect effect, Texture2D particleTexture, ref SmokeParticleComponent particleComp)
         {
 
             // If we have several particle systems, the content manager will return
