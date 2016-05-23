@@ -60,7 +60,8 @@ namespace GoblinKart {
                         trsComp.vRotation = Vector3.Zero;
                     }
                     if (Utilities.CheckKeyboardAction("quit", BUTTON_STATE.RELEASED, k)) {
-                        System.Environment.Exit(0);
+                        SystemManager.Instance.Category = "MainMenu";
+                        SceneManager.Instance.SetActiveScene("MainMenu");
                     }
 
                     if (Utilities.CheckKeyboardAction("forward", BUTTON_STATE.HELD, k)) {

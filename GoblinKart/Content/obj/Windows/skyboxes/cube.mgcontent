@@ -3,7 +3,7 @@
   <SourceFile>c:/GoblinKart/GoblinKart/Content/skyboxes/cube.fbx</SourceFile>
   <SourceTime>2016-05-06T11:23:44.397182+02:00</SourceTime>
   <DestFile>c:/GoblinKart/GoblinKart/Content/bin/Windows/skyboxes/cube.xnb</DestFile>
-  <DestTime>2016-05-23T14:31:35.4207899+02:00</DestTime>
+  <DestTime>2016-05-23T15:39:05.8564616+02:00</DestTime>
   <Importer>FbxImporter</Importer>
   <ImporterTime>2016-03-30T08:36:08+02:00</ImporterTime>
   <Processor>ModelProcessor</Processor>

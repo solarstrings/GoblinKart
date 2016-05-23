@@ -1,0 +1,97 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using GameEngine;
+using Microsoft.Xna.Framework;
+using GameEngine.InputDefs;
+
+namespace GoblinKart
+{
+    class MultiPlayerMenuSystem : IUpdateSystem
+    {
+        int currentSelction = 0;
+        ECSEngine engine;
+
+        private Entity join;
+        private Entity host;
+        private Entity back;
+        private Entity keyboard;
+        private KeyBoardComponent kbComp;
+
+        public MultiPlayerMenuSystem(ECSEngine engine)
+        {
+            this.engine = engine;
+            List<Entity> sceneEntities = SceneManager.Instance.GetActiveScene().GetAllEntities();
+            join = ComponentManager.Instance.GetEntityWithTag("MP_Join", sceneEntities);
+            host = ComponentManager.Instance.GetEntityWithTag("MP_Host", sceneEntities);
+            back = ComponentManager.Instance.GetEntityWithTag("MP_Back", sceneEntities);
+            keyboard = ComponentManager.Instance.GetEntityWithTag("MP_Keyboard", sceneEntities);
+            kbComp = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(keyboard);
+        }
+
+        private void SetActiveOption()
+        {
+            if (currentSelction == 0)
+            {
+                join.Visible = true;
+                host.Visible = false;
+                back.Visible = false;
+            }
+            if (currentSelction == 1)
+            {
+                join.Visible = false;
+                host.Visible = true;
+                back.Visible = false;
+            }
+
+            if (currentSelction == 2)
+            {
+                join.Visible = false;
+                host.Visible = false;
+                back.Visible = true;
+            }
+        }
+        public void Update(GameTime gameTime)
+        {
+
+            if (Utilities.CheckKeyboardAction("up", BUTTON_STATE.RELEASED, kbComp))
+            {
+                currentSelction--;
+                if (currentSelction < 0)
+                {
+                    currentSelction = 2;
+                }
+                SetActiveOption();
+            }
+
+            else if (Utilities.CheckKeyboardAction("down", BUTTON_STATE.RELEASED, kbComp))
+            {
+                currentSelction++;
+                if (currentSelction > 2)
+                {
+                    currentSelction = 0;
+                }
+                SetActiveOption();
+            }
+            else if (Utilities.CheckKeyboardAction("apply", BUTTON_STATE.RELEASED, kbComp))
+            {
+                if (currentSelction == 0)
+                {
+
+                }
+                if (currentSelction == 1)
+                {
+
+                }
+                if (currentSelction == 2)
+                {
+                    SystemManager.Instance.Category = "MainMenu";
+                    SceneManager.Instance.SetActiveScene("MainMenu");
+                }
+            }
+        }
+    }
+}
+

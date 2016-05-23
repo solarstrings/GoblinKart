@@ -24,6 +24,7 @@ namespace GoblinKart
         public override void Initialise()
         {
             new InitMainMenu(this);
+            new InitMultiplayerMenu(this);
             new InitGame(this);
             new InitHouses(this);            
            
