@@ -43,8 +43,6 @@
     <Compile Include="Engine.cs" />
     <Compile Include="Init\InitGame.cs" />
     <Compile Include="Init\InitHouses.cs" />
-    <Compile Include="Init\InitNetworkClient.cs" />
-    <Compile Include="Init\InitNetworkServer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Systems\KartCollisionSystem.cs" />
