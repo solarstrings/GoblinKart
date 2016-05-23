@@ -161,10 +161,12 @@ namespace GameEngine
             {
                 if (renderSystemDictionary.ContainsKey(Category))
                 {
+                    spriteBatch.Begin();
                     foreach (IRenderSystem renSys in renderSystemDictionary[Category].Values)
                     {
                         renSys.Render(spriteBatch, gameTime);
                     }
+                    spriteBatch.End();
                 }
             }
         }

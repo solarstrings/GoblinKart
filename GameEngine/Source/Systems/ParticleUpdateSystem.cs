@@ -17,7 +17,7 @@ namespace GameEngine
                 throw new ArgumentNullException("gameTime");
             }
 
-            List<Entity> particlesEnt = ComponentManager.Instance.GetAllEntitiesWithComponentType<ParticleComponent>();
+            List<Entity> particlesEnt = ComponentManager.Instance.GetAllEntitiesWithComponentType<SmokeParticleComponent>();
             if(particlesEnt == null)
             {
                 return;
@@ -25,7 +25,7 @@ namespace GameEngine
 
             foreach (Entity e in particlesEnt)
             {
-                ParticleComponent pc = ComponentManager.Instance.GetEntityComponent<ParticleComponent>(e);
+                SmokeParticleComponent pc = ComponentManager.Instance.GetEntityComponent<SmokeParticleComponent>(e);
                 var transformEntities = ComponentManager.Instance.GetAllEntitiesWithComponentType<TransformComponent>();
                 var transformEntity = ComponentManager.Instance.GetEntityWithTag("Kart", transformEntities);
 
@@ -38,24 +38,29 @@ namespace GameEngine
 
                 ParticleRenderSystem.AddParticle(pc,Vector3.Zero, Vector3.Zero);
 
+                //get the position and rotation of the kart
+                Matrix PosRotMatrix = Matrix.CreateTranslation(-tc.position) * Matrix.CreateFromQuaternion(tc.rotation) * Matrix.CreateTranslation(tc.position);
+
+                //Set the particles position to the models position, applying the position and offset with the Positin and rotation of the 
+                Vector3 newPos = Vector3.Transform(tc.position + pc.positionOffset, PosRotMatrix);
+                
                 // If we let our timer go on increasing for ever, it would eventually
                 // run out of floating point precision, at which point the particles
                 // would render incorrectly. An easy way to prevent this is to notice
                 // that the time value doesn't matter when no particles are being drawn,
                 // so we can reset it back to zero any time the active queue is empty.
-
                 if (pc.firstActiveParticle == pc.firstFreeParticle)
                     pc.currentTime = 0;
 
                 if (pc.firstRetiredParticle == pc.firstActiveParticle)
                     pc.drawCounter = 0;
 
-                pc.effect.Parameters["position"].SetValue(tc.position);
+                pc.effect.Parameters["position"].SetValue(newPos);
 
             }
         }
 
-        void RetireActiveParticles(ParticleComponent particleComp)
+        void RetireActiveParticles(SmokeParticleComponent particleComp)
         {
             float particleDuration = (float)particleComp.Duration.TotalSeconds;
 
@@ -80,7 +85,7 @@ namespace GameEngine
             }
         }
 
-        void FreeRetiredParticles(ParticleComponent particleComp)
+        void FreeRetiredParticles(SmokeParticleComponent particleComp)
         {
             while (particleComp.firstRetiredParticle != particleComp.firstActiveParticle)
             {

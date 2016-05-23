@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameEngine
 {
-    public class ParticleComponent :IComponent
+    public class SmokeParticleComponent :IComponent
     {
         public Texture2D texture;
         public int MaxParticles { get; set; }
@@ -45,6 +45,8 @@ namespace GameEngine
         public int firstFreeParticle;
         public int firstRetiredParticle;
 
+        public Vector3 positionOffset;
+
         // Store the current time, in seconds.
         public float currentTime;
 
@@ -65,31 +67,34 @@ namespace GameEngine
 
         public BlendState BlendState = BlendState.NonPremultiplied;
 
-        public ParticleComponent()
+        public SmokeParticleComponent()
         {
             MaxParticles = 600;
 
-            Duration = TimeSpan.FromSeconds(10);
+            Duration = TimeSpan.FromSeconds(1);
 
-            MinHorizontalVelocity = 0;
-            MaxHorizontalVelocity = 15;
+            MinHorizontalVelocity = 2;
+            MaxHorizontalVelocity = 35;
 
-            MinVerticalVelocity = 10;
-            MaxVerticalVelocity = 20;
+            MinVerticalVelocity = 2;
+            MaxVerticalVelocity = 10;
 
             // Create a wind effect by tilting the gravity vector sideways.
-            Gravity = new Vector3(-20, -5, 0);
+            Gravity = new Vector3(0, -5, 0);
 
-            EndVelocity = 0.75f;
+            EndVelocity = 0.25f;
 
             MinRotateSpeed = -1;
             MaxRotateSpeed = 1;
 
-            MinStartSize = 4;
-            MaxStartSize = 7;
+            MinStartSize = 3;
+            MaxStartSize = 4;
 
-            MinEndSize = 35;
-            MaxEndSize = 140;
+            MinEndSize = 15;
+            MaxEndSize = 30;
+
+            //set offset to 0
+            positionOffset = Vector3.Zero;
 
             InitParticles();
         }

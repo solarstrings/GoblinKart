@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Ankan/Source/Repos/GoblinKart6/GoblinKart/Content/canyon.png</SourceFile>
-  <SourceTime>2016-05-12T10:02:34.9183395+02:00</SourceTime>
-  <DestFile>C:/Users/Ankan/Source/Repos/GoblinKart6/GoblinKart/Content/bin/Windows/canyon.xnb</DestFile>
-  <DestTime>2016-05-19T16:19:36.5654176+02:00</DestTime>
+  <SourceFile>c:/GoblinKart/GoblinKart/Content/canyon.png</SourceFile>
+  <SourceTime>2016-03-09T18:25:10.387+01:00</SourceTime>
+  <DestFile>c:/GoblinKart/GoblinKart/Content/bin/Windows/canyon.xnb</DestFile>
+  <DestTime>2016-05-23T15:39:04.850404+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-03-30T08:36:08+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

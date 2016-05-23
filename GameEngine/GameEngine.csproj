@@ -69,7 +69,7 @@
     <Compile Include="Source\Components\Render2DComponent.cs" />
     <Compile Include="Source\Components\ShadingEffectComponent.cs" />
     <Compile Include="Source\Components\SkyboxComponent.cs" />
-    <Compile Include="Source\Components\ParticleComponent.cs" />
+    <Compile Include="Source\Components\SmokeParticleComponent.cs" />
     <Compile Include="Source\Components\TagComponent.cs" />
     <Compile Include="Source\Components\TerrainChunk.cs" />
     <Compile Include="Source\Components\TerrainMapComponent.cs" />
