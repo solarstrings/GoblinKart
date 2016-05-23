@@ -7,17 +7,14 @@ using Microsoft.Xna.Framework;
 namespace GoblinKart {
     class KartControlSystem : IUpdateSystem {
         ECSEngine engine;
-        bool airBorne = true;
+        bool airborne = true;
 
         const float kartGroundOffset = 1.7f;
         const float maxSpeed = 100f;
         const float maxReverseSpeed = -50f;
         const float kartAcceleration = 2f;
         const float kartTurningAcceleration = 2.8f;
-        const float gravityAcceleration = -2f;
         const float jumpingAcceleration = 75f;
-        const float kartFriction = 0.95f;
-        const float kartDrag = 0.999f;
 
         public KartControlSystem(ECSEngine engine) {
             this.engine = engine;
@@ -32,44 +29,15 @@ namespace GoblinKart {
             Entity terrain = ComponentManager.Instance.GetEntityWithTag("Terrain", sceneEntities);
             TerrainMapComponent terComp = ComponentManager.Instance.GetEntityComponent<TerrainMapComponent>(terrain);
 
-            engine.SetWindowTitle("Visible Chunks:" + terComp.numChunksInView + " Num Drawed static models: " + terComp.numModelsInView + "| Kart x: " + trsComp.position.X + " Kart y: " + trsComp.position.Y + " Kart z: " + trsComp.position.Z + " Map height: " +
-                TerrainMapRenderSystem.GetTerrainHeight(terComp, trsComp.position.X, Math.Abs(trsComp.position.Z)));
+            //engine.SetWindowTitle("Visible Chunks:" + terComp.numChunksInView + " Num Drawed static models: " + terComp.numModelsInView + "| Kart x: " + trsComp.position.X + " Kart y: " + trsComp.position.Y + " Kart z: " + trsComp.position.Z + " Map height: " +
+            //    TerrainMapRenderSystem.GetTerrainHeight(terComp, trsComp.position.X, Math.Abs(trsComp.position.Z)));
+            engine.SetWindowTitle("xVel: " + trsComp.velocity.X + "yVel: " + trsComp.velocity.Y);
 
             ModelRenderSystem.ResetMeshTransforms(ref kartModel);
             MoveKart(gameTime, sceneEntities, trsComp, kartModel);
-            ApplyGravity(trsComp, terComp, gameTime);
-            ApplyFriction(trsComp);
-        }
-
-        /* Increases negative vertical acceleration of the kart if it is above the ground. If it only slightly above the ground
-        it will still be flagged as non flying to make such detection more responsive. */
-        public void ApplyGravity(TransformComponent trsComp, TerrainMapComponent terComp, GameTime gameTime) {
-            float distanceToGround = -(TerrainMapRenderSystem.GetTerrainHeight(terComp, trsComp.position.X, Math.Abs(trsComp.position.Z)) - trsComp.position.Y);
-
-            if (distanceToGround <= kartGroundOffset) {
-                trsComp.LockModelToHeight(terComp, kartGroundOffset);
-                trsComp.Velocity.Y = 0;
-                airBorne = false;
-                return;
-            }
-            else if(distanceToGround > 10f) {
-                airBorne = true;
-            }
-            else {
-                airBorne = false;
-            }
-            trsComp.Velocity.Y += gravityAcceleration;
-        }
-
-        /* Adds friction to the kart, the amount depending on if it is in the air or not. */
-        public void ApplyFriction(TransformComponent trsComp) {
-            if (airBorne) {
-                trsComp.Velocity.X *= kartDrag;
-            }
-            else {
-                trsComp.Velocity.X *= kartFriction;
-            }
-
+            PhysicsSystem.ApplyGravity(ref trsComp, gameTime);
+            PhysicsSystem.ApplyFriction(ref trsComp, airborne);
+            CollisionSystem.TerrainMapCollision(ref trsComp, ref airborne, terComp, kartGroundOffset);
         }
 
         private void MoveKart(GameTime gameTime, List<Entity> sceneEntities, TransformComponent trsComp, ModelComponent kartModel) {
@@ -96,19 +64,20 @@ namespace GoblinKart {
                     }
 
                     if (Utilities.CheckKeyboardAction("forward", BUTTON_STATE.HELD, k)) {
-                        if(!airBorne && trsComp.Velocity.X < maxSpeed) {
-                            trsComp.Velocity += new Vector3(kartAcceleration, 0, 0);
+                        if(!airborne && trsComp.velocity.X < maxSpeed) {
+                            trsComp.velocity += new Vector3(kartAcceleration, 0, 0);
                         }
                     }
                     if (Utilities.CheckKeyboardAction("back", BUTTON_STATE.HELD, k)) {
-                        if (!airBorne && trsComp.Velocity.X > maxReverseSpeed) {
-                            trsComp.Velocity += new Vector3(-kartAcceleration, 0, 0);
+                        if (!airborne && trsComp.velocity.X > maxReverseSpeed) {
+                            trsComp.velocity += new Vector3(-kartAcceleration, 0, 0);
                         }
                     }
                     if (Utilities.CheckKeyboardAction("jump", BUTTON_STATE.RELEASED, k)) {
-                        if (!airBorne) {
-                            trsComp.Velocity.Y += jumpingAcceleration;
+                        if (!airborne) {
+                            trsComp.velocity.Y += jumpingAcceleration;
                         }
+                        SoundManager.Instance.PlaySound("jump");
                     }
                     ModelRenderSystem.SetMeshTransform(ref kartModel, 1, Matrix.CreateRotationY(0.08f));
                     ModelRenderSystem.SetMeshTransform(ref kartModel, 3, Matrix.CreateRotationY(0.1f));
