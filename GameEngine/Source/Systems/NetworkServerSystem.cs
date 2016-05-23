@@ -16,11 +16,11 @@ namespace GameEngine.Source.Systems
     {
         public void Update(GameTime gameTime)
         {
-            var Server = NetworkManager.Instance.Server;
+            var server = NetworkManager.Instance.Server;
 
             NetIncomingMessage inc;
             
-            if ((inc = Server.ReadMessage()) != null)
+            if ((inc = server.ReadMessage()) != null)
             {
                 switch (inc.MessageType)
                 {
@@ -41,10 +41,10 @@ namespace GameEngine.Source.Systems
                             inc.ReadAllProperties(loginInformation);
                             inc.SenderConnection.Approve();
 
-                            var outmsg = Server.CreateMessage();
+                            var outmsg = server.CreateMessage();
                             outmsg.Write((byte) PacketType.Login);
                             outmsg.Write(true);
-                            Server.SendMessage(outmsg, inc.SenderConnection,
+                            server.SendMessage(outmsg, inc.SenderConnection,
                                 NetDeliveryMethod.ReliableOrdered, 0);
                         }
                         else
