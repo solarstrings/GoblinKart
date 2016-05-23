@@ -35,9 +35,9 @@ namespace GoblinKart {
 
             ModelRenderSystem.ResetMeshTransforms(ref kartModel);
             MoveKart(gameTime, sceneEntities, trsComp, kartModel);
-            CollisionSystem.TerrainMapCollision(ref trsComp, ref airborne, terComp, kartGroundOffset);
             PhysicsSystem.ApplyGravity(ref trsComp, gameTime);
             PhysicsSystem.ApplyFriction(ref trsComp, airborne);
+            CollisionSystem.TerrainMapCollision(ref trsComp, ref airborne, terComp, kartGroundOffset);
         }
 
         private void MoveKart(GameTime gameTime, List<Entity> sceneEntities, TransformComponent trsComp, ModelComponent kartModel) {
@@ -77,6 +77,7 @@ namespace GoblinKart {
                         if (!airborne) {
                             trsComp.velocity.Y += jumpingAcceleration;
                         }
+                        SoundManager.Instance.PlaySound("jump");
                     }
                     ModelRenderSystem.SetMeshTransform(ref kartModel, 1, Matrix.CreateRotationY(0.08f));
                     ModelRenderSystem.SetMeshTransform(ref kartModel, 3, Matrix.CreateRotationY(0.1f));
