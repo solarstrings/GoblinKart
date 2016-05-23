@@ -9,12 +9,12 @@ namespace GoblinKart {
         ECSEngine engine;
         bool airborne = true;
 
-        const float kartGroundOffset = 1.7f;
-        const float maxSpeed = 100f;
-        const float maxReverseSpeed = -50f;
-        const float kartAcceleration = 2f;
-        const float kartTurningAcceleration = 2.8f;
-        const float jumpingAcceleration = 75f;
+        const float KartGroundOffset = 1.7f;
+        const float MaxSpeed = 100f;
+        const float MaxReverseSpeed = -50f;
+        const float KartAcceleration = 2f;
+        const float KartTurningAcceleration = 2.8f;
+        const float JumpingAcceleration = 75f;
 
         public KartControlSystem(ECSEngine engine) {
             this.engine = engine;
@@ -31,13 +31,17 @@ namespace GoblinKart {
 
             //engine.SetWindowTitle("Visible Chunks:" + terComp.numChunksInView + " Num Drawed static models: " + terComp.numModelsInView + "| Kart x: " + trsComp.position.X + " Kart y: " + trsComp.position.Y + " Kart z: " + trsComp.position.Z + " Map height: " +
             //    TerrainMapRenderSystem.GetTerrainHeight(terComp, trsComp.position.X, Math.Abs(trsComp.position.Z)));
-            engine.SetWindowTitle("xVel: " + trsComp.velocity.X + "yVel: " + trsComp.velocity.Y);
+            engine.SetWindowTitle("xVel: " + trsComp.Velocity.X + "yVel: " + trsComp.Velocity.Y);
 
             ModelRenderSystem.ResetMeshTransforms(ref kartModel);
             MoveKart(gameTime, sceneEntities, trsComp, kartModel);
             PhysicsSystem.ApplyGravity(ref trsComp, gameTime);
             PhysicsSystem.ApplyFriction(ref trsComp, airborne);
-            CollisionSystem.TerrainMapCollision(ref trsComp, ref airborne, terComp, kartGroundOffset);
+            CollisionSystem.TerrainMapCollision(ref trsComp, ref airborne, terComp, KartGroundOffset);
+        }
+
+        private Quaternion CreateRotation(Vector3 v3) {
+            return Quaternion.CreateFromYawPitchRoll(v3.X, v3.Y, v3.Z);
         }
 
         private void MoveKart(GameTime gameTime, List<Entity> sceneEntities, TransformComponent trsComp, ModelComponent kartModel) {
@@ -49,15 +53,12 @@ namespace GoblinKart {
 
                 if (k != null) {
                     if (Utilities.CheckKeyboardAction("right", BUTTON_STATE.HELD, k)) {
-                        newRot = new Vector3(-kartTurningAcceleration, 0f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        trsComp.vRotation = newRot;
+                        newRot = new Vector3(-KartTurningAcceleration, 0f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        trsComp.Rotation *= CreateRotation(newRot);
                     }
                     else if (Utilities.CheckKeyboardAction("left", BUTTON_STATE.HELD, k)) {
-                        newRot = new Vector3(kartTurningAcceleration, 0f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        trsComp.vRotation = newRot;
-                    }
-                    else {
-                        trsComp.vRotation = Vector3.Zero;
+                        newRot = new Vector3(KartTurningAcceleration, 0f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        trsComp.Rotation *= CreateRotation(newRot);
                     }
                     if (Utilities.CheckKeyboardAction("quit", BUTTON_STATE.RELEASED, k)) {
                         SystemManager.Instance.Category = "MainMenu";
@@ -65,18 +66,18 @@ namespace GoblinKart {
                     }
 
                     if (Utilities.CheckKeyboardAction("forward", BUTTON_STATE.HELD, k)) {
-                        if(!airborne && trsComp.velocity.X < maxSpeed) {
-                            trsComp.velocity += new Vector3(kartAcceleration, 0, 0);
+                        if(!airborne && trsComp.Velocity.X < MaxSpeed) {
+                            trsComp.Velocity += new Vector3(KartAcceleration, 0, 0);
                         }
                     }
                     if (Utilities.CheckKeyboardAction("back", BUTTON_STATE.HELD, k)) {
-                        if (!airborne && trsComp.velocity.X > maxReverseSpeed) {
-                            trsComp.velocity += new Vector3(-kartAcceleration, 0, 0);
+                        if (!airborne && trsComp.Velocity.X > MaxReverseSpeed) {
+                            trsComp.Velocity += new Vector3(-KartAcceleration, 0, 0);
                         }
                     }
                     if (Utilities.CheckKeyboardAction("jump", BUTTON_STATE.RELEASED, k)) {
                         if (!airborne) {
-                            trsComp.velocity.Y += jumpingAcceleration;
+                            trsComp.Velocity.Y += JumpingAcceleration;
                         }
                         SoundManager.Instance.PlaySound("jump");
                     }

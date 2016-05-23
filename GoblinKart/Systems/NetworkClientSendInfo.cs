@@ -35,7 +35,7 @@ namespace GoblinKart.Systems
 
                 var transformComponent = ComponentManager.Instance.GetEntityComponent<TransformComponent>(e);
 
-                message = client.CreateMessage(transformComponent.position.ToString());
+                message = client.CreateMessage(transformComponent.Position.ToString());
             }
 
             // Maybe check for other things to send...?

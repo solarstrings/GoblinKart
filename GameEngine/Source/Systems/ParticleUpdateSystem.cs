@@ -39,10 +39,10 @@ namespace GameEngine
                 ParticleRenderSystem.AddParticle(pc,Vector3.Zero, Vector3.Zero);
 
                 //get the position and rotation of the kart
-                Matrix PosRotMatrix = Matrix.CreateTranslation(-tc.position) * Matrix.CreateFromQuaternion(tc.rotation) * Matrix.CreateTranslation(tc.position);
+                Matrix PosRotMatrix = Matrix.CreateTranslation(-tc.Position) * Matrix.CreateFromQuaternion(tc.Rotation) * Matrix.CreateTranslation(tc.Position);
 
                 //Set the particles position to the models position, applying the position and offset with the Positin and rotation of the 
-                Vector3 newPos = Vector3.Transform(tc.position + pc.positionOffset, PosRotMatrix);
+                Vector3 newPos = Vector3.Transform(tc.Position + pc.positionOffset, PosRotMatrix);
                 
                 // If we let our timer go on increasing for ever, it would eventually
                 // run out of floating point precision, at which point the particles

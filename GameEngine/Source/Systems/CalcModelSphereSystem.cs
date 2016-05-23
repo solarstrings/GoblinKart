@@ -37,14 +37,14 @@ namespace GameEngine.Source.Systems
                     sphere = BoundingSphere.
                              CreateMerged(sphere, mesh.BoundingSphere);
             }
-            sphere.Center = transform.position;
+            sphere.Center = transform.Position;
 
-            if (transform.scale.X > transform.scale.Y && transform.scale.X > transform.scale.Z)
-                sphere.Radius *= transform.scale.X;
-            else if (transform.scale.Y > transform.scale.X && transform.scale.Y > transform.scale.Z)
-                sphere.Radius *= transform.scale.Y;
+            if (transform.Scale.X > transform.Scale.Y && transform.Scale.X > transform.Scale.Z)
+                sphere.Radius *= transform.Scale.X;
+            else if (transform.Scale.Y > transform.Scale.X && transform.Scale.Y > transform.Scale.Z)
+                sphere.Radius *= transform.Scale.Y;
             else
-                sphere.Radius *= transform.scale.Z;
+                sphere.Radius *= transform.Scale.Z;
 
             return sphere;
         }
