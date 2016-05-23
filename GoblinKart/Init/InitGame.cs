@@ -10,7 +10,9 @@ using GameEngine.Source.Components;
 using GameEngine.Source.Systems;
 using GoblinKart.Components;
 using GoblinKart.Systems;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace GoblinKart.Init {
     class InitGame {
@@ -37,6 +39,7 @@ namespace GoblinKart.Init {
             InitTerrain(engine);
             InitSkybox(engine);
             InitParticles(engine);
+            InitSound(engine);
 
             SceneManager.Instance.SetActiveScene("Game");
             SystemManager.Instance.Category = "Game";
@@ -181,6 +184,16 @@ namespace GoblinKart.Init {
             ParticleRenderSystem.LoadParticleEffect(engine.GetGraphicsDevice(),engine.LoadContent<Effect>("Effects/ParticleEffect"), engine.LoadContent<Texture2D>("smoke"), ref pComp);
             ParticleRenderSystem.setParticleOffsetPosition(ref pComp, new Vector3(0, 0, 10f));
             SceneManager.Instance.AddEntityToSceneOnLayer("Game", 2, SmokehParticle);
+        }
+        private void InitSound(ECSEngine engine)
+        {
+            SoundManager.Instance.SetMusicVolume(0.1f);
+            var song = engine.LoadContent<Song>("Sounds/song");
+            SoundManager.Instance.AddSong("song", song);
+            SoundManager.Instance.PlaySong("song");
+
+            var jump = engine.LoadContent<SoundEffect>("Sounds/jump");
+            SoundManager.Instance.AddSoundEffect("jump", jump);
         }
     }
 }
