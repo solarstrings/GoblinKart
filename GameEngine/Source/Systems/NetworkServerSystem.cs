@@ -17,6 +17,10 @@ namespace GameEngine.Source.Systems
     {
         public void Update(GameTime gameTime)
         {
+            if(NetworkManager.Instance.Server==null)
+            {
+                return;
+            }
             var server = NetworkManager.Instance.Server;
 
             NetIncomingMessage inc;
