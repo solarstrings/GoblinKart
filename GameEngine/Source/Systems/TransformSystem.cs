@@ -18,8 +18,6 @@ namespace GameEngine
 
             Parallel.ForEach(transformComponents, t =>
             {
-                var qRotation = Quaternion.CreateFromYawPitchRoll(t.VRotation.X, t.VRotation.Y, t.VRotation.Z);
-                t.Rotation *= qRotation;
                 t.Forward = Vector3.Transform(Vector3.Forward, t.Rotation);
                 //Update world matrix
                 t.World = Matrix.CreateScale(t.Scale)

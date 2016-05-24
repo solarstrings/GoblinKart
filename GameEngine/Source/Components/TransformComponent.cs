@@ -7,14 +7,13 @@ namespace GameEngine {
         public Vector3 Position { get; set; }
         public Vector3 Scale { get; set; }
         public Quaternion Rotation { get; set; }
-
-        public Vector3 VRotation { get; set; }
         public Vector3 Forward { get; set; }
+
         public Vector3 Velocity;
 
-        public float gravity { get; } = -2f;
-        public float friction = 0.95f;
-        public float drag = 0.999f;
+        public float Gravity { get; } = -2f;
+        public float Friction = 0.95f;
+        public float Drag = 0.999f;
 
         public TransformComponent() {
             Scale = Vector3.One;

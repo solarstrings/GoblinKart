@@ -34,7 +34,6 @@ namespace GoblinKart.Init
             TransformComponent tt = new TransformComponent();
             float hh = (float)rnd.Next(8, 12) / 100;
             tt.Position = new Vector3(500, 35, -50);
-            tt.VRotation = new Vector3(0, 0, 0);
             tt.Scale = new Vector3(0.08f, hh, 0.08f);
             ComponentManager.Instance.AddComponentToEntity(entity, tt);
 
@@ -67,7 +66,6 @@ namespace GoblinKart.Init
                 float houseHeight = (float)rnd.Next(8, 12) / 100;
                 t.Position = new Vector3(minx, 0.0f, -minz);
                 t.Position = new Vector3(t.Position.X, TerrainMapRenderSystem.GetTerrainHeight(tcomp, t.Position.X, Math.Abs(t.Position.Z)), t.Position.Z);
-                t.VRotation = new Vector3(0, 0, 0);
                 t.Scale = new Vector3(0.08f, houseHeight, 0.08f);
                 t.World = Matrix.CreateTranslation(t.Position);
 
