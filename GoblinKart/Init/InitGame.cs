@@ -32,10 +32,9 @@ namespace GoblinKart.Init {
             sm.RegisterSystem("Game", meshToMeshCollisionSystem);
 
             sm.RegisterSystem("Game", new PowerupCollisionSystem(meshToMeshCollisionSystem));
-
+            InitKeyboard();
             InitKart(engine);
             InitCamera(engine);
-            InitKeyboard();
             InitTerrain(engine);
             InitSkybox(engine);
             InitParticles(engine);
