@@ -27,12 +27,12 @@ namespace GameEngine {
                 foreach (ModelMesh mesh in modelComp.model.Meshes) {
                     foreach (ModelMeshPart part in mesh.MeshParts) {
                         part.Effect = modelComp.effect;
-                        part.Effect.Parameters["World"].SetValue(tComp.world * mesh.ParentBone.Transform * Matrix.CreateScale(new Vector3(20f)));
+                        part.Effect.Parameters["World"].SetValue(tComp.World * mesh.ParentBone.Transform * Matrix.CreateScale(new Vector3(20f)));
                         part.Effect.Parameters["View"].SetValue(camComp.viewMatrix);
                         part.Effect.Parameters["Projection"].SetValue(camComp.projectionMatrix);
                         part.Effect.Parameters["SkyboxTexture"].SetValue(envComp.environmentMap);
                         part.Effect.Parameters["CameraPosition"].SetValue(camComp.position);
-                        part.Effect.Parameters["WorldInverseTranspose"].SetValue(Matrix.Transpose(Matrix.Invert(tComp.world * mesh.ParentBone.Transform)));
+                        part.Effect.Parameters["WorldInverseTranspose"].SetValue(Matrix.Transpose(Matrix.Invert(tComp.World * mesh.ParentBone.Transform)));
                     }
                     mesh.Draw();
                 }

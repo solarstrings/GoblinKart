@@ -32,19 +32,19 @@ namespace GameEngine {
                 TransformComponent t = ComponentManager.Instance.GetEntityComponent<TransformComponent>(e);
 
                 //get the rotation
-                pos = Vector3.Transform(pos, Matrix.CreateFromQuaternion(t.rotation));
+                pos = Vector3.Transform(pos, Matrix.CreateFromQuaternion(t.Rotation));
 
                 //move the camera to the object position
-                pos += t.position;
+                pos += t.Position;
 
                 c.position = pos;
 
                 //update the camera up position
                 Vector3 cameraUp = new Vector3(0, 1, 0);
-                cameraUp = Vector3.Transform(cameraUp, Matrix.CreateFromQuaternion(t.rotation));
+                cameraUp = Vector3.Transform(cameraUp, Matrix.CreateFromQuaternion(t.Rotation));
 
                 //update the view
-                c.viewMatrix = Matrix.CreateLookAt(pos, t.position, cameraUp);
+                c.viewMatrix = Matrix.CreateLookAt(pos, t.Position, cameraUp);
 
                 //update the projection
                 // c.projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, c.aspectRatio, c.nearClipPlane, c.farClipPlane);

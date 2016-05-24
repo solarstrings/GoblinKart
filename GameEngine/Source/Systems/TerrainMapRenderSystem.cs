@@ -54,7 +54,7 @@ namespace GameEngine {
                         terrainComponent.terrainChunks[i].effect.Texture = terrainComponent.terrainChunks[i].terrainTex;
                         terrainComponent.terrainChunks[i].effect.Projection = camera.projectionMatrix;
                         terrainComponent.terrainChunks[i].effect.View = camera.viewMatrix;
-                        terrainComponent.terrainChunks[i].effect.World = transformComponent.world * Matrix.CreateTranslation(terrainComponent.terrainChunks[i].offsetPosition);
+                        terrainComponent.terrainChunks[i].effect.World = transformComponent.World * Matrix.CreateTranslation(terrainComponent.terrainChunks[i].offsetPosition);
                         terrainComponent.terrainChunks[i].effect.EnableDefaultLighting();
 
                         BoundingBox box = boxConvert.ConvertBoundingBoxToWorldCoords(terrainComponent.terrainChunks[i].boundingBox, terrainComponent.terrainChunks[i].effect.World);
@@ -79,7 +79,7 @@ namespace GameEngine {
                                 ModelComponent mComp = ComponentManager.Instance.GetEntityComponent<ModelComponent>(staticModelEnt);
                                 ModelBoundingSphereComponent sp = ComponentManager.Instance.GetEntityComponent<ModelBoundingSphereComponent>(staticModelEnt);
 
-                                BoundingSphere newSphere = sphereConvert.ConvertBoundingSphereToWorldCoords(sp.sphere, Matrix.CreateTranslation(tComp.position));
+                                BoundingSphere newSphere = sphereConvert.ConvertBoundingSphereToWorldCoords(sp.sphere, Matrix.CreateTranslation(tComp.Position));
                                 newSphere.Radius += 0.5f;
 
                                 foreach (var pair in mComp.meshTransforms)
@@ -309,7 +309,7 @@ namespace GameEngine {
                         //and a sphere component
                         if (spComp != null)
                         {
-                            newSphere = sphereConvert.ConvertBoundingSphereToWorldCoords(spComp.sphere, tComp.world);
+                            newSphere = sphereConvert.ConvertBoundingSphereToWorldCoords(spComp.sphere, tComp.World);
 
 
                             //if the box and the sphere overlaps

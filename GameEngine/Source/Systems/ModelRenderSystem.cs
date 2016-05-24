@@ -70,8 +70,8 @@ namespace GameEngine
                                     modelInCameraFrustrum = false;
                                     foreach (BoundingBox bb in b.boundingBoxes) {
                                         Vector3 leftRightVector = Matrix.Transpose(c.viewMatrix).Right;
-                                        boxRenderer.RenderBoundingBox(bb, t.world, c.viewMatrix, c.projectionMatrix);
-                                        BoundingBox box = boxConvert.ConvertBoundingBoxToWorldCoords(b.boundingBoxes[0], Matrix.CreateTranslation(t.position));
+                                        boxRenderer.RenderBoundingBox(bb, t.World, c.viewMatrix, c.projectionMatrix);
+                                        BoundingBox box = boxConvert.ConvertBoundingBoxToWorldCoords(b.boundingBoxes[0], Matrix.CreateTranslation(t.Position));
                                         BoundingSphere s = BoundingSphere.CreateFromBoundingBox(box);
 
                                         if (c.cameraFrustrum.Contains(s) != ContainmentType.Disjoint) {

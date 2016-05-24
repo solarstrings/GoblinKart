@@ -41,7 +41,6 @@ namespace GameEngine.Source.Managers
             outmsg.WriteAllProperties(loginInformation);
             client.Connect("localhost", 9981, outmsg);
 
-
             if (!EstablishInfo(client)) return false;
             var clientEntity = EntityFactory.Instance.NewEntityWithTag("Client");
 
@@ -79,7 +78,7 @@ namespace GameEngine.Source.Managers
             }
         }
 
-        public void InitNetworkServer(ECSEngine engine)
+        public void InitNetworkServer()
         {
             var config = new NetPeerConfiguration("networkGame") { Port = 9981 };
             config.EnableMessageType(NetIncomingMessageType.ConnectionApproval);

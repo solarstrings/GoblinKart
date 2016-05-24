@@ -38,10 +38,13 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\KartComponent.cs" />
     <Compile Include="Components\PowerupComponent.cs" />
     <Compile Include="Components\PowerupModelComponent.cs" />
     <Compile Include="Engine.cs" />
+    <Compile Include="Init\InitClient.cs" />
     <Compile Include="Init\InitGame.cs" />
+    <Compile Include="Init\InitHost.cs" />
     <Compile Include="Init\InitHouses.cs" />
     <Compile Include="Init\InitMainMenu.cs" />
     <Compile Include="Init\InitMultiplayerMenu.cs" />
@@ -51,6 +54,7 @@
     <Compile Include="Systems\KartControlSystem.cs" />
     <Compile Include="Systems\MainMenuSystem.cs" />
     <Compile Include="Systems\MultiPlayerMenuSystem.cs" />
+    <Compile Include="Systems\NetworkClientSendInfo.cs" />
     <Compile Include="Systems\PowerupCollisionSystem.cs" />
     <Compile Include="Utilities\Utilities.cs" />
   </ItemGroup>
