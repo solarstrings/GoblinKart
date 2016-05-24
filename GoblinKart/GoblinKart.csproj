@@ -48,6 +48,7 @@
     <Compile Include="Init\InitHouses.cs" />
     <Compile Include="Init\InitMainMenu.cs" />
     <Compile Include="Init\InitMultiplayerMenu.cs" />
+    <Compile Include="Network\NetworkInformation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Systems\KartCollisionSystem.cs" />

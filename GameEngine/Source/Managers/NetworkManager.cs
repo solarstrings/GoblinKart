@@ -92,13 +92,14 @@ namespace GameEngine.Source.Managers
             var server = new NetServer(config);
             server.Start();
 
-            var serverEntity = EntityFactory.Instance.NewEntityWithTag("Server");
-
             // Set the managers server
             Server = server;
+            IamAServer = true;
+        }
 
-            SystemManager.Instance.RegisterSystem("MultiPlayerMenu", new NetworkServerSystem());
-
+        public void Send(NetOutgoingMessage message)
+        {
+            Client.SendMessage(message, Client.Connections, NetDeliveryMethod.ReliableOrdered, 0);
         }
     }
 }
