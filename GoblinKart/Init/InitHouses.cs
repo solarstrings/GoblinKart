@@ -33,9 +33,9 @@ namespace GoblinKart.Init
 
             TransformComponent tt = new TransformComponent();
             float hh = (float)rnd.Next(8, 12) / 100;
-            tt.position = new Vector3(500, 35, -50);
-            tt.vRotation = new Vector3(0, 0, 0);
-            tt.scale = new Vector3(0.08f, hh, 0.08f);
+            tt.Position = new Vector3(500, 35, -50);
+            tt.VRotation = new Vector3(0, 0, 0);
+            tt.Scale = new Vector3(0.08f, hh, 0.08f);
             ComponentManager.Instance.AddComponentToEntity(entity, tt);
 
             ComponentManager.Instance.AddComponentToEntity(entity, new Collision3Dcomponent());
@@ -65,14 +65,14 @@ namespace GoblinKart.Init
                 float minx = rnd.Next(128, 900);
                 float minz = rnd.Next(128, 900);
                 float houseHeight = (float)rnd.Next(8, 12) / 100;
-                t.position = new Vector3(minx, 0.0f, -minz);
-                t.position = new Vector3(t.position.X, TerrainMapRenderSystem.GetTerrainHeight(tcomp, t.position.X, Math.Abs(t.position.Z)), t.position.Z);
-                t.vRotation = new Vector3(0, 0, 0);
-                t.scale = new Vector3(0.08f, houseHeight, 0.08f);
-                t.world = Matrix.CreateTranslation(t.position);
+                t.Position = new Vector3(minx, 0.0f, -minz);
+                t.Position = new Vector3(t.Position.X, TerrainMapRenderSystem.GetTerrainHeight(tcomp, t.Position.X, Math.Abs(t.Position.Z)), t.Position.Z);
+                t.VRotation = new Vector3(0, 0, 0);
+                t.Scale = new Vector3(0.08f, houseHeight, 0.08f);
+                t.World = Matrix.CreateTranslation(t.Position);
 
                 //house and house2 are identical, so it's ok to use either of them
-                ModelBoundingSphereComponent sphereComp = new ModelBoundingSphereComponent(house, t.position);
+                ModelBoundingSphereComponent sphereComp = new ModelBoundingSphereComponent(house, t.Position);
 
                 ComponentManager.Instance.AddComponentToEntity(e, t);
                 ComponentManager.Instance.AddComponentToEntity(e, sphereComp);

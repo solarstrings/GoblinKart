@@ -30,29 +30,7 @@ namespace GoblinKart
             keyboard = ComponentManager.Instance.GetEntityWithTag("mainMenuKeyboard", sceneEntities);
             kbComp = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(keyboard);
         }
-
-        private void SetActiveOption()
-        {
-            if(currentSelction==0)
-            {
-                single.Visible = true;
-                multi.Visible = false;
-                exit.Visible = false;
-            }
-            if(currentSelction==1)
-            {
-                single.Visible = false;
-                multi.Visible = true;
-                exit.Visible = false;
-            }
-
-            if (currentSelction == 2)
-            {
-                single.Visible = false;
-                multi.Visible = false;
-                exit.Visible = true;
-            }
-        }
+ 
         public void Update(GameTime gameTime)
         {
 
@@ -91,6 +69,28 @@ namespace GoblinKart
                 {
                     System.Environment.Exit(0);
                 }
+            }
+        }
+        private void SetActiveOption()
+        {
+            if (currentSelction == 0)
+            {
+                single.Visible = true;
+                multi.Visible = false;
+                exit.Visible = false;
+            }
+            if (currentSelction == 1)
+            {
+                single.Visible = false;
+                multi.Visible = true;
+                exit.Visible = false;
+            }
+
+            if (currentSelction == 2)
+            {
+                single.Visible = false;
+                multi.Visible = false;
+                exit.Visible = true;
             }
         }
     }

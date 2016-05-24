@@ -8,6 +8,7 @@ namespace GameEngine.Source.Engine
 {
     public enum PacketType
     {
-        Login
+        Login,
+        PlayerPosition
     }
 }

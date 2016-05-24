@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameEngine.Source.Components;
 using GameEngine.Source.Engine;
 using GameEngine.Source.Network;
 using GameEngine.Source.Systems;
@@ -34,18 +36,23 @@ namespace GameEngine.Source.Managers
             var client = new NetClient(new NetPeerConfiguration("networkGame") { Port = 9981 });
             client.Start();
 
-            var loginInformation = new LoginInformation() { Name = "ClientPlayer" };
+            var player = new PlayerComponent { Name = "ClientPlayer" };
 
             var outmsg = client.CreateMessage();
             outmsg.Write((byte)PacketType.Login);
-            outmsg.WriteAllProperties(loginInformation);
+            outmsg.WriteAllProperties(player);
             client.Connect("localhost", 9981, outmsg);
 
-            if (!EstablishInfo(client)) return false;
+            if (!EstablishInfo(client))
+            {
+                Debug.WriteLine("Connection to the host failed!");
+                return false;
+            }
             var clientEntity = EntityFactory.Instance.NewEntityWithTag("Client");
 
             // Set the managers client
             Client = client;
+            Debug.WriteLine("You have successfully connected to the host!");
 
             return true;
         }
@@ -90,7 +97,8 @@ namespace GameEngine.Source.Managers
             // Set the managers server
             Server = server;
 
-            SystemManager.Instance.RegisterSystem("Lobby", new NetworkServerSystem());
+            SystemManager.Instance.RegisterSystem("MultiPlayerMenu", new NetworkServerSystem());
+
         }
     }
 }

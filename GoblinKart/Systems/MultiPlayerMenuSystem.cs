@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GameEngine;
 using Microsoft.Xna.Framework;
 using GameEngine.InputDefs;
+using GameEngine.Source.Managers;
 
 namespace GoblinKart
 {
@@ -31,28 +32,6 @@ namespace GoblinKart
             kbComp = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(keyboard);
         }
 
-        private void SetActiveOption()
-        {
-            if (currentSelction == 0)
-            {
-                join.Visible = true;
-                host.Visible = false;
-                back.Visible = false;
-            }
-            if (currentSelction == 1)
-            {
-                join.Visible = false;
-                host.Visible = true;
-                back.Visible = false;
-            }
-
-            if (currentSelction == 2)
-            {
-                join.Visible = false;
-                host.Visible = false;
-                back.Visible = true;
-            }
-        }
         public void Update(GameTime gameTime)
         {
 
@@ -79,17 +58,50 @@ namespace GoblinKart
             {
                 if (currentSelction == 0)
                 {
-
+                    Join();
                 }
                 if (currentSelction == 1)
                 {
-
+                    Host();
                 }
                 if (currentSelction == 2)
                 {
                     SystemManager.Instance.Category = "MainMenu";
                     SceneManager.Instance.SetActiveScene("MainMenu");
                 }
+            }
+        }
+
+        private void Host()
+        {
+            NetworkManager.Instance.InitNetworkServer();
+        }
+
+        private void Join()
+        {
+            NetworkManager.Instance.InitClientConnection();
+        }
+
+        private void SetActiveOption()
+        {
+            if (currentSelction == 0)
+            {
+                join.Visible = true;
+                host.Visible = false;
+                back.Visible = false;
+            }
+            if (currentSelction == 1)
+            {
+                join.Visible = false;
+                host.Visible = true;
+                back.Visible = false;
+            }
+
+            if (currentSelction == 2)
+            {
+                join.Visible = false;
+                host.Visible = false;
+                back.Visible = true;
             }
         }
     }

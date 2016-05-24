@@ -43,7 +43,7 @@ namespace GameEngine
                         effect.FogEnd = modelComp.fogEnd;
                     }
 
-                    effect.World = transforms[mesh.ParentBone.Index] * t.world;
+                    effect.World = transforms[mesh.ParentBone.Index] * t.World;
                     effect.View = c.viewMatrix;
                     effect.Projection = c.projectionMatrix;
                 }

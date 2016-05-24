@@ -30,12 +30,12 @@ namespace GameEngine.Source.Systems
                 foreach (var mesh1 in model1.model.Meshes)
                 {
                     var sphere1 = mesh1.BoundingSphere;
-                    sphere1 = sphere1.Transform(transfrom1.world);
+                    sphere1 = sphere1.Transform(transfrom1.World);
 
                     foreach (var mesh2 in model2.model.Meshes)
                     {
                         var sphere2 = mesh2.BoundingSphere;
-                        sphere2 = sphere2.Transform(transfrom2.world);
+                        sphere2 = sphere2.Transform(transfrom2.World);
 
                         if (sphere1.Intersects(sphere2))
                         {

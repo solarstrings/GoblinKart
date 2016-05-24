@@ -64,6 +64,7 @@
     <Compile Include="Source\Components\MouseComponent.cs" />
     <Compile Include="Source\Components\NetworkComponent.cs" />
     <Compile Include="Source\Components\ParentComponent.cs" />
+    <Compile Include="Source\Components\PlayerComponent.cs" />
     <Compile Include="Source\Components\Position2DComponent.cs" />
     <Compile Include="Source\Components\RectangleCollisionComponent.cs" />
     <Compile Include="Source\Components\Render2DComponent.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,13 +33,13 @@ namespace GameEngine.Source.Systems
                     case NetIncomingMessageType.UnconnectedData:
                         break;
                     case NetIncomingMessageType.ConnectionApproval:
-                        Console.WriteLine("New connection...");
+                        Debug.WriteLine("New connection...");
                         var data = inc.ReadByte();
                         if (data == (byte) PacketType.Login)
                         {
-                            Console.WriteLine("... Connection accepted.");
-                            var loginInformation = new LoginInformation();
-                            inc.ReadAllProperties(loginInformation);
+                            Debug.WriteLine("... Connection accepted.");
+                            var player = new PlayerComponent();
+                            inc.ReadAllProperties(player);
                             inc.SenderConnection.Approve();
 
                             var outmsg = server.CreateMessage();

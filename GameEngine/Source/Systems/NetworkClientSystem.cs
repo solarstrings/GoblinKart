@@ -15,6 +15,7 @@ namespace GameEngine.Source.Systems
         {
             var clientComponent = ComponentManager.Instance.GetAllComponentsOfType<ClientComponent>()[0];
 
+            // Should be the same as for the server except some if-statements that makes the host do host-stuff aswell (like sending incoming messages to everyone)
             NetIncomingMessage inc;
             if ((inc = clientComponent.Client.ReadMessage()) != null)
             {

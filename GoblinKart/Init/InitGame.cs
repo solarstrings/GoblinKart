@@ -79,9 +79,9 @@ namespace GoblinKart.Init {
             ComponentManager.Instance.AddComponentToEntity(kart, new PowerupComponent());
 
             TransformComponent kartTransform = new TransformComponent();
-            kartTransform.position = new Vector3(0.0f, 0.0f, 0.0f);
-            kartTransform.vRotation = new Vector3(0, 0, 0);
-            kartTransform.scale = new Vector3(2.5f, 2.5f, 2.5f);
+            kartTransform.Position = new Vector3(0.0f, 0.0f, 0.0f);
+            kartTransform.VRotation = new Vector3(0, 0, 0);
+            kartTransform.Scale = new Vector3(2.5f, 2.5f, 2.5f);
             ComponentManager.Instance.AddComponentToEntity(kart, kartTransform);
 
             SceneManager.Instance.AddEntityToSceneOnLayer("Game", 3, kart);
@@ -166,8 +166,8 @@ namespace GoblinKart.Init {
             t.SetTextureToChunk(92, engine.LoadContent<Texture2D>("verticalroad"));
             t.SetTextureToChunk(91, engine.LoadContent<Texture2D>("verticalroad"));
 
-            tf.world = Matrix.CreateTranslation(0, 0, 0);
-            tf.position = Vector3.Zero;
+            tf.World = Matrix.CreateTranslation(0, 0, 0);
+            tf.Position = Vector3.Zero;
             ComponentManager.Instance.AddComponentToEntity(terrain, t);
             ComponentManager.Instance.AddComponentToEntity(terrain, tf);
 

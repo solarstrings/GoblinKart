@@ -31,7 +31,7 @@ namespace GoblinKart {
 
             //engine.SetWindowTitle("Visible Chunks:" + terComp.numChunksInView + " Num Drawed static models: " + terComp.numModelsInView + "| Kart x: " + trsComp.position.X + " Kart y: " + trsComp.position.Y + " Kart z: " + trsComp.position.Z + " Map height: " +
             //    TerrainMapRenderSystem.GetTerrainHeight(terComp, trsComp.position.X, Math.Abs(trsComp.position.Z)));
-            engine.SetWindowTitle("xVel: " + trsComp.velocity.X + "yVel: " + trsComp.velocity.Y);
+            engine.SetWindowTitle("xVel: " + trsComp.Velocity.X + "yVel: " + trsComp.Velocity.Y);
 
             ModelRenderSystem.ResetMeshTransforms(ref kartModel);
             MoveKart(gameTime, sceneEntities, trsComp, kartModel);
@@ -50,14 +50,14 @@ namespace GoblinKart {
                 if (k != null) {
                     if (Utilities.CheckKeyboardAction("right", BUTTON_STATE.HELD, k)) {
                         newRot = new Vector3(-kartTurningAcceleration, 0f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        trsComp.vRotation = newRot;
+                        trsComp.VRotation = newRot;
                     }
                     else if (Utilities.CheckKeyboardAction("left", BUTTON_STATE.HELD, k)) {
                         newRot = new Vector3(kartTurningAcceleration, 0f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        trsComp.vRotation = newRot;
+                        trsComp.VRotation = newRot;
                     }
                     else {
-                        trsComp.vRotation = Vector3.Zero;
+                        trsComp.VRotation = Vector3.Zero;
                     }
                     if (Utilities.CheckKeyboardAction("quit", BUTTON_STATE.RELEASED, k)) {
                         SystemManager.Instance.Category = "MainMenu";
@@ -65,18 +65,18 @@ namespace GoblinKart {
                     }
 
                     if (Utilities.CheckKeyboardAction("forward", BUTTON_STATE.HELD, k)) {
-                        if(!airborne && trsComp.velocity.X < maxSpeed) {
-                            trsComp.velocity += new Vector3(kartAcceleration, 0, 0);
+                        if(!airborne && trsComp.Velocity.X < maxSpeed) {
+                            trsComp.Velocity += new Vector3(kartAcceleration, 0, 0);
                         }
                     }
                     if (Utilities.CheckKeyboardAction("back", BUTTON_STATE.HELD, k)) {
-                        if (!airborne && trsComp.velocity.X > maxReverseSpeed) {
-                            trsComp.velocity += new Vector3(-kartAcceleration, 0, 0);
+                        if (!airborne && trsComp.Velocity.X > maxReverseSpeed) {
+                            trsComp.Velocity += new Vector3(-kartAcceleration, 0, 0);
                         }
                     }
                     if (Utilities.CheckKeyboardAction("jump", BUTTON_STATE.RELEASED, k)) {
                         if (!airborne) {
-                            trsComp.velocity.Y += jumpingAcceleration;
+                            trsComp.Velocity.Y += jumpingAcceleration;
                         }
                         SoundManager.Instance.PlaySound("jump");
                     }
