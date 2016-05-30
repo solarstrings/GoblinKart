@@ -48,6 +48,7 @@ namespace GameEngine {
         /* Flagges the object as flying if it is above the ground. If it only slightly above the ground
         it will still be flagged as non flying to make such detection more responsive. */
         public static void TerrainMapCollision(ref TransformComponent trsComp, ref bool airborne, TerrainMapComponent terComp, float groundOffset) {
+
             float distanceToGround = -(TerrainMapRenderSystem.GetTerrainHeight(terComp, trsComp.Position.X, Math.Abs(trsComp.Position.Z)) - trsComp.Position.Y);
 
             if (distanceToGround <= groundOffset) {

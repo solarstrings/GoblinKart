@@ -33,7 +33,6 @@ namespace GoblinKart
             TerrainMapRenderSystem.AddStaticModelsToChunks();
             SceneManager.Instance.SetActiveScene("MainMenu");
             SystemManager.Instance.Category = "MainMenu";
-            
         }
     }
 }

@@ -55,7 +55,6 @@
     <Compile Include="Source\Components\EnvironmentmappingComponent.cs" />
     <Compile Include="Source\Components\GamePadComponent.cs" />
     <Compile Include="Source\Components\IComponent.cs" />
-    <Compile Include="Source\Components\InputComponent.cs" />
     <Compile Include="Source\Components\KeyBoardComponent.cs" />
     <Compile Include="Source\Components\ModelBoundingBoxComponent.cs" />
     <Compile Include="Source\Components\ModelBoundingSphereComponent.cs" />
@@ -77,7 +76,6 @@
     <Compile Include="Source\Components\TextRenderComponent.cs" />
     <Compile Include="Source\Components\TimerComponent.cs" />
     <Compile Include="Source\Components\TransformComponent.cs" />
-    <Compile Include="Source\Components\TriggerComponent.cs" />
     <Compile Include="Source\Components\Velocity2DComponent.cs" />
     <Compile Include="Source\Engine\BoundingBoxToWorldSpace.cs" />
     <Compile Include="Source\Engine\BoundingSphereToWorldSpace.cs" />
@@ -107,7 +105,6 @@
     <Compile Include="Source\Observers\ICollisionSubject.cs" />
     <Compile Include="Source\Observers\IMeshCollisionObserver.cs" />
     <Compile Include="Source\Observers\IMeshCollisionSubject.cs" />
-    <Compile Include="Source\Scripts\IScript.cs" />
     <Compile Include="Source\Systems\AISystem.cs" />
     <Compile Include="Source\Systems\AnimateSystem.cs" />
     <Compile Include="Source\Systems\CalcModelSphereSystem.cs" />
@@ -115,7 +112,6 @@
     <Compile Include="Source\Systems\CollisionSystem.cs" />
     <Compile Include="Source\Systems\EnvironmentmappingSystem.cs" />
     <Compile Include="Source\Systems\GamePadSystem.cs" />
-    <Compile Include="Source\Systems\InputSystem.cs" />
     <Compile Include="Source\Systems\IRender3DSystem.cs" />
     <Compile Include="Source\Systems\IRenderSystem.cs" />
     <Compile Include="Source\Systems\ISystem.cs" />
@@ -138,7 +134,6 @@
     <Compile Include="Source\Systems\TextRenderSystem.cs" />
     <Compile Include="Source\Systems\TimerSystem.cs" />
     <Compile Include="Source\Systems\TransformSystem.cs" />
-    <Compile Include="Source\Systems\TriggerSystem.cs" />
     <Compile Include="Source\Systems\MeshToMeshCollision.cs" />
     <Compile Include="Source\VertexPositionColorNormal.cs" />
     <Compile Include="Waypoint.cs" />
@@ -158,6 +153,7 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Source\Scripts\" />
     <Folder Include="Source\Utilities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

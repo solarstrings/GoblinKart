@@ -67,7 +67,7 @@ namespace GoblinKart
                 }
                 else if (currentSelction == 2)
                 {
-                    System.Environment.Exit(0);
+                    engine.StopEngine();
                 }
             }
         }

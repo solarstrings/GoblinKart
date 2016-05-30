@@ -35,9 +35,10 @@ namespace GoblinKart {
 
             ModelRenderSystem.ResetMeshTransforms(ref kartModel);
             MoveKart(gameTime, sceneEntities, trsComp, kartModel);
-            PhysicsSystem.ApplyGravity(ref trsComp, gameTime);
-            PhysicsSystem.ApplyFriction(ref trsComp, airborne);
             CollisionSystem.TerrainMapCollision(ref trsComp, ref airborne, terComp, KartGroundOffset);
+            PhysicsSystem.ApplyFriction(ref trsComp, airborne);
+            PhysicsSystem.ApplyGravity(ref trsComp, gameTime, airborne);
+
         }
 
         private Quaternion CreateRotation(Vector3 v3) {
@@ -75,11 +76,11 @@ namespace GoblinKart {
                             trsComp.Velocity += new Vector3(-KartAcceleration, 0, 0);
                         }
                     }
-                    if (Utilities.CheckKeyboardAction("jump", BUTTON_STATE.RELEASED, k)) {
+                    if (Utilities.CheckKeyboardAction("jump", BUTTON_STATE.PRESSED, k)) {
                         if (!airborne) {
                             trsComp.Velocity.Y += JumpingAcceleration;
-                        }
-                        SoundManager.Instance.PlaySound("jump");
+                            SoundManager.Instance.PlaySound("jump");
+                        }                        
                     }
                     ModelRenderSystem.SetMeshTransform(ref kartModel, 1, Matrix.CreateRotationY(0.08f));
                     ModelRenderSystem.SetMeshTransform(ref kartModel, 3, Matrix.CreateRotationY(0.1f));

@@ -250,6 +250,18 @@
 /processorParam:TextureFormat=Color
 /build:smoke.png
 
+#begin Sounds/jump.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/jump.mp3
+
+#begin Sounds/song.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/song.mp3
+
 #begin Menu/ExitSelected.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -345,16 +357,4 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Menu/MultiplayerMenu.png
-
-#begin Sounds/jump.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sounds/jump.mp3
-
-#begin Sounds/song.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sounds/song.mp3
 
