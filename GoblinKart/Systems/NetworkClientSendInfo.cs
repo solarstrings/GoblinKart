@@ -7,6 +7,7 @@ using GameEngine;
 using GameEngine.Source.Components;
 using GameEngine.Source.Managers;
 using GoblinKart.Components;
+using GoblinKart.Network;
 using Lidgren.Network;
 using Microsoft.Xna.Framework;
 
@@ -18,9 +19,6 @@ namespace GoblinKart.Systems
         {
             // Get all networkComponents (should be the component to entities with information necessary to send)
             var networkEntities = ComponentManager.Instance.GetAllEntitiesWithComponentType<NetworkComponent>();
-
-            var client = NetworkManager.Instance.Client;
-
             
             NetOutgoingMessage message = null;
             // msg.Write((int)MessageType.StringMessage); <---------- Detta kan vara bra att göra för att bestämma messageType, måste man kanske göra..?
@@ -33,24 +31,27 @@ namespace GoblinKart.Systems
 
                 if (kartComponent == null) continue;
 
+                var playerComponent = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(e);
                 var transformComponent = ComponentManager.Instance.GetEntityComponent<TransformComponent>(e);
 
-                message = client.CreateMessage();
-                message.Write(transformComponent.Position.ToString());
-                message.Write(transformComponent.Rotation.ToString());
-                message.Write(transformComponent.Scale.ToString());
+                NetworkInformation info = new NetworkInformation()
+                {
+                    Id = playerComponent.Id,
+                    Name = playerComponent.Name,
+                    Position = transformComponent.Position,
+                    Forward = transformComponent.Forward
+                };
+
+                message = NetworkManager.Instance.Client.CreateMessage();
+                message.WriteAllProperties(info);
             }
 
             // Maybe check for other things to send...?
             // this feels like kinda bad idea to handle this..?
 
             // Send message
-            Send(client, message);
+            NetworkManager.Instance.Send(message);
         }
 
-        public void Send(NetClient client, NetOutgoingMessage message)
-        {
-            client.SendMessage(message, client.Connections, NetDeliveryMethod.ReliableOrdered, 0);
-        }
     }
 }

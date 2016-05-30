@@ -8,6 +8,7 @@ using GameEngine;
 using GameEngine.Source.Components;
 using GameEngine.Source.Engine;
 using GameEngine.Source.Managers;
+using GoblinKart.Network;
 using Lidgren.Network;
 using Microsoft.Xna.Framework;
 
@@ -52,10 +53,22 @@ namespace GoblinKart.Systems
         public void HandleRecievedPositionData(NetIncomingMessage inc)
         {
             Debug.WriteLine("New position recieved...");
+
+            var nm = NetworkManager.Instance;
             
-            // Use the position and update the players position
+            // Read the information
+            var info = new NetworkInformation();
+            inc.ReadAllProperties(info);
+
+            // Use the information to update needed network-stuff
 
             // If you are the host, send the position to all the others except the sender.
+            if (nm.IamAServer)
+            {
+                var message = nm.Client.CreateMessage();
+                message.WriteAllProperties(info);
+                nm.Send(message);
+            }
         }
     }
 }

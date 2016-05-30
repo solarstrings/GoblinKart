@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameEngine;
+using GameEngine.Source.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
@@ -25,6 +26,7 @@ namespace GoblinKart.Init
             AddMenuAndOptions(engine);
             SceneManager.Instance.SetActiveScene("MultiPlayerMenu");
             SystemManager.Instance.RegisterSystem("MultiPlayerMenu", new MultiPlayerMenuSystem(engine));
+            SystemManager.Instance.RegisterSystem("MultiPlayerMenu", new NetworkServerSystem());
         }
 
         private void AddMenuAndOptions(ECSEngine engine)
