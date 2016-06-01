@@ -4,29 +4,35 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace GameEngine
 {
-    public class SystemManager
+    /// <summary>
+    /// Thread safe singleton without using locks
+    /// See link: "http://csharpindepth.com/Articles/General/Singleton.aspx#nested-cctor"/// 
+    /// </summary>
+    public sealed class SystemManager
     {
-        public string Category { set; get; }
-        private static SystemManager instance = null;
-        
-        private SystemManager(){}
+        private bool updateThreadStarted = false;
+        private static readonly SystemManager instance = new SystemManager();
+
+        public bool exitGame = false;
+
+        // Explicit static constructor to tell C# compiler
+        // not to mark type as beforefieldinit
+        static SystemManager() { }
+        private SystemManager(){ }
 
         public static SystemManager Instance
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new SystemManager();
-                    instance.Category = null;
-                }
                 return instance;
             }
         }
 
+        public string Category { set; get; }
         Dictionary<string, Dictionary<Type, IUpdateSystem>> updateSystemDictionary = new Dictionary<string, Dictionary<Type, IUpdateSystem>>();
         Dictionary<string, Dictionary<Type, IRenderSystem>> renderSystemDictionary = new Dictionary<string, Dictionary<Type, IRenderSystem>>();
         Dictionary<string, Dictionary<Type, IRender3DSystem>> render3DSystemDictionary = new Dictionary<string, Dictionary<Type, IRender3DSystem>>();
@@ -172,19 +178,33 @@ namespace GameEngine
         }
 
         /// <summary>
-        /// 
+        /// Create a thread and run this method inside it
         /// </summary>
         /// <param name="gameTime"></param>
         internal void RunAllUpdateSystems(GameTime gameTime)
         {
-            if (updateSystemDictionary.Count > 0)
+            Stopwatch stopWatch = new Stopwatch();
+
+            while (true)
             {
-                if (updateSystemDictionary.ContainsKey(Category))
+                stopWatch.Start();
+
+                //1 seconds = 1000 milliseconds.
+                //we want update to go fairly fast, 160 times / second.
+                //
+                if (stopWatch.Elapsed.Milliseconds > 16.66)
                 {
-                    foreach (IUpdateSystem upSys in updateSystemDictionary[Category].Values)
+                    if (updateSystemDictionary.Count > 0)
                     {
-                        upSys.Update(gameTime);
+                        if (updateSystemDictionary.ContainsKey(Category))
+                        {
+                            foreach (IUpdateSystem upSys in updateSystemDictionary[Category].Values)
+                            {
+                                upSys.Update(gameTime);
+                            }
+                        }
                     }
+                    stopWatch.Reset();
                 }
             }
         }

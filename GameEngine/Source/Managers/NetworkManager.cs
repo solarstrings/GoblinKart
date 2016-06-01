@@ -10,23 +10,34 @@ using GameEngine.Source.Network;
 using GameEngine.Source.Systems;
 using Lidgren.Network;
 
+
 namespace GameEngine.Source.Managers
 {
-    public class NetworkManager
+    /// <summary>
+    /// Thread safe singleton without using locks
+    /// See link: "http://csharpindepth.com/Articles/General/Singleton.aspx#nested-cctor"
+    /// </summary>
+    public sealed class NetworkManager
     {
+        private static readonly NetworkManager _instance = new NetworkManager();
         // How do we know if someone is host or client?
         public NetServer Server { get; set; }
         public NetClient Client { get; set; }
 
         public bool IamAServer = false;
 
-        private static NetworkManager _instance;
+
+        // Explicit static constructor to tell C# compiler
+        // not to mark type as beforefieldinit
+        static NetworkManager() { }
+
+        private NetworkManager() { }
+
+        
         public static NetworkManager Instance
         {
             get
             {
-                if (_instance == null)
-                    _instance = new NetworkManager();
                 return _instance;
             }
         }

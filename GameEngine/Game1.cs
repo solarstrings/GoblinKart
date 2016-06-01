@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Threading;
 
 namespace GameEngine
 {
@@ -12,6 +13,7 @@ namespace GameEngine
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         ECSEngine engine = null;
+        private bool updateThreadStarted = false;
 
         public Game1()
             : base()
@@ -74,11 +76,20 @@ namespace GameEngine
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            SystemManager.Instance.RunAllUpdateSystems(gameTime);
+            if(SystemManager.Instance.exitGame)
+            {
+                this.Exit();
+            }
 
+            if (updateThreadStarted == false)
+            {
+                Thread t = new Thread(() => SystemManager.Instance.RunAllUpdateSystems(gameTime));
+                t.IsBackground = true;
+                updateThreadStarted = true;
+                t.Start();
+                base.Update(gameTime);
+            }
             // TODO: Add your update logic here
-
-            base.Update(gameTime);
         }
 
         /// <summary>

@@ -38,8 +38,12 @@ namespace GameEngine
             game.Window.Title = title;
         }
 
+        /// <summary>
+        /// This is not thread safe. If you are running update in separate thread,
+        /// use: SystemManager.Instance.exitGame = true Instead.
+        /// </summary>
         public void StopEngine()
-        {
+        {            
             if (game != null)
             {
                 game.Exit();

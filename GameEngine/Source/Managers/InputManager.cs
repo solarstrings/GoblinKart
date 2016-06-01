@@ -10,12 +10,21 @@ namespace GameEngine
 {
     /// <summary>
     /// The InputManager handle input from keyboard and mouse, as well can handle input from four gamepads.
-    /// 
+    /// Thread safe singleton without using locks
+    /// See link: "http://csharpindepth.com/Articles/General/Singleton.aspx#nested-cctor"
     /// </summary>
     class InputManager
     {
+
+        private static readonly InputManager instance = new InputManager();
+
+
+        // Explicit static constructor to tell C# compiler
+        // not to mark type as beforefieldinit
+        static InputManager() { }
         private InputManager() { }
-        private static InputManager instance = null;
+        
+
 
         Dictionary<string, List<Keys>> keyBoardActions = new Dictionary<string, List<Keys>>();
         Dictionary<PlayerIndex, Dictionary<string, List<Buttons>>> gamePadActions =  new Dictionary<PlayerIndex, Dictionary<string, List<Buttons>>>();
@@ -36,10 +45,6 @@ namespace GameEngine
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new InputManager();
-                }
                 return instance;
             }
         }

@@ -6,16 +6,22 @@ using System.Text;
 using Microsoft.Xna.Framework;
 
 namespace GameEngine {
-    class PhysicsManager {
+    /// <summary>
+    /// Thread safe singleton without using locks
+    /// See link: "http://csharpindepth.com/Articles/General/Singleton.aspx#nested-cctor"
+    /// </summary>
+    sealed class PhysicsManager {
 
+        private static readonly PhysicsManager instance = new PhysicsManager();
+
+        // Explicit static constructor to tell C# compiler
+        // not to mark type as beforefieldinit
+        static PhysicsManager() { }
         private PhysicsManager() { }
-        private static PhysicsManager instance = null;
+        
 
         public static PhysicsManager Instance {
             get {
-                if (instance == null) {
-                    instance = new PhysicsManager();
-                }
                 return instance;
             }
         }

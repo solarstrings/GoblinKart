@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Text;
 
@@ -7,23 +8,26 @@ namespace GameEngine
 {
     /// <summary>
     /// Class to handle components: Add, remove and  retrive components 
+    /// Thread safe singleton without using locks
+    /// See link: "http://csharpindepth.com/Articles/General/Singleton.aspx#nested-cctor"
     /// </summary>
-    public class ComponentManager
+    public sealed class ComponentManager
     {
-        private static ComponentManager instance;
+        private static readonly ComponentManager instance = new ComponentManager();
+
+        static ComponentManager() { }
+        private ComponentManager() { }
+
         public static ComponentManager Instance
         {
             get
             {
-                if (instance == null)
-                    instance = new ComponentManager();
                 return instance;
+
             }
         }
 
-        public Dictionary<Type, Dictionary<Entity, IComponent>> componentsDictionary = new Dictionary<Type, Dictionary<Entity, IComponent>>();
-
-        private ComponentManager() { }
+        public ConcurrentDictionary <Type, ConcurrentDictionary<Entity, IComponent>> componentsDictionary = new ConcurrentDictionary<Type, ConcurrentDictionary<Entity, IComponent>>();
 
         /// <summary>
         /// This method register a component "to" an entity 
@@ -36,7 +40,7 @@ namespace GameEngine
 
             if (!componentsDictionary.ContainsKey(type))
             {
-                componentsDictionary.Add(type, new Dictionary<Entity, IComponent>());
+                componentsDictionary.TryAdd(type, new ConcurrentDictionary<Entity, IComponent>());
             }
 
             componentsDictionary[type][entity] = component;
@@ -52,7 +56,17 @@ namespace GameEngine
             Type type = typeof(T);
             if (componentsDictionary.ContainsKey(type))
                 if (componentsDictionary[type].ContainsKey(entity))
-                    componentsDictionary[type].Remove(entity);
+                {
+                    IComponent c;
+                    if(componentsDictionary[type].TryRemove(entity,out c) == false)
+                    {
+                        Console.WriteLine("failed to remove component");
+                    }
+                    else
+                    {
+                        Console.WriteLine("removed component");
+                    }
+                }
         }
 
         /// <summary>
@@ -102,7 +116,7 @@ namespace GameEngine
             Type type = typeof(T);
             if (componentsDictionary.ContainsKey(type))
             {
-                if (componentsDictionary[type].ContainsValue(component))
+                if (componentsDictionary[type].Values.Contains(component))
                 {
                     foreach (KeyValuePair<Entity, IComponent> kv in componentsDictionary[type])
                     {
@@ -189,10 +203,13 @@ namespace GameEngine
         /// <param name="entity"> The entity to be removed </param>
         public void RemoveEntity(Entity entity)
         {
-            foreach (KeyValuePair<Type, Dictionary<Entity, IComponent>> entry in componentsDictionary)
+            foreach (KeyValuePair<Type, ConcurrentDictionary<Entity, IComponent>> entry in componentsDictionary)
             {
                 if (entry.Value.ContainsKey(entity))
-                    componentsDictionary[entry.Key].Remove(entity);
+                {
+                    IComponent c;
+                    componentsDictionary[entry.Key].TryRemove(entity, out c);
+                }
             }
         }
     }

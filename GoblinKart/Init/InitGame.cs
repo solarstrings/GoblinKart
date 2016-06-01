@@ -138,6 +138,9 @@ namespace GoblinKart.Init {
 
             ComponentManager.Instance.AddComponentToEntity(camera, cc);
             ComponentManager.Instance.AddComponentToEntity(camera, new TransformComponent());
+            ComponentManager.Instance.AddComponentToEntity(camera, new PlayerComponent());
+            ComponentManager.Instance.RemoveComponentFromEntity<PlayerComponent>(camera);
+
             CameraSystem.SetTargetEntity("Kart");
             SceneManager.Instance.AddEntityToSceneOnLayer("Game", 6, camera);
             CameraSystem.SetCameraFrustrum();

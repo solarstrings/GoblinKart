@@ -16,6 +16,8 @@ namespace GameEngine
         ModelRenderMethods modelRenderMethods;
         bool renderBoxInitialised = false;
 
+        private Object lockMeshTransformUpdate = new Object();
+
         private bool modelInCameraFrustrum=false;
 
         //if the terrain system is drawing all static models belonging to chunks
@@ -56,12 +58,16 @@ namespace GameEngine
 
                         //if the entity has a model component
                         if (m != null) {
-                            //loop through all mesh transforms in the model
-                            foreach (var pair in m.meshTransforms) {
-                                //update the model transforms
-                                modelRenderMethods.ChangeBoneTransform(m, pair.Key, pair.Value);
-                            }
 
+                            if (m.meshTransforms.Count > 0)
+                            {
+                                //loop through all mesh transforms in the model
+                                foreach (var pair in m.meshTransforms)
+                                {
+                                    //update the model transforms
+                                    modelRenderMethods.ChangeBoneTransform(m, pair.Key, pair.Value);
+                                }
+                            }
                             TransformComponent t = ComponentManager.Instance.GetEntityComponent<TransformComponent>(entity);
                             //if there is a transform component
                             if (t != null) {

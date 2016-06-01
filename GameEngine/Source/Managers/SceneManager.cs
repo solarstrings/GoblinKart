@@ -5,24 +5,29 @@ using System.Text;
 
 namespace GameEngine
 {
-    public class SceneManager
+    /// <summary>
+    /// Thread safe singleton without using locks
+    /// See link: "http://csharpindepth.com/Articles/General/Singleton.aspx#nested-cctor"
+    /// </summary>
+    public sealed class SceneManager
     {
+        private static readonly SceneManager instance = new SceneManager();
         private string activeScene = "";        
 
-        public Dictionary<string, Scene> sceneDictionary = new Dictionary<string, Scene>();
+        public Dictionary<string, Scene> sceneDictionary = new Dictionary<string, Scene>();        
+        
+        // Explicit static constructor to tell C# compiler
+        // not to mark type as beforefieldinit
+        static SceneManager() { }
+        private SceneManager() { }
 
-        private static SceneManager instance;
         public static SceneManager Instance
         {
             get
             {
-                if (instance == null)
-                    instance = new SceneManager();
                 return instance;
             }
         }        
-        
-        private SceneManager() { }
 
         /// <summary>
         /// Creates and adds a new Scene to the scene dictionary

@@ -7,15 +7,21 @@ using Microsoft.Xna.Framework.Media;
 
 namespace GameEngine
 {
-    public class SoundManager
+    /// <summary>
+    /// Thread safe singleton without using locks
+    /// See link: "http://csharpindepth.com/Articles/General/Singleton.aspx#nested-cctor"
+    /// </summary>
+    public sealed class SoundManager
     {
-        private static SoundManager instance;
+        private static readonly SoundManager instance = new SoundManager();
         private Dictionary<string, SoundEffect> SoundPool = new Dictionary<string, SoundEffect>();
         private Dictionary<string, Song> SongPool = new Dictionary<string, Song>();
         private Dictionary<string, SoundCategory> soundCategories = new Dictionary<string,SoundCategory>();
         private Dictionary<string, SoundEffectInstance> soundPoolInstance = new Dictionary<string, SoundEffectInstance>();
 
         private float masterVolume = 1.0F;
+
+        static SoundManager() { }
 
         private SoundManager() { }
 
@@ -26,11 +32,7 @@ namespace GameEngine
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new SoundManager();
-                    instance.masterVolume = 1.0F;
-                }
+                instance.masterVolume = 1.0F;
                 return instance;
             }
         }

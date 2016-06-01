@@ -31,7 +31,7 @@ namespace GoblinKart {
 
             //engine.SetWindowTitle("Visible Chunks:" + terComp.numChunksInView + " Num Drawed static models: " + terComp.numModelsInView + "| Kart x: " + trsComp.position.X + " Kart y: " + trsComp.position.Y + " Kart z: " + trsComp.position.Z + " Map height: " +
             //    TerrainMapRenderSystem.GetTerrainHeight(terComp, trsComp.position.X, Math.Abs(trsComp.position.Z)));
-            engine.SetWindowTitle("xVel: " + trsComp.Velocity.X + "yVel: " + trsComp.Velocity.Y);
+            //engine.SetWindowTitle("xVel: " + trsComp.Velocity.X + "yVel: " + trsComp.Velocity.Y);
 
             ModelRenderSystem.ResetMeshTransforms(ref kartModel);
             MoveKart(gameTime, sceneEntities, trsComp, kartModel);
