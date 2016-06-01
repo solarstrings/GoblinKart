@@ -9,6 +9,7 @@ namespace GameEngine.Source.Engine
     public enum PacketType
     {
         Login,
-        PlayerPosition
+        PlayerData,
+        InitNetworkInformation,
     }
 }
