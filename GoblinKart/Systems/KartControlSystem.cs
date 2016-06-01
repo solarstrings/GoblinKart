@@ -35,7 +35,11 @@ namespace GoblinKart {
 
             ModelRenderSystem.ResetMeshTransforms(ref kartModel);
             MoveKart(gameTime, sceneEntities, trsComp, kartModel);
+
+            // Move this to its own system?
             CollisionSystem.TerrainMapCollision(ref trsComp, ref airborne, terComp, KartGroundOffset);
+
+            // Move these to the physicssystem? Friction/gravity components?
             PhysicsSystem.ApplyFriction(ref trsComp, airborne);
             PhysicsSystem.ApplyGravity(ref trsComp, gameTime, airborne);
 

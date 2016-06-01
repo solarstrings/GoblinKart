@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameEngine;
 using GameEngine.Source.Components;
+using GameEngine.Source.Engine;
 using GameEngine.Source.Managers;
 using GoblinKart.Components;
 using GoblinKart.Network;
@@ -39,10 +40,11 @@ namespace GoblinKart.Systems
                     Id = playerComponent.Id,
                     Name = playerComponent.Name,
                     Position = transformComponent.Position,
-                    Forward = transformComponent.Forward
+                    Forward = transformComponent.Forward,
+                    Velocity = transformComponent.Velocity
                 };
-
                 message = NetworkManager.Instance.Client.CreateMessage();
+                message.Write((byte)PacketType.PlayerData);              
                 message.WriteAllProperties(info);
             }
 
