@@ -82,8 +82,6 @@ namespace GoblinKart {
                             SoundManager.Instance.PlaySound("jump");
                         }                        
                     }
-                    ModelRenderSystem.SetMeshTransform(ref kartModel, 1, Matrix.CreateRotationY(0.08f));
-                    ModelRenderSystem.SetMeshTransform(ref kartModel, 3, Matrix.CreateRotationY(0.1f));
                 }
             }
         }

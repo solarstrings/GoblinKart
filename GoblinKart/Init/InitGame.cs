@@ -81,6 +81,7 @@ namespace GoblinKart.Init {
             aiModelComp.staticModel = false;
             ModelRenderSystem.AddMeshTransform(ref aiModelComp, 1, Matrix.CreateRotationY(0.2f));
             ModelRenderSystem.AddMeshTransform(ref aiModelComp, 3, Matrix.CreateRotationY(0.5f));
+
             ComponentManager.Instance.AddComponentToEntity(aiKart, aiModelComp);
             var wp1 = new Waypoint
             {

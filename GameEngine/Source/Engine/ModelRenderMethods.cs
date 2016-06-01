@@ -10,6 +10,8 @@ namespace GameEngine
 {
     class ModelRenderMethods
     {
+        private Object lockMeshTransformUpdate = new Object();
+
         public void RenderBasicEffectModel(ModelComponent modelComp, TransformComponent t, CameraComponent c,bool renderOnlyNonStaticModels)
         {
             //if the terrain render system is rendering all static models
@@ -58,7 +60,10 @@ namespace GameEngine
         /// <param name="t"></param>
         public void ChangeBoneTransform(ModelComponent modelComp, int boneIndex, Matrix t)
         {
-            modelComp.model.Bones[boneIndex].Transform = t * modelComp.model.Bones[boneIndex].Transform;
+            lock(lockMeshTransformUpdate)
+            {
+                modelComp.model.Bones[boneIndex].Transform = t * modelComp.model.Bones[boneIndex].Transform;
+            }
         }
 
     }
