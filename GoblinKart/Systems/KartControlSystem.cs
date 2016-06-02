@@ -37,7 +37,11 @@ namespace GoblinKart {
 
             ModelRenderSystem.ResetMeshTransforms(ref kartModel);
             MoveKart(gameTime, sceneEntities, trsComp, kartModel);
+
+            // Move this to its own system?
             CollisionSystem.TerrainMapCollision(ref trsComp, ref airborne, terComp, KartGroundOffset);
+
+            // Move these to the physicssystem? Friction/gravity components?
             PhysicsSystem.ApplyFriction(ref trsComp, airborne);
             PhysicsSystem.ApplyGravity(ref trsComp, gameTime, airborne);
 
@@ -84,8 +88,6 @@ namespace GoblinKart {
                             SoundManager.Instance.PlaySound("jump");
                         }                        
                     }
-                    ModelRenderSystem.SetMeshTransform(ref kartModel, 1, Matrix.CreateRotationY(0.08f));
-                    ModelRenderSystem.SetMeshTransform(ref kartModel, 3, Matrix.CreateRotationY(0.1f));
                 }
             }
         }
