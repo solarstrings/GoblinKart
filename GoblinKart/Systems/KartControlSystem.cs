@@ -10,11 +10,13 @@ namespace GoblinKart {
         bool airborne = true;
 
         const float KartGroundOffset = 1.7f;
+        /*
         const float MaxSpeed = 100f;
         const float MaxReverseSpeed = -50f;
         const float KartAcceleration = 2f;
         const float KartTurningAcceleration = 2.8f;
         const float JumpingAcceleration = 75f;
+        */
 
         public KartControlSystem(ECSEngine engine) {
             this.engine = engine;
@@ -54,11 +56,11 @@ namespace GoblinKart {
 
                 if (k != null) {
                     if (Utilities.CheckKeyboardAction("right", BUTTON_STATE.HELD, k)) {
-                        newRot = new Vector3(-KartTurningAcceleration, 0f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        newRot = new Vector3(-PhysicsManager.TurningAcceleration, 0f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
                         trsComp.Rotation *= CreateRotation(newRot);
                     }
                     else if (Utilities.CheckKeyboardAction("left", BUTTON_STATE.HELD, k)) {
-                        newRot = new Vector3(KartTurningAcceleration, 0f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        newRot = new Vector3(PhysicsManager.TurningAcceleration, 0f, 0f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
                         trsComp.Rotation *= CreateRotation(newRot);
                     }
                     if (Utilities.CheckKeyboardAction("quit", BUTTON_STATE.RELEASED, k)) {
@@ -67,18 +69,18 @@ namespace GoblinKart {
                     }
 
                     if (Utilities.CheckKeyboardAction("forward", BUTTON_STATE.HELD, k)) {
-                        if(!airborne && trsComp.Velocity.X < MaxSpeed) {
-                            trsComp.Velocity += new Vector3(KartAcceleration, 0, 0);
+                        if(!airborne && trsComp.Velocity.X < PhysicsManager.MaxSpeed) {
+                            trsComp.Velocity += new Vector3(PhysicsManager.Acceleration, 0, 0);
                         }
                     }
                     if (Utilities.CheckKeyboardAction("back", BUTTON_STATE.HELD, k)) {
-                        if (!airborne && trsComp.Velocity.X > MaxReverseSpeed) {
-                            trsComp.Velocity += new Vector3(-KartAcceleration, 0, 0);
+                        if (!airborne && trsComp.Velocity.X > PhysicsManager.MaxReverseSpeed) {
+                            trsComp.Velocity += new Vector3(-PhysicsManager.Acceleration, 0, 0);
                         }
                     }
                     if (Utilities.CheckKeyboardAction("jump", BUTTON_STATE.PRESSED, k)) {
                         if (!airborne) {
-                            trsComp.Velocity.Y += JumpingAcceleration;
+                            trsComp.Velocity.Y += PhysicsManager.JumpingAcceleration;
                             SoundManager.Instance.PlaySound("jump");
                         }                        
                     }

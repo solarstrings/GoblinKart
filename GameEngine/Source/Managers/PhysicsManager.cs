@@ -10,7 +10,12 @@ namespace GameEngine {
     /// Thread safe singleton without using locks
     /// See link: "http://csharpindepth.com/Articles/General/Singleton.aspx#nested-cctor"
     /// </summary>
-    sealed class PhysicsManager {
+    public class PhysicsManager {
+        public const float MaxSpeed = 50f;
+        public const float MaxReverseSpeed = -30f;
+        public const float Acceleration = 2f;
+        public const float TurningAcceleration = 2.8f;
+        public const float JumpingAcceleration = 75f;
 
         private static readonly PhysicsManager instance = new PhysicsManager();
 
