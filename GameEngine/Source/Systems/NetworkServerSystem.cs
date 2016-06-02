@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using GameEngine.Source.Components;
 using GameEngine.Source.Engine;
 using GameEngine.Source.Managers;
-using GameEngine.Source.Network;
 using Lidgren.Network;
 using Microsoft.Xna.Framework;
 
@@ -18,13 +17,11 @@ namespace GameEngine.Source.Systems
         public void Update(GameTime gameTime)
         {
             if(NetworkManager.Instance.Server==null)
-            {
                 return;
-            }
+
             var server = NetworkManager.Instance.Server;
 
-            NetIncomingMessage inc;
-            
+            NetIncomingMessage inc;         
             if ((inc = server.ReadMessage()) != null)
             {
                 switch (inc.MessageType)
@@ -32,30 +29,12 @@ namespace GameEngine.Source.Systems
                     case NetIncomingMessageType.Error:
                         break;
                     case NetIncomingMessageType.StatusChanged:
-                        HandleConnectionStatus(inc);
+                        HandleConnectionStatus(server, inc);
                         break;
                     case NetIncomingMessageType.UnconnectedData:
                         break;
                     case NetIncomingMessageType.ConnectionApproval:
-                        Debug.WriteLine("New connection...");
-                        var data = inc.ReadByte();
-                        if (data == (byte) PacketType.Login)
-                        {
-                            Debug.WriteLine("... Connection accepted.");
-                            var player = new PlayerComponent();
-                            inc.ReadAllProperties(player);
-                            inc.SenderConnection.Approve();
-
-                            var outmsg = server.CreateMessage();
-                            outmsg.Write((byte) PacketType.Login);
-                            outmsg.Write(true);
-                            server.SendMessage(outmsg, inc.SenderConnection,
-                                NetDeliveryMethod.ReliableOrdered, 0);
-                        }
-                        else
-                        {
-                            inc.SenderConnection.Deny("Didn't send correct information");
-                        }
+                        HandleNewConnection(server, inc);
                         break;
                     case NetIncomingMessageType.Data:
 
@@ -63,6 +42,7 @@ namespace GameEngine.Source.Systems
                     case NetIncomingMessageType.Receipt:
                         break;
                     case NetIncomingMessageType.DiscoveryRequest:
+                        HandleDiscoveryRequest(server, inc);
                         break;
                     case NetIncomingMessageType.DiscoveryResponse:
                         break;
@@ -85,8 +65,53 @@ namespace GameEngine.Source.Systems
             }
         }
 
+        private void HandleNewConnection(NetServer server, NetIncomingMessage inc)
+        {
+            Debug.WriteLine("New connection...");
+
+            if (inc.ReadByte() == (byte)PacketType.Login)
+            {
+                Debug.WriteLine("... Connection accepted.");
+                var player = new PlayerComponent();
+                inc.ReadAllProperties(player);
+
+                inc.SenderConnection.Approve();
+
+                var outmsg = server.CreateMessage();
+                outmsg.Write((byte)PacketType.Login);
+                outmsg.Write(true);
+                server.SendMessage(outmsg, inc.SenderConnection,
+                    NetDeliveryMethod.ReliableOrdered, 0);
+            }
+            else
+            {
+                inc.SenderConnection.Deny("Didn't send correct information");
+            }
+        }
+
+        private void HandleDiscoveryRequest(NetServer server, NetIncomingMessage inc)
+        {
+            if (server == null) return;
+
+            while ((inc = server.ReadMessage()) != null)
+            {
+                switch (inc.MessageType)
+                {
+                    case NetIncomingMessageType.DiscoveryRequest:
+
+                        // Create a response and write some example data to it
+                        NetOutgoingMessage response = server.CreateMessage();
+                        response.Write("Goblin Server");
+
+                        // Send the response to the sender of the request
+                        server.SendDiscoveryResponse(response, inc.SenderEndPoint);
+                        break;
+                }
+            }
+        }
+
         // TODO implement me
-        private void HandleConnectionStatus(NetIncomingMessage message)
+        private void HandleConnectionStatus(NetServer server, NetIncomingMessage message)
         {
             switch (message.SenderConnection.Status)
             {
@@ -112,5 +137,7 @@ namespace GameEngine.Source.Systems
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+
     }
 }

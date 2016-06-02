@@ -22,7 +22,6 @@ namespace GoblinKart.Init {
         {
             sm.RegisterSystem("Game", new PhysicsSystem());
             sm.RegisterSystem("Game", new TransformSystem());
-            sm.RegisterSystem("Game", new AISystem());
             sm.RegisterSystem("Game", new CalcModelSphereSystem());
             sm.RegisterSystem("Game", new ModelRenderSystem(true));
 
@@ -35,6 +34,7 @@ namespace GoblinKart.Init {
             sm.RegisterSystem("Game", new PowerupCollisionSystem(meshToMeshCollisionSystem));
             InitKeyboard();
             InitKart(engine);
+            InitAI(engine);
             InitCamera(engine);
             InitTerrain(engine);
             InitSkybox(engine);
@@ -44,6 +44,68 @@ namespace GoblinKart.Init {
             SceneManager.Instance.SetActiveScene("Game");
             SystemManager.Instance.Category = "Game";
         }
+
+        #region AI
+
+        private void InitAI(ECSEngine engine)
+        {
+            sm.RegisterSystem("Game", new AISystem());
+
+            Entity aiKart = EntityFactory.Instance.NewEntityWithTag("AIKart");
+            ModelComponent aiModelComp = new ModelComponent(engine.LoadContent<Model>("Chopper"), true, false, false);
+            aiModelComp.staticModel = false;
+            ModelRenderSystem.AddMeshTransform(ref aiModelComp, 1, Matrix.CreateRotationY(0.2f));
+            ModelRenderSystem.AddMeshTransform(ref aiModelComp, 3, Matrix.CreateRotationY(0.5f));
+            ComponentManager.Instance.AddComponentToEntity(aiKart, aiModelComp);
+
+            //Create waypoints and add the AIComponent.
+            List<Waypoint> waypoints = CreateWaypoints();
+            AISystem.Waypoints = waypoints;
+            var aiComp = new AIComponent(waypoints[0]);
+            ComponentManager.Instance.AddComponentToEntity(aiKart, aiComp);
+
+            ComponentManager.Instance.AddComponentToEntity(aiKart, new Collision3Dcomponent());
+
+            TransformComponent aiKartTransform = new TransformComponent();
+            aiKartTransform.Position = new Vector3(-50.0f, 0.0f, -100.0f);
+            aiKartTransform.Rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitY, AISystem.GetRotation(aiKartTransform.Position, aiComp.Waypoint.TargetPosition));
+            aiKartTransform.Scale = new Vector3(2.5f, 2.5f, 2.5f);
+            ComponentManager.Instance.AddComponentToEntity(aiKart, aiKartTransform);
+
+            SceneManager.Instance.AddEntityToSceneOnLayer("Game", 3, aiKart);
+        }
+
+        private List<Waypoint> CreateWaypoints()
+        {
+            var waypoints = new List<Waypoint>();
+
+            //TODO: More user friendly.
+            var wp1 = new Waypoint
+            {
+                Id = 0,
+                WaypointPosition = new Vector2(-30.0f, 0.0f),
+                Radius = 20
+            };
+            var wp2 = new Waypoint
+            {
+                Id = 1,
+                WaypointPosition = new Vector2(-10.0f, -300.0f),
+                Radius = 20
+            };
+            var wp3 = new Waypoint
+            {
+                Id = 2,
+                WaypointPosition = new Vector2(-100.0f, -30.0f),
+                Radius = 20
+            };
+            waypoints.Add(wp1);
+            waypoints.Add(wp2);
+            waypoints.Add(wp3);
+
+            return waypoints;
+        }
+
+        #endregion
 
         private void InitKeyboard() {
             sm.RegisterSystem("Game", new KeyBoardSystem());
@@ -73,50 +135,6 @@ namespace GoblinKart.Init {
             ModelRenderSystem.AddMeshTransform(ref modelComp, 1, Matrix.CreateRotationY(0.2f));
             ModelRenderSystem.AddMeshTransform(ref modelComp, 3, Matrix.CreateRotationY(0.5f));
             ComponentManager.Instance.AddComponentToEntity(kart, modelComp);
-
-            #region AI
-            //Placed here for testing purposes, will be moved later :)
-            Entity aiKart = EntityFactory.Instance.NewEntityWithTag("AIKart");
-            ModelComponent aiModelComp = new ModelComponent(engine.LoadContent<Model>("Chopper"), true, false, false);
-            aiModelComp.staticModel = false;
-            ModelRenderSystem.AddMeshTransform(ref aiModelComp, 1, Matrix.CreateRotationY(0.2f));
-            ModelRenderSystem.AddMeshTransform(ref aiModelComp, 3, Matrix.CreateRotationY(0.5f));
-
-            ComponentManager.Instance.AddComponentToEntity(aiKart, aiModelComp);
-            var wp1 = new Waypoint
-            {
-                Id = 0,
-                WaypointPosition = new Vector2(-30.0f, 0.0f),
-                Radius = 20
-            };
-            var wp2 = new Waypoint
-            {
-                Id = 1,
-                WaypointPosition = new Vector2(-10.0f, -300.0f),
-                Radius = 20
-            };
-            var wp3 = new Waypoint
-            {
-                Id = 2,
-                WaypointPosition = new Vector2(-100.0f, -30.0f),
-                Radius = 20
-            };
-            var wps = new List<Waypoint>();
-            wps.Add(wp1);
-            wps.Add(wp2);
-            wps.Add(wp3);
-            AISystem.Waypoints = wps;
-            var aiComp = new AIComponent(wp1);
-            ComponentManager.Instance.AddComponentToEntity(aiKart, aiComp);
-            ComponentManager.Instance.AddComponentToEntity(aiKart, new Collision3Dcomponent());
-            TransformComponent aiKartTransform = new TransformComponent();
-            aiKartTransform.Position = new Vector3(-50.0f, 0.0f, -100.0f);
-            aiKartTransform.Rotation = aiComp.GetRotation(aiKartTransform.Position);
-            aiKartTransform.Scale = new Vector3(2.5f, 2.5f, 2.5f);
-            ComponentManager.Instance.AddComponentToEntity(aiKart, aiKartTransform);
-            SceneManager.Instance.AddEntityToSceneOnLayer("Game", 3, aiKart);
-            
-            #endregion
 
             ComponentManager.Instance.AddComponentToEntity(kart, new Collision3Dcomponent());
             ComponentManager.Instance.AddComponentToEntity(kart, new PowerupComponent());

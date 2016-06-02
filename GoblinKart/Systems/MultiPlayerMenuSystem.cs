@@ -7,6 +7,8 @@ using GameEngine;
 using Microsoft.Xna.Framework;
 using GameEngine.InputDefs;
 using GameEngine.Source.Managers;
+using GameEngine.Source.Systems;
+using GoblinKart.Systems;
 
 namespace GoblinKart
 {
@@ -75,11 +77,24 @@ namespace GoblinKart
         private void Host()
         {
             NetworkManager.Instance.InitNetworkServer();
+            SystemManager.Instance.RegisterSystem("Game", new NetworkServerSystem());
+            SystemManager.Instance.RegisterSystem("Game", new NetworkServerRecieveMessage());
         }
 
         private void Join()
         {
-            NetworkManager.Instance.InitClientConnection();
+            if (NetworkManager.Instance.InitClientConnection())
+            {
+                Console.WriteLine("Connection successfull!");
+                SystemManager.Instance.RegisterSystem("Game", new NetworkClientRecieveMessage(engine));
+                SystemManager.Instance.RegisterSystem("Game", new NetworkClientSendInfo());
+
+            }
+            else
+            {
+                Console.WriteLine("Failed to connect/find to/a server");
+            }
+            
         }
 
         private void SetActiveOption()

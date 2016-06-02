@@ -100,7 +100,6 @@
     <Compile Include="Source\Managers\SceneManager.cs" />
     <Compile Include="Source\Managers\SoundManager.cs" />
     <Compile Include="Source\Managers\SystemManager.cs" />
-    <Compile Include="Source\Network\LoginInformation.cs" />
     <Compile Include="Source\Observers\ICollisionObserver.cs" />
     <Compile Include="Source\Observers\ICollisionSubject.cs" />
     <Compile Include="Source\Observers\IMeshCollisionObserver.cs" />
@@ -153,6 +152,7 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Source\Network\" />
     <Folder Include="Source\Scripts\" />
     <Folder Include="Source\Utilities\" />
   </ItemGroup>

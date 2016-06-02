@@ -15,12 +15,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GoblinKart.Systems
 {
-    public class NetworkRecieveMessage : IUpdateSystem
+    public class NetworkClientRecieveMessage : IUpdateSystem
     {
         private ECSEngine _engine;
         private GameTime _gameTime;
 
-        public NetworkRecieveMessage(ECSEngine engine)
+        public NetworkClientRecieveMessage(ECSEngine engine)
         {
             _engine = engine;
         }
@@ -46,7 +46,7 @@ namespace GoblinKart.Systems
             }
         }
 
-        public void Data(NetIncomingMessage inc)
+        private void Data(NetIncomingMessage inc)
         {
             var packetType = (PacketType)inc.ReadByte();
             switch (packetType)
@@ -55,6 +55,7 @@ namespace GoblinKart.Systems
                     HandleRecievedPlayerData(inc);
                     break;
                 case PacketType.Login:
+
                     break;
                 case PacketType.InitNetworkInformation:
                     HandleInitNetworkInformation(inc);
@@ -92,7 +93,7 @@ namespace GoblinKart.Systems
 
         }
 
-        public void HandleRecievedPlayerData(NetIncomingMessage inc)
+        private void HandleRecievedPlayerData(NetIncomingMessage inc)
         {
             Debug.WriteLine("New position recieved...");
 

@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework;
 
 namespace GoblinKart.Systems
 {
-    public class ServerRecieveMessage : IUpdateSystem
+    public class NetworkServerRecieveMessage : IUpdateSystem
     {
         public void Update(GameTime gameTime)
         {

@@ -11,7 +11,8 @@ namespace GameEngine {
 
         public Vector3 Velocity;
 
-        // Move this to a better place
+        public float Angle { get; set; }
+
         public float Gravity { get; } = -2f;
         public float Friction = 0.95f;
         public float Drag = 0.999f;
