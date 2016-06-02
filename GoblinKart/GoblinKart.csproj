@@ -57,9 +57,9 @@
     <Compile Include="Systems\MainMenuSystem.cs" />
     <Compile Include="Systems\MultiPlayerMenuSystem.cs" />
     <Compile Include="Systems\NetworkClientSendInfo.cs" />
-    <Compile Include="Systems\NetworkRecieveMessage.cs" />
+    <Compile Include="Systems\NetworkClientRecieveMessage.cs" />
     <Compile Include="Systems\PowerupCollisionSystem.cs" />
-    <Compile Include="Systems\ServerRecieveMessage.cs" />
+    <Compile Include="Systems\NetworkServerRecieveMessage.cs" />
     <Compile Include="Utilities\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
