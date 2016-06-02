@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using GameEngine.Source.Components;
 using GameEngine.Source.Engine;
-using GameEngine.Source.Network;
 using GameEngine.Source.Systems;
 using Lidgren.Network;
 
@@ -44,31 +44,75 @@ namespace GameEngine.Source.Managers
 
         public bool InitClientConnection()
         {
-            var client = new NetClient(new NetPeerConfiguration("networkGame") { Port = 9981 });
+            var config = new NetPeerConfiguration("networkGame") {Port = 9981};
+            config.EnableMessageType(NetIncomingMessageType.DiscoveryResponse);
+
+            var client = new NetClient(config);
+            
             client.Start();
 
-            var player = new PlayerComponent { Name = "ClientPlayer" };
+            var serverIp = CheckForBroadCast();
 
-            var outmsg = client.CreateMessage();
-            outmsg.Write((byte)PacketType.Login);
-            outmsg.WriteAllProperties(player);
-            client.Connect("localhost", 9981, outmsg);
-
-            if (!EstablishInfo(client))
+            if (serverIp != null)
             {
-                Debug.WriteLine("Connection to the host failed!");
+                var player = new PlayerComponent {Name = "ClientPlayer"};
+
+                var outmsg = client.CreateMessage();
+                outmsg.Write((byte) PacketType.Login);
+                outmsg.WriteAllProperties(player);
+
+                client.Connect(serverIp, outmsg);
+
+                if (!EstablishInfo())
+                {
+                    Debug.WriteLine("Connection to the host failed!");
+                    return false;
+                }
+                var clientEntity = EntityFactory.Instance.NewEntityWithTag("Client");
+
+                // Set the managers client
+                Client = client;
+                Debug.WriteLine("You have successfully connected to the host!");
+
+                return true;
+            }
+
+            else
+            {
+                // Make client handle failed connection
                 return false;
             }
-            var clientEntity = EntityFactory.Instance.NewEntityWithTag("Client");
 
-            // Set the managers client
-            Client = client;
-            Debug.WriteLine("You have successfully connected to the host!");
-
-            return true;
+            
         }
 
-        private bool EstablishInfo(NetClient client)
+        public IPEndPoint CheckForBroadCast()
+        {
+            Debug.WriteLine("Sending discovery signal");
+            Client.DiscoverLocalPeers(9981);
+
+            var time = DateTime.Now;
+            while (true)
+            {
+                if (DateTime.Now.Subtract(time).Seconds < 5)
+                {
+                    Debug.WriteLine("No server found");
+                    return null;
+                }
+
+                NetIncomingMessage inc;
+                if ((inc = Client.ReadMessage()) == null) continue;
+
+                switch (inc.MessageType)
+                {
+                    case NetIncomingMessageType.DiscoveryResponse:
+                        Console.WriteLine("Found server at " + inc.SenderEndPoint + " name: " + inc.ReadString());
+                        return inc.SenderEndPoint;
+                }
+            }
+        }
+
+        private bool EstablishInfo()
         {
             var time = DateTime.Now;
             while (true)
@@ -79,18 +123,19 @@ namespace GameEngine.Source.Managers
                 }
 
                 NetIncomingMessage inc;
-                if ((inc = client.ReadMessage()) == null) continue;
+                if ((inc = Client.ReadMessage()) == null) continue;
 
                 switch (inc.MessageType)
                 {
                     case NetIncomingMessageType.Data:
-                        var data = inc.ReadByte();
-                        if (data == (byte)PacketType.Login)
+                        if (inc.ReadByte() == (byte)PacketType.Login)
                         {
+                            Debug.WriteLine("Connection accepted!");
                             var accepted = inc.ReadBoolean();
                             return accepted;
                         }
                         else
+                            Debug.WriteLine("Invalid login package");
                             return false;
                 }
             }
@@ -100,6 +145,8 @@ namespace GameEngine.Source.Managers
         {
             var config = new NetPeerConfiguration("networkGame") { Port = 9981 };
             config.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
+            config.EnableMessageType(NetIncomingMessageType.DiscoveryRequest);
+
             var server = new NetServer(config);
             server.Start();
 
@@ -107,7 +154,7 @@ namespace GameEngine.Source.Managers
             Server = server;
             IamAServer = true;
         }
-
+  
         public void Send(NetOutgoingMessage message)
         {
             Client.SendMessage(message, Client.Connections, NetDeliveryMethod.ReliableOrdered, 0);
