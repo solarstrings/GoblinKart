@@ -65,7 +65,7 @@ namespace GameEngine
                                 foreach (var pair in m.meshTransforms)
                                 {
                                     //update the model transforms
-                                    modelRenderMethods.ChangeBoneTransform(m, pair.Key, pair.Value);
+                                    ChangeBoneTransform(m, pair.Key, pair.Value);
                                 }
                             }
                             TransformComponent t = ComponentManager.Instance.GetEntityComponent<TransformComponent>(entity);
@@ -108,6 +108,13 @@ namespace GameEngine
                         }
                     }
                 }
+            }
+        }
+
+
+        private void ChangeBoneTransform(ModelComponent modelComp, int boneIndex, Matrix t) {
+            lock (lockMeshTransformUpdate) {
+                modelComp.model.Bones[boneIndex].Transform = t * modelComp.model.Bones[boneIndex].Transform;
             }
         }
 
