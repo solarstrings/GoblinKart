@@ -28,7 +28,7 @@ namespace GoblinKart.Systems
                         Data(inc);
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        break;
                 }
             }
         }

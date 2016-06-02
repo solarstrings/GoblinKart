@@ -24,6 +24,8 @@ namespace GoblinKart.Systems
             NetOutgoingMessage message = null;
             // msg.Write((int)MessageType.StringMessage); <---------- Detta kan vara bra att göra för att bestämma messageType, måste man kanske göra..?
 
+            if (networkEntities == null) return;
+
             // Check for the kartComponent
             foreach (var e in networkEntities)
             {

@@ -44,14 +44,14 @@ namespace GameEngine.Source.Managers
 
         public bool InitClientConnection()
         {
-            var config = new NetPeerConfiguration("networkGame") {Port = 9981};
+            var config = new NetPeerConfiguration("networkGame");
             config.EnableMessageType(NetIncomingMessageType.DiscoveryResponse);
 
             var client = new NetClient(config);
             
             client.Start();
 
-            var serverIp = CheckForBroadCast();
+            var serverIp = CheckForBroadCast(client);
 
             if (serverIp != null)
             {
@@ -63,11 +63,13 @@ namespace GameEngine.Source.Managers
 
                 client.Connect(serverIp, outmsg);
 
-                if (!EstablishInfo())
-                {
-                    Debug.WriteLine("Connection to the host failed!");
-                    return false;
-                }
+                
+
+                //if (!EstablishInfo(client))
+                //{
+                //    Debug.WriteLine("Connection to the host failed!");
+                //    return false;
+                //}
                 var clientEntity = EntityFactory.Instance.NewEntityWithTag("Client");
 
                 // Set the managers client
@@ -86,44 +88,47 @@ namespace GameEngine.Source.Managers
             
         }
 
-        public IPEndPoint CheckForBroadCast()
+        public IPEndPoint CheckForBroadCast(NetClient client)
         {
             Debug.WriteLine("Sending discovery signal");
-            Client.DiscoverLocalPeers(9981);
+            client.DiscoverLocalPeers(9981);
 
-            var time = DateTime.Now;
             while (true)
             {
-                if (DateTime.Now.Subtract(time).Seconds < 5)
-                {
-                    Debug.WriteLine("No server found");
-                    return null;
-                }
-
                 NetIncomingMessage inc;
-                if ((inc = Client.ReadMessage()) == null) continue;
+                if ((inc = client.ReadMessage()) == null) continue;
 
                 switch (inc.MessageType)
                 {
                     case NetIncomingMessageType.DiscoveryResponse:
                         Console.WriteLine("Found server at " + inc.SenderEndPoint + " name: " + inc.ReadString());
+
+                        
+
                         return inc.SenderEndPoint;
                 }
             }
+            
+
+            //var time = DateTime.Now;
+            //while (true)
+            //{
+            //    if (DateTime.Now.Subtract(time).Seconds < 5)
+            //    {
+            //        Debug.WriteLine("No server found");
+            //        return null;
+            //    }
+
+
+            //}
         }
 
-        private bool EstablishInfo()
+        private bool EstablishInfo(NetClient client)
         {
-            var time = DateTime.Now;
             while (true)
             {
-                if (DateTime.Now.Subtract(time).Seconds < 5)
-                {
-                    return false;
-                }
-
                 NetIncomingMessage inc;
-                if ((inc = Client.ReadMessage()) == null) continue;
+                if ((inc = client.ReadMessage()) == null) continue;
 
                 switch (inc.MessageType)
                 {
@@ -136,9 +141,21 @@ namespace GameEngine.Source.Managers
                         }
                         else
                             Debug.WriteLine("Invalid login package");
-                            return false;
+                        return false;
                 }
             }
+            
+
+            //var time = DateTime.Now;
+            //while (true)
+            //{
+            //    if (DateTime.Now.Subtract(time).Seconds < 5)
+            //    {
+            //        return false;
+            //    }
+
+
+            //}
         }
 
         public void InitNetworkServer()

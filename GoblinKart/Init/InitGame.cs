@@ -73,6 +73,7 @@ namespace GoblinKart.Init {
             ModelRenderSystem.AddMeshTransform(ref modelComp, 1, Matrix.CreateRotationY(0.2f));
             ModelRenderSystem.AddMeshTransform(ref modelComp, 3, Matrix.CreateRotationY(0.5f));
             ComponentManager.Instance.AddComponentToEntity(kart, modelComp);
+            ComponentManager.Instance.AddComponentToEntity(kart, new NetworkComponent());
 
             #region AI
             //Placed here for testing purposes, will be moved later :)

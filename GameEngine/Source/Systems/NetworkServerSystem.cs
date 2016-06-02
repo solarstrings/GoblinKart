@@ -93,20 +93,17 @@ namespace GameEngine.Source.Systems
         {
             if (server == null) return;
 
-            while ((inc = server.ReadMessage()) != null)
+            switch (inc.MessageType)
             {
-                switch (inc.MessageType)
-                {
-                    case NetIncomingMessageType.DiscoveryRequest:
+                case NetIncomingMessageType.DiscoveryRequest:
 
-                        // Create a response and write some example data to it
-                        NetOutgoingMessage response = server.CreateMessage();
-                        response.Write("Goblin Server");
+                    // Create a response and write some example data to it
+                    NetOutgoingMessage response = server.CreateMessage();
+                    response.Write("Goblin Server");
 
-                        // Send the response to the sender of the request
-                        server.SendDiscoveryResponse(response, inc.SenderEndPoint);
-                        break;
-                }
+                    // Send the response to the sender of the request
+                    server.SendDiscoveryResponse(response, inc.SenderEndPoint);
+                    break;
             }
         }
 

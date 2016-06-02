@@ -29,11 +29,11 @@ namespace GoblinKart.Systems
         {
             _gameTime = gameTime;
 
-            var server = NetworkManager.Instance.Server;
+            var client = NetworkManager.Instance.Client;
 
             NetIncomingMessage inc;
 
-            if ((inc = server.ReadMessage()) != null)
+            if ((inc = client.ReadMessage()) != null)
             {
                 switch (inc.MessageType)
                 {
@@ -41,7 +41,7 @@ namespace GoblinKart.Systems
                         Data(inc);
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        break;
                 }
             }
         }
@@ -61,7 +61,7 @@ namespace GoblinKart.Systems
                     HandleInitNetworkInformation(inc);
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    break;
             }
         }
 

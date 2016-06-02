@@ -42,9 +42,7 @@
     <Compile Include="Components\PowerupComponent.cs" />
     <Compile Include="Components\PowerupModelComponent.cs" />
     <Compile Include="Engine.cs" />
-    <Compile Include="Init\InitClient.cs" />
     <Compile Include="Init\InitGame.cs" />
-    <Compile Include="Init\InitHost.cs" />
     <Compile Include="Init\InitHouses.cs" />
     <Compile Include="Init\InitMainMenu.cs" />
     <Compile Include="Init\InitMultiplayerMenu.cs" />
