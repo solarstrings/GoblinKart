@@ -77,7 +77,7 @@ namespace GoblinKart
         private void Host()
         {
             NetworkManager.Instance.InitNetworkServer();
-            SystemManager.Instance.RegisterSystem("Game", new NetworkServerSystem());
+            //SystemManager.Instance.RegisterSystem("Game", new NetworkServerSystem());
             SystemManager.Instance.RegisterSystem("Game", new NetworkServerRecieveMessage());
             SystemManager.Instance.Category = "Game";
             SceneManager.Instance.SetActiveScene("Game");
@@ -89,7 +89,7 @@ namespace GoblinKart
             {
                 Console.WriteLine("Connection successfull!");
                 SystemManager.Instance.RegisterSystem("Game", new NetworkClientRecieveMessage(engine));
-                //SystemManager.Instance.RegisterSystem("Game", new NetworkClientSendInfo());
+                SystemManager.Instance.RegisterSystem("Game", new NetworkClientSendInfo());
                 SystemManager.Instance.Category = "Game";
                 SceneManager.Instance.SetActiveScene("Game");
 

@@ -134,7 +134,5 @@ namespace GameEngine.Source.Systems
                     throw new ArgumentOutOfRangeException();
             }
         }
-
-
     }
 }

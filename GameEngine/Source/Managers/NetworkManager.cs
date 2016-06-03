@@ -174,7 +174,9 @@ namespace GameEngine.Source.Managers
   
         public void Send(NetOutgoingMessage message)
         {
+            // TODO KRASH här!! Något verkar vara null, förmodligen connectionen... Lös det!
             Client.SendMessage(message, Client.Connections, NetDeliveryMethod.ReliableOrdered, 0);
+            //Client.SendMessage(message, Client.ServerConnection, NetDeliveryMethod.ReliableOrdered, 0);
         }
     }
 }
