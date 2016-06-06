@@ -90,7 +90,7 @@ namespace GoblinKart
             {
                 Console.WriteLine("Connection successfull!");
                 SystemManager.Instance.RegisterSystem("Game", new NetworkClientRecieveMessage(engine));
-                //SystemManager.Instance.RegisterSystem("Game", new NetworkClientSendInfo());
+                SystemManager.Instance.RegisterSystem("Game", new NetworkClientSendInfo());
                 SystemManager.Instance.Category = "Game";
                 SceneManager.Instance.SetActiveScene("Game");
 

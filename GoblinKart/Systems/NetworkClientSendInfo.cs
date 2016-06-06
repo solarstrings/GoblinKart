@@ -40,17 +40,44 @@ namespace GoblinKart.Systems
                 var playerComponent = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(e);
                 var transformComponent = ComponentManager.Instance.GetEntityComponent<TransformComponent>(e);
 
-                NetworkInformation info = new NetworkInformation()
-                {
-                    Id = playerComponent.Id,
-                    Name = playerComponent.Name,
-                    Position = transformComponent.Position,
-                    Forward = transformComponent.Forward,
-                    Velocity = transformComponent.Velocity
-                };
                 message = NetworkManager.Instance.Client.CreateMessage();
-                message.Write((byte)PacketType.PlayerData);              
-                message.WriteAllProperties(info);
+                message.Write((byte)PacketType.PlayerData);
+
+                message.Write(playerComponent.Id);
+                message.Write(playerComponent.Name);
+
+                message.Write(transformComponent.Position.X);
+                message.Write(transformComponent.Position.Y);
+                message.Write(transformComponent.Position.Z);
+
+                message.Write(transformComponent.Forward.X);
+                message.Write(transformComponent.Forward.Y);
+                message.Write(transformComponent.Forward.Z);
+
+                message.Write(transformComponent.Velocity.X);
+                message.Write(transformComponent.Velocity.Y);
+                message.Write(transformComponent.Velocity.Z);
+
+
+
+
+                //NetworkInformation info = new NetworkInformation()
+                //{
+                //    Id = playerComponent.Id,
+                //    Name = playerComponent.Name,
+                //    Position = transformComponent.Position,
+                //    Forward = transformComponent.Forward,
+                //    Velocity = transformComponent.Velocity
+                //};
+                //message = NetworkManager.Instance.Client.CreateMessage();
+                //message.Write((byte)PacketType.PlayerData);              
+                //message.WriteAllProperties(info);
+
+                //Debug.WriteLine(info.Id + info.Name);
+                //Debug.WriteLine(info.Forward);
+                //Debug.WriteLine(info.Position);
+                //Debug.WriteLine(info.Velocity);
+
             }
 
             // Maybe check for other things to send...?

@@ -80,16 +80,13 @@ namespace GoblinKart.Systems
 
         private void HandleInitNetworkInformation(NetIncomingMessage inc)
         {
-            Debug.WriteLine(inc.Data);
-            Debug.WriteLine("meme once");
-
             var cm = ComponentManager.Instance;
 
             var nrOfPlayers = inc.ReadInt32();
 
             for (var i = 0; i < nrOfPlayers; i++)
             {
-                PlayerComponent player = new PlayerComponent();
+                var player = new PlayerComponent();
                 inc.ReadAllProperties(player);
 
                 var e = EntityFactory.Instance.NewEntity();
@@ -107,33 +104,14 @@ namespace GoblinKart.Systems
                 cm.AddComponentToEntity(e, modelComp);
 
                 SceneManager.Instance.AddEntityToSceneOnLayer("Game", 3, e);
+
+                //var es = ComponentManager.Instance.GetAllEntitiesWithComponentType<PlayerComponent>();
+
+                //foreach (var ey in es)
+                //{
+                //    var xx = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(ey);
+                //}
             }
-
-
-
-            //var pal = new PlayerComponent();
-            //inc.ReadAllProperties(info);
-
-            //var cm = ComponentManager.Instance;
-
-            //foreach (var player in info.Players)
-            //{
-            //    var e = EntityFactory.Instance.NewEntity();
-
-            //    cm.AddComponentToEntity(e, player);
-            //    cm.AddComponentToEntity(e, new TransformComponent());
-
-            //    var modelComp = new ModelComponent(_engine.LoadContent<Model>("chopper"), true, false, false)
-            //    {
-            //        staticModel = false
-            //    };
-
-            //    ModelRenderSystem.AddMeshTransform(ref modelComp, 1, Matrix.CreateRotationY(0.2f));
-            //    ModelRenderSystem.AddMeshTransform(ref modelComp, 3, Matrix.CreateRotationY(0.5f));
-            //    cm.AddComponentToEntity(e, modelComp);
-
-            //    SceneManager.Instance.AddEntityToSceneOnLayer("Game", 3, e);
-            //}
         }
 
         private void HandleRecievedPlayerData(NetIncomingMessage inc)
@@ -143,38 +121,66 @@ namespace GoblinKart.Systems
             var nm = NetworkManager.Instance;
             
             // Read the information
-            var info = new NetworkInformation();
-            inc.ReadAllProperties(info);
+            var info = new NetworkInformation
+            {
+                Id = inc.ReadInt32(),
+                Name = inc.ReadString(),
+                Position = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat()),
+                Forward = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat()),
+                Velocity = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat())
+            };
 
-            // Use the information to update needed network-stuff
-            List<Entity> entities = ComponentManager.Instance.GetAllEntitiesWithComponentType<PlayerComponent>();
+            //Debug.WriteLine(inc.ReadInt32());
+            //Debug.WriteLine(inc.ReadString());
+
+            //Debug.WriteLine(inc.ReadFloat());
+            //Debug.WriteLine(inc.ReadFloat());
+            //Debug.WriteLine(inc.ReadFloat());
+
+            //Debug.WriteLine(inc.ReadFloat());
+            //Debug.WriteLine(inc.ReadFloat());
+            //Debug.WriteLine(inc.ReadFloat());
+
+            //Debug.WriteLine(inc.ReadFloat());
+            //Debug.WriteLine(inc.ReadFloat());
+            //Debug.WriteLine(inc.ReadFloat());
+
+            //Debug.WriteLine(info.Id + info.Name);
+            //Debug.WriteLine(info.Forward);
+            //Debug.WriteLine(info.Position);
+            //Debug.WriteLine(info.Velocity);
+
+            // Use the information to update needed network - stuff
+            var entities = ComponentManager.Instance.GetAllEntitiesWithComponentType<PlayerComponent>();
 
             // TODO Maybe implement me smarter!
             foreach (var e in entities)
             {
-                PlayerComponent p = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(e);
+                var p = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(e);
 
                 if (p.Id == info.Id)
                 {
                     TransformComponent t = ComponentManager.Instance.GetEntityComponent<TransformComponent>(e);
 
                     var difference = Vector3.Distance(info.Position, t.Position);
-                    
+
                     // Debug.WriteLine(difference);
 
                     // TODO add threshold constant
-                    if (difference < 20)
+                    if (difference < 25)
                     {
                         t.Position = info.Position;
                         t.Forward = info.Forward;
-                    }                
+                        // Debug.WriteLine("low Diff, good move! No interpolation!");
+                    }
                     else
                     {
+                        Debug.WriteLine("Interpolation!!?");
                         // TODO FIX INTERPOLATIONSHASTIGHET
                         // TODO FIX ROTATION-INTERPOLATION
                         var diff = new Vector3(info.Position.X - t.Position.X, info.Position.Y - t.Position.Y,
                             info.Position.Z - t.Position.Z);
-                        t.Position += diff *(float) _gameTime.ElapsedGameTime.TotalSeconds*1;
+                        t.Position += diff * (float)_gameTime.ElapsedGameTime.TotalSeconds * 1;
                     }
                     break;
                 }
