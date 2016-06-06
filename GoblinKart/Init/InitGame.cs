@@ -130,10 +130,10 @@ namespace GoblinKart.Init {
             sm.RegisterSystem("Game", new KartControlSystem(engine));
 
             Entity kart = EntityFactory.Instance.NewEntityWithTag("Kart");
-            ModelComponent modelComp = new ModelComponent(engine.LoadContent<Model>("Chopper"), true, false,false);
+            ModelComponent modelComp = new ModelComponent(engine.LoadContent<Model>("kart"), true, false,false);
             modelComp.staticModel = false;
-            ModelRenderSystem.AddMeshTransform(ref modelComp, 1, Matrix.CreateRotationY(0.2f));
-            ModelRenderSystem.AddMeshTransform(ref modelComp, 3, Matrix.CreateRotationY(0.5f));
+            //ModelRenderSystem.AddMeshTransform(ref modelComp, 1, Matrix.CreateRotationY(0.2f));
+            //ModelRenderSystem.AddMeshTransform(ref modelComp, 3, Matrix.CreateRotationY(0.5f));
             ComponentManager.Instance.AddComponentToEntity(kart, modelComp);
             ComponentManager.Instance.AddComponentToEntity(kart, new NetworkComponent());
 
