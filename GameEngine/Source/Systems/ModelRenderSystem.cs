@@ -16,8 +16,6 @@ namespace GameEngine
         ModelRenderMethods modelRenderMethods;
         bool renderBoxInitialised = false;
 
-        private Object lockMeshTransformUpdate = new Object();
-
         private bool modelInCameraFrustrum=false;
 
         //if the terrain system is drawing all static models belonging to chunks
@@ -113,7 +111,7 @@ namespace GameEngine
 
 
         private void ChangeBoneTransform(ModelComponent modelComp, int boneIndex, Matrix t) {
-            lock (lockMeshTransformUpdate) {
+            lock (modelComp) {
                 modelComp.model.Bones[boneIndex].Transform = t * modelComp.model.Bones[boneIndex].Transform;
             }
         }

@@ -122,7 +122,6 @@
     <Compile Include="Source\Systems\MouseSystem.cs" />
     <Compile Include="Source\Systems\MoveSystem.cs" />
     <Compile Include="Source\Systems\NetworkClientSystem.cs" />
-    <Compile Include="Source\Systems\NetworkServerSystem.cs" />
     <Compile Include="Source\Systems\ParentSystem.cs" />
     <Compile Include="Source\Systems\ParticleRenderSystem.cs" />
     <Compile Include="Source\Systems\ParticleUpdateSystem.cs" />

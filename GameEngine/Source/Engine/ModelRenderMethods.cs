@@ -52,19 +52,5 @@ namespace GameEngine
                 mesh.Draw();
             }
         }
-
-        /// <summary>
-        /// This function rotates the given bone by the given matrix
-        /// </summary>
-        /// <param name="boneIndex"></param>
-        /// <param name="t"></param>
-        public void ChangeBoneTransform(ModelComponent modelComp, int boneIndex, Matrix t)
-        {
-            lock(lockMeshTransformUpdate)
-            {
-                modelComp.model.Bones[boneIndex].Transform = t * modelComp.model.Bones[boneIndex].Transform;
-            }
-        }
-
     }
 }

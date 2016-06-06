@@ -55,7 +55,7 @@ namespace GoblinKart.Systems
                     HandleRecievedPlayerData(inc);
                     break;
                 case PacketType.Login:
-
+                    HandleLoginData(inc);
                     break;
                 case PacketType.InitNetworkInformation:
                     HandleInitNetworkInformation(inc);
@@ -65,8 +65,21 @@ namespace GoblinKart.Systems
             }
         }
 
+        private void HandleLoginData(NetIncomingMessage inc)
+        {
+            var id = inc.ReadInt32();
+
+            //Get the player component (only one at this time for the client)
+            var e = ComponentManager.Instance.GetFirstEntityOfType<PlayerComponent>();
+
+            // Set the id given by the server
+            var playerComp = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(e);
+            playerComp.Id = id;           
+        }
+
         private void HandleInitNetworkInformation(NetIncomingMessage inc)
         {
+            Debug.WriteLine(inc.Data);
             var info = new InitNetworkInformation();
             inc.ReadAllProperties(info);
 

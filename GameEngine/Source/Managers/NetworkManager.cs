@@ -9,7 +9,7 @@ using GameEngine.Source.Components;
 using GameEngine.Source.Engine;
 using GameEngine.Source.Systems;
 using Lidgren.Network;
-
+using System.Threading;
 
 namespace GameEngine.Source.Managers
 {
@@ -20,8 +20,8 @@ namespace GameEngine.Source.Managers
     public sealed class NetworkManager
     {
         private static readonly NetworkManager _instance = new NetworkManager();
-        // How do we know if someone is host or client?
         public NetServer Server { get; set; }
+        public List<PlayerComponent> Players { get; set; } = new List<PlayerComponent>();
         public NetClient Client { get; set; }
 
         public bool IamAServer = false;
@@ -63,13 +63,8 @@ namespace GameEngine.Source.Managers
 
                 client.Connect(serverIp, outmsg);
 
-                
-
-                //if (!EstablishInfo(client))
-                //{
-                //    Debug.WriteLine("Connection to the host failed!");
-                //    return false;
-                //}
+                EstablishConnection(client);
+              
                 var clientEntity = EntityFactory.Instance.NewEntityWithTag("Client");
 
                 // Set the managers client
@@ -83,9 +78,33 @@ namespace GameEngine.Source.Managers
             {
                 // Make client handle failed connection
                 return false;
-            }
+            }            
+        }
 
-            
+
+
+        public bool EstablishConnection(NetClient client)
+        {
+            // Se till att loopen tar slut ifall det ej blir ngn connection...
+            while (true)
+            {
+                NetIncomingMessage inc;
+                if ((inc = client.ReadMessage()) == null) continue;
+                Debug.WriteLine("WAITING...");
+                switch (inc.MessageType)
+                {
+                    case NetIncomingMessageType.StatusChanged:
+                        switch (inc.SenderConnection.Status)
+                        {
+                            case NetConnectionStatus.Connected:
+                                // Do something! Save connection?
+                                client.Connections.Add(inc.SenderConnection);
+                                Debug.WriteLine("CONNECTION ACCEPTED");
+                                return true;
+                        }
+                        break;
+                }
+            }
         }
 
         public IPEndPoint CheckForBroadCast(NetClient client)
@@ -103,64 +122,14 @@ namespace GameEngine.Source.Managers
                     case NetIncomingMessageType.DiscoveryResponse:
                         Console.WriteLine("Found server at " + inc.SenderEndPoint + " name: " + inc.ReadString());
 
-                        
-
                         return inc.SenderEndPoint;
                 }
             }
-            
-
-            //var time = DateTime.Now;
-            //while (true)
-            //{
-            //    if (DateTime.Now.Subtract(time).Seconds < 5)
-            //    {
-            //        Debug.WriteLine("No server found");
-            //        return null;
-            //    }
-
-
-            //}
-        }
-
-        private bool EstablishInfo(NetClient client)
-        {
-            while (true)
-            {
-                NetIncomingMessage inc;
-                if ((inc = client.ReadMessage()) == null) continue;
-
-                switch (inc.MessageType)
-                {
-                    case NetIncomingMessageType.Data:
-                        if (inc.ReadByte() == (byte)PacketType.Login)
-                        {
-                            Debug.WriteLine("Connection accepted!");
-                            var accepted = inc.ReadBoolean();
-                            return accepted;
-                        }
-                        else
-                            Debug.WriteLine("Invalid login package");
-                        return false;
-                }
-            }
-            
-
-            //var time = DateTime.Now;
-            //while (true)
-            //{
-            //    if (DateTime.Now.Subtract(time).Seconds < 5)
-            //    {
-            //        return false;
-            //    }
-
-
-            //}
         }
 
         public void InitNetworkServer()
         {
-            var config = new NetPeerConfiguration("networkGame") { Port = 9981 };
+            var config = new NetPeerConfiguration("networkGame") {Port = 9981};
             config.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
             config.EnableMessageType(NetIncomingMessageType.DiscoveryRequest);
 
@@ -171,12 +140,24 @@ namespace GameEngine.Source.Managers
             Server = server;
             IamAServer = true;
         }
-  
-        public void Send(NetOutgoingMessage message)
+
+        //The second parameter is the connection that you should not send to
+        public void ServerSend(NetOutgoingMessage message, NetConnection connection)
         {
-            // TODO KRASH här!! Något verkar vara null, förmodligen connectionen... Lös det!
+           NetConnection [] connections = new NetConnection[Server.Connections.Count];
+
+            Server.Connections.CopyTo(connections);
+            var cons = connections.Where(x => x != connection).ToList();
+
+            if (cons.Count > 0)
+            {
+                Server.SendMessage(message, cons, NetDeliveryMethod.ReliableOrdered, 0);
+            }
+        }
+
+        public void ClientSend(NetOutgoingMessage message)
+        {
             Client.SendMessage(message, Client.Connections, NetDeliveryMethod.ReliableOrdered, 0);
-            //Client.SendMessage(message, Client.ServerConnection, NetDeliveryMethod.ReliableOrdered, 0);
         }
     }
 }

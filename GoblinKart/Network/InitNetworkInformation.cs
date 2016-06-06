@@ -10,6 +10,6 @@ namespace GoblinKart.Network
 {
     public class InitNetworkInformation
     {
-        public List<PlayerComponent> Players { get; set; }
+        public List<PlayerComponent> Players { get; set; } = new List<PlayerComponent>();
     }
 }

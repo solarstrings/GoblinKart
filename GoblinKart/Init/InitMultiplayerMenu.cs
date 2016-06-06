@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine.Source.Systems;
+using GoblinKart.Systems;
 
 namespace GoblinKart.Init
 {
@@ -19,14 +20,14 @@ namespace GoblinKart.Init
         public InitMultiplayerMenu(ECSEngine engine)
         {
             SystemManager.Instance.RegisterSystem("MultiPlayerMenu", new SpriteRenderSystem());
-            SystemManager.Instance.RegisterSystem("MultiPlayerMenu", new NetworkServerSystem());
+            SystemManager.Instance.RegisterSystem("MultiPlayerMenu", new NetworkServerRecieveMessage());
+
 
             sm.RegisterSystem("MultiPlayerMenu", new KeyBoardSystem());
             InitKeyboard();
             AddMenuAndOptions(engine);
             SceneManager.Instance.SetActiveScene("MultiPlayerMenu");
             SystemManager.Instance.RegisterSystem("MultiPlayerMenu", new MultiPlayerMenuSystem(engine));
-            SystemManager.Instance.RegisterSystem("MultiPlayerMenu", new NetworkServerSystem());
         }
 
         private void AddMenuAndOptions(ECSEngine engine)
