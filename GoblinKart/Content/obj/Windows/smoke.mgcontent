@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Ankan/Source/Repos/GoblinKart6/GoblinKart/Content/smoke.png</SourceFile>
-  <SourceTime>2016-05-12T10:02:35.0902166+02:00</SourceTime>
-  <DestFile>C:/Users/Ankan/Source/Repos/GoblinKart6/GoblinKart/Content/bin/Windows/smoke.xnb</DestFile>
-  <DestTime>2016-06-01T13:50:46.0490318+02:00</DestTime>
+  <SourceFile>C:/Users/Andreas Karlsson/Source/Repos/GoblinKart3/GoblinKart/Content/smoke.png</SourceFile>
+  <SourceTime>2016-06-06T19:15:54.0905849+02:00</SourceTime>
+  <DestFile>C:/Users/Andreas Karlsson/Source/Repos/GoblinKart3/GoblinKart/Content/bin/Windows/smoke.xnb</DestFile>
+  <DestTime>2016-06-06T19:25:56.7493998+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-03-30T08:36:08+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

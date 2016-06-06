@@ -67,6 +67,7 @@ namespace GoblinKart.Systems
 
         private void HandleLoginData(NetIncomingMessage inc)
         {
+
             var id = inc.ReadInt32();
 
             //Get the player component (only one at this time for the client)
@@ -80,13 +81,17 @@ namespace GoblinKart.Systems
         private void HandleInitNetworkInformation(NetIncomingMessage inc)
         {
             Debug.WriteLine(inc.Data);
-            var info = new InitNetworkInformation();
-            inc.ReadAllProperties(info);
+            Debug.WriteLine("meme once");
 
             var cm = ComponentManager.Instance;
 
-            foreach (var player in info.Players)
+            var nrOfPlayers = inc.ReadInt32();
+
+            for (var i = 0; i < nrOfPlayers; i++)
             {
+                PlayerComponent player = new PlayerComponent();
+                inc.ReadAllProperties(player);
+
                 var e = EntityFactory.Instance.NewEntity();
 
                 cm.AddComponentToEntity(e, player);
@@ -104,11 +109,36 @@ namespace GoblinKart.Systems
                 SceneManager.Instance.AddEntityToSceneOnLayer("Game", 3, e);
             }
 
+
+
+            //var pal = new PlayerComponent();
+            //inc.ReadAllProperties(info);
+
+            //var cm = ComponentManager.Instance;
+
+            //foreach (var player in info.Players)
+            //{
+            //    var e = EntityFactory.Instance.NewEntity();
+
+            //    cm.AddComponentToEntity(e, player);
+            //    cm.AddComponentToEntity(e, new TransformComponent());
+
+            //    var modelComp = new ModelComponent(_engine.LoadContent<Model>("chopper"), true, false, false)
+            //    {
+            //        staticModel = false
+            //    };
+
+            //    ModelRenderSystem.AddMeshTransform(ref modelComp, 1, Matrix.CreateRotationY(0.2f));
+            //    ModelRenderSystem.AddMeshTransform(ref modelComp, 3, Matrix.CreateRotationY(0.5f));
+            //    cm.AddComponentToEntity(e, modelComp);
+
+            //    SceneManager.Instance.AddEntityToSceneOnLayer("Game", 3, e);
+            //}
         }
 
         private void HandleRecievedPlayerData(NetIncomingMessage inc)
         {
-            Debug.WriteLine("New position recieved...");
+            //Debug.WriteLine("New position recieved...");
 
             var nm = NetworkManager.Instance;
             
@@ -130,6 +160,8 @@ namespace GoblinKart.Systems
 
                     var difference = Vector3.Distance(info.Position, t.Position);
                     
+                    // Debug.WriteLine(difference);
+
                     // TODO add threshold constant
                     if (difference < 20)
                     {

@@ -135,7 +135,7 @@ namespace GoblinKart.Init {
             ModelRenderSystem.AddMeshTransform(ref modelComp, 1, Matrix.CreateRotationY(0.2f));
             ModelRenderSystem.AddMeshTransform(ref modelComp, 3, Matrix.CreateRotationY(0.5f));
             ComponentManager.Instance.AddComponentToEntity(kart, modelComp);
-            ComponentManager.Instance.AddComponentToEntity(kart, new NetworkComponent());
+            ComponentManager.Instance.AddComponentToEntity(kart, new NetworkShareComponent());
 
             ComponentManager.Instance.AddComponentToEntity(kart, new Collision3Dcomponent());
             ComponentManager.Instance.AddComponentToEntity(kart, new PowerupComponent());

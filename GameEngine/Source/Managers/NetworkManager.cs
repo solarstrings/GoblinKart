@@ -65,8 +65,6 @@ namespace GameEngine.Source.Managers
 
                 EstablishConnection(client);
               
-                var clientEntity = EntityFactory.Instance.NewEntityWithTag("Client");
-
                 // Set the managers client
                 Client = client;
                 Debug.WriteLine("You have successfully connected to the host!");
@@ -98,7 +96,7 @@ namespace GameEngine.Source.Managers
                         {
                             case NetConnectionStatus.Connected:
                                 // Do something! Save connection?
-                                client.Connections.Add(inc.SenderConnection);
+                                //client.Connections.Add(inc.SenderConnection);
                                 Debug.WriteLine("CONNECTION ACCEPTED");
                                 return true;
                         }

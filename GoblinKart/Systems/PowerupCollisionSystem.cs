@@ -52,7 +52,7 @@ namespace GoblinKart.Systems
             }
             else
             {
-                Debug.WriteLine("Wrong type of collision!");
+                // Debug.WriteLine("Wrong type of collision!");
             }
         }
     }

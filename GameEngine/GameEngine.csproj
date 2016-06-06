@@ -151,7 +151,6 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Source\Network\" />
     <Folder Include="Source\Scripts\" />
     <Folder Include="Source\Utilities\" />
   </ItemGroup>

@@ -81,9 +81,12 @@ namespace GoblinKart.Systems
 
         private void HandleRecievePlayerData(NetIncomingMessage inc)
         {
+            //Debug.WriteLine(inc.Data);
             // Debug.WriteLine("Information recieved and will be sent to all clients!");
             var info = new NetworkInformation();
             inc.ReadAllProperties(info);
+
+            Debug.WriteLine(info.Id + info.Name);
             
             // TODO Fixa så att man inte skickar till den som precis gav informationen! inc.sender...
             var message = NetworkManager.Instance.Server.CreateMessage();
@@ -108,14 +111,17 @@ namespace GoblinKart.Systems
                 // TODO Maybe change this
                 player.Id = nm.Players.Count+1;
                 nm.Players.Add(player);
-                                                   
+
+                // Debug.WriteLine(player.Id + player.Name);
+
                 inc.SenderConnection.Approve();
 
-                var outmsg = server.CreateMessage();
-                outmsg.Write((byte)PacketType.Login);
+                // Need to sleep, else it will send these things below too fast...
+                System.Threading.Thread.Sleep(3000);
 
-                // Send true and id back
-                outmsg.Write(true);
+                // Send back accepted connection (true) and the player id
+                var outmsg = server.CreateMessage();
+                outmsg.Write((byte)PacketType.Login);              
                 outmsg.Write(nm.Players.Count);
                 server.SendMessage(outmsg, inc.SenderConnection,
                     NetDeliveryMethod.ReliableOrdered, 0);
@@ -124,37 +130,55 @@ namespace GoblinKart.Systems
                 if (nm.Players.Count > 1)
                 {
                     // Send data from new connection to all the other players
-                    var outmsg2 = server.CreateMessage();
-                    outmsg2.Write((byte)PacketType.InitNetworkInformation);
-
-                    var players = new InitNetworkInformation();
-                    players.Players = new List<PlayerComponent>() {player};
-                    outmsg2.WriteAllProperties(players);
-                    NetworkManager.Instance.ServerSend(outmsg2, inc.SenderConnection);
+                    SendNewPlayerToAllPlayers(inc, player);
 
                     // Send all the other players to the new connection                                                    
-                    var outmsg3 = server.CreateMessage();
-                    outmsg3.Write((byte)PacketType.InitNetworkInformation);
+                    SendOldPlayersToTheNewPlayer(inc, player);
 
-                    var players2 = new InitNetworkInformation();
-
-                    PlayerComponent[] asdf = new PlayerComponent[nm.Players.Count];
-                    nm.Players.CopyTo(asdf);
-                    var asdff = new List<PlayerComponent>();
-                    asdff.AddRange(asdf);
-
-                    players2.Players = asdff;
-                    players2.Players.Remove(player);
-
-                    outmsg3.WriteAllProperties(players2);
-                    server.SendMessage(outmsg3, inc.SenderConnection, NetDeliveryMethod.ReliableOrdered, 0);
-                }
-                
+                    Debug.WriteLine("InitNetworkInfo sent for all!");
+                }                
             }
             else
             {
                 inc.SenderConnection.Deny("Didn't send correct information");
             }
+        }
+
+        private void SendNewPlayerToAllPlayers(NetIncomingMessage inc, PlayerComponent player)
+        {
+            var outmsg2 = NetworkManager.Instance.Server.CreateMessage();
+            outmsg2.Write((byte)PacketType.InitNetworkInformation);
+
+            //var players = new InitNetworkInformation {Players = new List<PlayerComponent>() {player
+
+            outmsg2.Write(1);
+            outmsg2.WriteAllProperties(player);
+            NetworkManager.Instance.ServerSend(outmsg2, inc.SenderConnection);
+
+            // Debug.WriteLine(players.Players.Count);
+        }
+
+        private void SendOldPlayersToTheNewPlayer(NetIncomingMessage inc, PlayerComponent player)
+        {
+            var nm = NetworkManager.Instance;
+
+            var outmsg3 = nm.Server.CreateMessage();
+            outmsg3.Write((byte)PacketType.InitNetworkInformation);
+
+            var players2 = new InitNetworkInformation();
+
+            PlayerComponent[] asdf = new PlayerComponent[nm.Players.Count];
+            nm.Players.CopyTo(asdf);
+            var asdff = new List<PlayerComponent>();
+            asdff.AddRange(asdf);
+
+            players2.Players = asdff;
+            players2.Players.Remove(player);
+
+            outmsg3.WriteAllProperties(players2);
+            nm.Server.SendMessage(outmsg3, inc.SenderConnection, NetDeliveryMethod.ReliableOrdered, 0);
+
+            Debug.WriteLine(players2.Players.Count);
         }
 
         private void HandleDiscoveryRequest(NetServer server, NetIncomingMessage inc)
@@ -178,7 +202,7 @@ namespace GoblinKart.Systems
         // TODO implement me
         private void HandleConnectionStatus(NetServer server, NetIncomingMessage message)
         {
-            Debug.WriteLine("Should not happen!");
+            // Debug.WriteLine("Should not happen!");
             switch (message.SenderConnection.Status)
             {
                 case NetConnectionStatus.None:

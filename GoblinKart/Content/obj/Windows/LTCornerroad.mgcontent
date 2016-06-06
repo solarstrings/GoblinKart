@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Ankan/Source/Repos/GoblinKart6/GoblinKart/Content/LTCornerroad.png</SourceFile>
-  <SourceTime>2016-05-12T10:02:34.9808398+02:00</SourceTime>
-  <DestFile>C:/Users/Ankan/Source/Repos/GoblinKart6/GoblinKart/Content/bin/Windows/LTCornerroad.xnb</DestFile>
-  <DestTime>2016-06-01T13:50:42.7208956+02:00</DestTime>
+  <SourceFile>C:/Users/Andreas Karlsson/Source/Repos/GoblinKart3/GoblinKart/Content/LTCornerroad.png</SourceFile>
+  <SourceTime>2016-06-06T19:15:53.9812727+02:00</SourceTime>
+  <DestFile>C:/Users/Andreas Karlsson/Source/Repos/GoblinKart3/GoblinKart/Content/bin/Windows/LTCornerroad.xnb</DestFile>
+  <DestTime>2016-06-06T19:25:55.4104904+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-03-30T08:36:08+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

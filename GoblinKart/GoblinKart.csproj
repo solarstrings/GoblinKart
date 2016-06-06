@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Components\KartComponent.cs" />
+    <Compile Include="Components\NetworkShareComponent.cs" />
     <Compile Include="Components\PowerupComponent.cs" />
     <Compile Include="Components\PowerupModelComponent.cs" />
     <Compile Include="Engine.cs" />

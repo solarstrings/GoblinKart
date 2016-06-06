@@ -19,17 +19,18 @@ namespace GoblinKart.Systems
     {
         public void Update(GameTime gameTime)
         {
-            Debug.WriteLine("Sending information to the server!");
-            // Get all networkComponents (should be the component to entities with information necessary to send)
-            var networkEntities = ComponentManager.Instance.GetAllEntitiesWithComponentType<NetworkComponent>();
+            //Debug.WriteLine("Sending information to the server!");
+
+            // Get all networkShareComponents (should be the component to entities with information necessary to send)
+            var networkShareEntities = ComponentManager.Instance.GetAllEntitiesWithComponentType<NetworkShareComponent>();
             
             NetOutgoingMessage message = null;
             // msg.Write((int)MessageType.StringMessage); <---------- Detta kan vara bra att göra för att bestämma messageType, måste man kanske göra..?
 
-            if (networkEntities == null) return;
+            if (networkShareEntities == null) return;
 
             // Check for the kartComponent
-            foreach (var e in networkEntities)
+            foreach (var e in networkShareEntities)
             {
                 // We could implement a method in the componentmanager that gets entities depending on multiple components..?
                 //var kartComponent = ComponentManager.Instance.GetEntityComponent<KartComponent>(e);
