@@ -85,7 +85,7 @@ namespace GameEngine {
                                 foreach (var pair in mComp.meshTransforms)
                                 {
                                     //update the model transforms
-                                    modelRenderMethods.ChangeBoneTransform(mComp, pair.Key, pair.Value);
+                                    ChangeBoneTransform(mComp, pair.Key, pair.Value);
                                 }
 
                                 //if they use the basic effect
@@ -104,6 +104,13 @@ namespace GameEngine {
                         }
                     }
                 }
+            }
+        }
+        public void ChangeBoneTransform(ModelComponent modelComp, int boneIndex, Matrix t)
+        {
+            lock (modelComp)
+            {
+                modelComp.model.Bones[boneIndex].Transform = t * modelComp.model.Bones[boneIndex].Transform;
             }
         }
 

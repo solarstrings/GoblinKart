@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace GoblinKart.Systems
     {
         public void Update(GameTime gameTime)
         {
+            Debug.WriteLine("Sending information to the server!");
             // Get all networkComponents (should be the component to entities with information necessary to send)
             var networkEntities = ComponentManager.Instance.GetAllEntitiesWithComponentType<NetworkComponent>();
             
@@ -30,9 +32,9 @@ namespace GoblinKart.Systems
             foreach (var e in networkEntities)
             {
                 // We could implement a method in the componentmanager that gets entities depending on multiple components..?
-                var kartComponent = ComponentManager.Instance.GetEntityComponent<KartComponent>(e);
+                //var kartComponent = ComponentManager.Instance.GetEntityComponent<KartComponent>(e);
 
-                if (kartComponent == null) continue;
+                //if (kartComponent == null) continue;
 
                 var playerComponent = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(e);
                 var transformComponent = ComponentManager.Instance.GetEntityComponent<TransformComponent>(e);
@@ -54,7 +56,7 @@ namespace GoblinKart.Systems
             // this feels like kinda bad idea to handle this..?
 
             // Send message
-            NetworkManager.Instance.Send(message);
+            NetworkManager.Instance.ClientSend(message);
         }
 
     }

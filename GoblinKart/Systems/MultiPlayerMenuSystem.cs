@@ -76,11 +76,12 @@ namespace GoblinKart
 
         private void Host()
         {
+            // Init server
             NetworkManager.Instance.InitNetworkServer();
-            //SystemManager.Instance.RegisterSystem("Game", new NetworkServerSystem());
-            SystemManager.Instance.RegisterSystem("Game", new NetworkServerRecieveMessage());
-            SystemManager.Instance.Category = "Game";
-            SceneManager.Instance.SetActiveScene("Game");
+            SystemManager.Instance.RegisterSystem("MultiplayerMenu", new NetworkServerRecieveMessage());
+
+            //SystemManager.Instance.Category = "MultiplayerMenu";
+            //SceneManager.Instance.SetActiveScene("MultiplayerMenu");
         }
 
         private void Join()

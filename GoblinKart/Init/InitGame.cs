@@ -139,6 +139,9 @@ namespace GoblinKart.Init {
 
             ComponentManager.Instance.AddComponentToEntity(kart, new Collision3Dcomponent());
             ComponentManager.Instance.AddComponentToEntity(kart, new PowerupComponent());
+            
+            // Create player comp
+            ComponentManager.Instance.AddComponentToEntity(kart, new PlayerComponent {Name = "Player", Id = 1});
 
             TransformComponent kartTransform = new TransformComponent();
             kartTransform.Position = new Vector3(0.0f, 0.0f, 0.0f);
