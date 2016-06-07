@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using GameEngine;
@@ -17,18 +18,26 @@ namespace GoblinKart.Systems
 {
     public class NetworkClientSendInfo : IUpdateSystem
     {
+        private int _counter = 0;
+
         public void Update(GameTime gameTime)
         {
-            //Debug.WriteLine("Sending information to the server!");
+
+            if (_counter < 20)
+            {
+                _counter++;
+                return;
+            }
+            _counter = 0;
+
+            Debug.WriteLine("Sending information to the server!");
 
             // Get all networkShareComponents (should be the component to entities with information necessary to send)
             var networkShareEntities = ComponentManager.Instance.GetAllEntitiesWithComponentType<NetworkShareComponent>();
             
-            NetOutgoingMessage message = null;
-            // msg.Write((int)MessageType.StringMessage); <---------- Detta kan vara bra att göra för att bestämma messageType, måste man kanske göra..?
-
             if (networkShareEntities == null) return;
 
+            NetOutgoingMessage message = null;
             // Check for the kartComponent
             foreach (var e in networkShareEntities)
             {
@@ -46,6 +55,10 @@ namespace GoblinKart.Systems
                 message.Write(playerComponent.Id);
                 message.Write(playerComponent.Name);
 
+                message.Write(transformComponent.Scale.X);
+                message.Write(transformComponent.Scale.Y);
+                message.Write(transformComponent.Scale.Z);
+
                 message.Write(transformComponent.Position.X);
                 message.Write(transformComponent.Position.Y);
                 message.Write(transformComponent.Position.Z);
@@ -58,30 +71,10 @@ namespace GoblinKart.Systems
                 message.Write(transformComponent.Velocity.Y);
                 message.Write(transformComponent.Velocity.Z);
 
-
-
-
-                //NetworkInformation info = new NetworkInformation()
-                //{
-                //    Id = playerComponent.Id,
-                //    Name = playerComponent.Name,
-                //    Position = transformComponent.Position,
-                //    Forward = transformComponent.Forward,
-                //    Velocity = transformComponent.Velocity
-                //};
-                //message = NetworkManager.Instance.Client.CreateMessage();
-                //message.Write((byte)PacketType.PlayerData);              
-                //message.WriteAllProperties(info);
-
-                //Debug.WriteLine(info.Id + info.Name);
-                //Debug.WriteLine(info.Forward);
-                //Debug.WriteLine(info.Position);
-                //Debug.WriteLine(info.Velocity);
-
+                //Debug.WriteLine(transformComponent.Position.X);
+                //Debug.WriteLine(transformComponent.Position.Y);
+                //Debug.WriteLine(transformComponent.Position.Z);
             }
-
-            // Maybe check for other things to send...?
-            // this feels like kinda bad idea to handle this..?
 
             // Send message
             NetworkManager.Instance.ClientSend(message);

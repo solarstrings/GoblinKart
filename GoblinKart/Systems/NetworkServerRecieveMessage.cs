@@ -91,6 +91,24 @@ namespace GoblinKart.Systems
             message.Write(inc.ReadFloat());
             message.Write(inc.ReadFloat());
 
+            var x = inc.ReadFloat();
+            var y = inc.ReadFloat();
+            var z = inc.ReadFloat();
+
+            Debug.WriteLine(x);
+            Debug.WriteLine(y);
+            Debug.WriteLine(z);
+
+            message.Write(x);
+            message.Write(y);
+            message.Write(z);
+
+
+            //message.Write(inc.ReadFloat());
+            //message.Write(inc.ReadFloat());
+            //message.Write(inc.ReadFloat());
+
+            
             message.Write(inc.ReadFloat());
             message.Write(inc.ReadFloat());
             message.Write(inc.ReadFloat());
@@ -98,25 +116,12 @@ namespace GoblinKart.Systems
             message.Write(inc.ReadFloat());
             message.Write(inc.ReadFloat());
             message.Write(inc.ReadFloat());
+
+            
 
             NetworkManager.Instance.ServerSend(message, inc.SenderConnection);
 
-
-            // Debug.WriteLine("Information recieved and will be sent to all clients!");
-            //var info = new NetworkInformation();
-            //inc.ReadAllProperties(info);
-
-            //Debug.WriteLine(info.Id + info.Name);
-            //Debug.WriteLine(info.Forward);
-            //Debug.WriteLine(info.Position);
-            //Debug.WriteLine(info.Velocity);
-
-
-            //// TODO Fixa så att man inte skickar till den som precis gav informationen! inc.sender...
-            //var message = NetworkManager.Instance.Server.CreateMessage();
-            //message.Write((byte)PacketType.PlayerData);
-            //message.WriteAllProperties(info);
-            //NetworkManager.Instance.ServerSend(message, inc.SenderConnection);
+            //.WriteLine(message.);
         }
 
         private void HandleNewConnection(NetServer server, NetIncomingMessage inc)
@@ -140,7 +145,7 @@ namespace GoblinKart.Systems
                 inc.SenderConnection.Approve();
 
                 // Need to sleep, else it will send these things below too fast...
-                System.Threading.Thread.Sleep(3000);
+                System.Threading.Thread.Sleep(1000);
 
                 // Send back accepted connection (true) and the player id
                 var outmsg = server.CreateMessage();

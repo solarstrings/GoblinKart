@@ -11,6 +11,7 @@ namespace GoblinKart.Network
     {
         public string Name { get; set; }
         public int Id { get; set; }
+        public Vector3 Scale { get; set; }
         public Vector3 Position { get; set; }
         public Vector3 Forward { get; set; }
         public Vector3 Velocity { get; set; }

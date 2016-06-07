@@ -104,13 +104,6 @@ namespace GoblinKart.Systems
                 cm.AddComponentToEntity(e, modelComp);
 
                 SceneManager.Instance.AddEntityToSceneOnLayer("Game", 3, e);
-
-                //var es = ComponentManager.Instance.GetAllEntitiesWithComponentType<PlayerComponent>();
-
-                //foreach (var ey in es)
-                //{
-                //    var xx = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(ey);
-                //}
             }
         }
 
@@ -119,16 +112,17 @@ namespace GoblinKart.Systems
             //Debug.WriteLine("New position recieved...");
 
             var nm = NetworkManager.Instance;
-            
-            // Read the information
-            var info = new NetworkInformation
-            {
-                Id = inc.ReadInt32(),
-                Name = inc.ReadString(),
-                Position = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat()),
-                Forward = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat()),
-                Velocity = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat())
-            };
+
+           //Read the information
+           var info = new NetworkInformation
+           {
+               Id = inc.ReadInt32(),
+               Name = inc.ReadString(),
+               Scale = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat()),
+               Position = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat()),
+               Forward = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat()),
+               Velocity = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat())
+           };
 
             //Debug.WriteLine(inc.ReadInt32());
             //Debug.WriteLine(inc.ReadString());
@@ -167,10 +161,12 @@ namespace GoblinKart.Systems
                     // Debug.WriteLine(difference);
 
                     // TODO add threshold constant
-                    if (difference < 25)
+                    if (difference < 70)
                     {
+                        t.Velocity = info.Velocity;
                         t.Position = info.Position;
                         t.Forward = info.Forward;
+                        t.Scale = info.Scale;
                         // Debug.WriteLine("low Diff, good move! No interpolation!");
                     }
                     else
