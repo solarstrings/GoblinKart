@@ -18,17 +18,20 @@ namespace GoblinKart.Systems
 {
     public class NetworkClientSendInfo : IUpdateSystem
     {
-        private int _counter = 0;
+        private double _time = 0;
+        private double _updateRate = 0.04;
 
         public void Update(GameTime gameTime)
         {
 
-            if (_counter < 20)
-            {
-                _counter++;
+            // Update every x second
+            Debug.WriteLine(_time);
+            _time += gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (_time < _updateRate)
                 return;
-            }
-            _counter = 0;
+
+            _time = 0;
 
             Debug.WriteLine("Sending information to the server!");
 
@@ -67,13 +70,9 @@ namespace GoblinKart.Systems
                 message.Write(transformComponent.Forward.Y);
                 message.Write(transformComponent.Forward.Z);
 
-                message.Write(transformComponent.Velocity.X);
-                message.Write(transformComponent.Velocity.Y);
-                message.Write(transformComponent.Velocity.Z);
-
-                //Debug.WriteLine(transformComponent.Position.X);
-                //Debug.WriteLine(transformComponent.Position.Y);
-                //Debug.WriteLine(transformComponent.Position.Z);
+                //message.Write(transformComponent.Velocity.X);
+                //message.Write(transformComponent.Velocity.Y);
+                //message.Write(transformComponent.Velocity.Z);
             }
 
             // Send message

@@ -91,31 +91,18 @@ namespace GoblinKart.Systems
             message.Write(inc.ReadFloat());
             message.Write(inc.ReadFloat());
 
-            var x = inc.ReadFloat();
-            var y = inc.ReadFloat();
-            var z = inc.ReadFloat();
+            message.Write(inc.ReadFloat());
+            message.Write(inc.ReadFloat());
+            message.Write(inc.ReadFloat());
 
-            Debug.WriteLine(x);
-            Debug.WriteLine(y);
-            Debug.WriteLine(z);
 
-            message.Write(x);
-            message.Write(y);
-            message.Write(z);
-
+            message.Write(inc.ReadFloat());
+            message.Write(inc.ReadFloat());
+            message.Write(inc.ReadFloat());
 
             //message.Write(inc.ReadFloat());
             //message.Write(inc.ReadFloat());
             //message.Write(inc.ReadFloat());
-
-            
-            message.Write(inc.ReadFloat());
-            message.Write(inc.ReadFloat());
-            message.Write(inc.ReadFloat());
-
-            message.Write(inc.ReadFloat());
-            message.Write(inc.ReadFloat());
-            message.Write(inc.ReadFloat());
 
             
 

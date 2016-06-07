@@ -121,7 +121,7 @@ namespace GoblinKart.Systems
                Scale = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat()),
                Position = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat()),
                Forward = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat()),
-               Velocity = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat())
+               // Velocity = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat())
            };
 
             //Debug.WriteLine(inc.ReadInt32());
@@ -163,11 +163,10 @@ namespace GoblinKart.Systems
                     // TODO add threshold constant
                     if (difference < 70)
                     {
-                        t.Velocity = info.Velocity;
+                        //t.Velocity = info.Velocity;
                         t.Position = info.Position;
                         t.Forward = info.Forward;
                         t.Scale = info.Scale;
-                        // Debug.WriteLine("low Diff, good move! No interpolation!");
                     }
                     else
                     {
