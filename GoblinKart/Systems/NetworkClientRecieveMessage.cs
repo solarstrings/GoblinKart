@@ -97,13 +97,13 @@ namespace GoblinKart.Systems
                 cm.AddComponentToEntity(e, player);
                 cm.AddComponentToEntity(e, new TransformComponent());
 
-                var modelComp = new ModelComponent(_engine.LoadContent<Model>("chopper"), true, false, false)
+                var modelComp = new ModelComponent(_engine.LoadContent<Model>("kart"), true, false, false)
                 {
                     staticModel = false
                 };
 
-                ModelRenderSystem.AddMeshTransform(ref modelComp, 1, Matrix.CreateRotationY(0.2f));
-                ModelRenderSystem.AddMeshTransform(ref modelComp, 3, Matrix.CreateRotationY(0.5f));
+                //ModelRenderSystem.AddMeshTransform(ref modelComp, 1, Matrix.CreateRotationY(0.2f));
+                //ModelRenderSystem.AddMeshTransform(ref modelComp, 3, Matrix.CreateRotationY(0.5f));
                 cm.AddComponentToEntity(e, modelComp);
 
                 SceneManager.Instance.AddEntityToSceneOnLayer("Game", 3, e);

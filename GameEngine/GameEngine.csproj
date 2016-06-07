@@ -44,7 +44,7 @@
     <Compile Include="ECSEngine.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Source\Components\AIComponent.cs" />
+    <Compile Include="Source\Components\AiComponent.cs" />
     <Compile Include="Source\Components\AnimationComponent.cs" />
     <Compile Include="Source\Components\CameraComponent.cs" />
     <Compile Include="Source\Components\CircleCollisionComponent.cs" />
@@ -54,7 +54,6 @@
     <Compile Include="Source\Components\DefaultFogComponent.cs" />
     <Compile Include="Source\Components\EnvironmentmappingComponent.cs" />
     <Compile Include="Source\Components\GamePadComponent.cs" />
-    <Compile Include="Source\Components\IComponent.cs" />
     <Compile Include="Source\Components\KeyBoardComponent.cs" />
     <Compile Include="Source\Components\ModelBoundingBoxComponent.cs" />
     <Compile Include="Source\Components\ModelBoundingSphereComponent.cs" />
@@ -86,13 +85,26 @@
     <Compile Include="Source\Engine\Entity.cs" />
     <Compile Include="Source\Engine\EntityFactory.cs" />
     <Compile Include="Source\Engine\ErrorLogger.cs" />
+    <Compile Include="Source\Engine\IdleState.cs" />
     <Compile Include="Source\Engine\InputDefines.cs" />
     <Compile Include="Source\Engine\ModelRenderMethods.cs" />
     <Compile Include="Source\Engine\Music.cs" />
     <Compile Include="Source\Engine\PacketType.cs" />
     <Compile Include="Source\Engine\ParticleEmitter.cs" />
     <Compile Include="Source\Engine\ParticleVertex.cs" />
+    <Compile Include="Source\Engine\RaceState.cs" />
     <Compile Include="Source\Engine\Scene.cs" />
+    <Compile Include="Source\Engine\Waypoint.cs" />
+    <Compile Include="Source\Interfaces\ICollisionObserver.cs" />
+    <Compile Include="Source\Interfaces\ICollisionSubject.cs" />
+    <Compile Include="Source\Interfaces\IComponent.cs" />
+    <Compile Include="Source\Interfaces\IMeshCollisionObserver.cs" />
+    <Compile Include="Source\Interfaces\IMeshCollisionSubject.cs" />
+    <Compile Include="Source\Interfaces\IRender3DSystem.cs" />
+    <Compile Include="Source\Interfaces\IRenderSystem.cs" />
+    <Compile Include="Source\Interfaces\IState.cs" />
+    <Compile Include="Source\Interfaces\ISystem.cs" />
+    <Compile Include="Source\Interfaces\IUpdateSystem.cs" />
     <Compile Include="Source\Managers\ComponentManager.cs" />
     <Compile Include="Source\Managers\InputManager.cs" />
     <Compile Include="Source\Managers\NetworkManager.cs" />
@@ -100,10 +112,6 @@
     <Compile Include="Source\Managers\SceneManager.cs" />
     <Compile Include="Source\Managers\SoundManager.cs" />
     <Compile Include="Source\Managers\SystemManager.cs" />
-    <Compile Include="Source\Observers\ICollisionObserver.cs" />
-    <Compile Include="Source\Observers\ICollisionSubject.cs" />
-    <Compile Include="Source\Observers\IMeshCollisionObserver.cs" />
-    <Compile Include="Source\Observers\IMeshCollisionSubject.cs" />
     <Compile Include="Source\Systems\AISystem.cs" />
     <Compile Include="Source\Systems\AnimateSystem.cs" />
     <Compile Include="Source\Systems\CalcModelSphereSystem.cs" />
@@ -111,10 +119,6 @@
     <Compile Include="Source\Systems\CollisionSystem.cs" />
     <Compile Include="Source\Systems\EnvironmentmappingSystem.cs" />
     <Compile Include="Source\Systems\GamePadSystem.cs" />
-    <Compile Include="Source\Systems\IRender3DSystem.cs" />
-    <Compile Include="Source\Systems\IRenderSystem.cs" />
-    <Compile Include="Source\Systems\ISystem.cs" />
-    <Compile Include="Source\Systems\IUpdateSystem.cs" />
     <Compile Include="Source\Systems\KeyBoardSystem.cs" />
     <Compile Include="Source\Systems\MeshCollisionSystem.cs" />
     <Compile Include="Source\Systems\ModelCollisionSystem.cs" />
@@ -133,8 +137,6 @@
     <Compile Include="Source\Systems\TimerSystem.cs" />
     <Compile Include="Source\Systems\TransformSystem.cs" />
     <Compile Include="Source\Systems\MeshToMeshCollision.cs" />
-    <Compile Include="Source\VertexPositionColorNormal.cs" />
-    <Compile Include="Waypoint.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Lidgren.Network, Version=3.5.1.1679, Culture=neutral, processorArchitecture=MSIL" />

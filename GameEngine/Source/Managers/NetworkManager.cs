@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using GameEngine.Source.Components;
-using GameEngine.Source.Engine;
-using GameEngine.Source.Systems;
+using GameEngine.Components;
+using GameEngine.Engine;
+using GameEngine.Engine.Source.Engine;
 using Lidgren.Network;
-using System.Threading;
 
-namespace GameEngine.Source.Managers
+namespace GameEngine.Managers
 {
     /// <summary>
     /// Thread safe singleton without using locks
@@ -19,7 +16,6 @@ namespace GameEngine.Source.Managers
     /// </summary>
     public sealed class NetworkManager
     {
-        private static readonly NetworkManager _instance = new NetworkManager();
         public NetServer Server { get; set; }
         public List<PlayerComponent> Players { get; set; } = new List<PlayerComponent>();
         public NetClient Client { get; set; }
@@ -34,13 +30,7 @@ namespace GameEngine.Source.Managers
         private NetworkManager() { }
 
         
-        public static NetworkManager Instance
-        {
-            get
-            {
-                return _instance;
-            }
-        }
+        public static NetworkManager Instance { get; } = new NetworkManager();
 
         public bool InitClientConnection()
         {
@@ -65,6 +55,8 @@ namespace GameEngine.Source.Managers
 
                 EstablishConnection(client);
               
+                var clientEntity = EntityFactory.Instance.NewEntityWithTag("Client");
+
                 // Set the managers client
                 Client = client;
                 Debug.WriteLine("You have successfully connected to the host!");
@@ -96,7 +88,7 @@ namespace GameEngine.Source.Managers
                         {
                             case NetConnectionStatus.Connected:
                                 // Do something! Save connection?
-                                //client.Connections.Add(inc.SenderConnection);
+                                client.Connections.Add(inc.SenderConnection);
                                 Debug.WriteLine("CONNECTION ACCEPTED");
                                 return true;
                         }

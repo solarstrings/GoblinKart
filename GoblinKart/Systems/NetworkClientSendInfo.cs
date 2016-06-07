@@ -26,7 +26,7 @@ namespace GoblinKart.Systems
         {
 
             // Update every x second
-            Debug.WriteLine(_time);
+            //Debug.WriteLine(_time);
             _time += gameTime.ElapsedGameTime.TotalSeconds;
 
             if (_time < _updateRate)
@@ -71,6 +71,7 @@ namespace GoblinKart.Systems
                 message.Write(transformComponent.Forward.Y);
                 message.Write(transformComponent.Forward.Z);
 
+                // Might be implemented in the future
                 //message.Write(transformComponent.Velocity.X);
                 //message.Write(transformComponent.Velocity.Y);
                 //message.Write(transformComponent.Velocity.Z);
