@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameEngine.Source.Components;
+using GameEngine.Components;
 using Microsoft.Xna.Framework;
 
 namespace GoblinKart.Network

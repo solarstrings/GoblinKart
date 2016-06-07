@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameEngine;
-using GameEngine.Source.Systems;
+using GameEngine.Components;
+using GameEngine.Engine;
+using GameEngine.Managers;
+using GameEngine.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
-using GameEngine.Source.Systems;
 using GoblinKart.Systems;
 
 namespace GoblinKart.Init

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
-using GameEngine.Source.Components;
+using GameEngine.Components;
+using GameEngine.Engine;
+using GameEngine.Managers;
+using GameEngine.Systems;
 using GoblinKart.Components;
 
 namespace GoblinKart.Init
