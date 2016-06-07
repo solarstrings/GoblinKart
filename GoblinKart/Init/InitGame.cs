@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
-using GameEngine.Source.Components;
-using GameEngine.Source.Systems;
+using GameEngine.Components;
+using GameEngine.Engine;
+using GameEngine.Managers;
+using GameEngine.Systems;
 using GoblinKart.Components;
 using GoblinKart.Systems;
 using Microsoft.Xna.Framework.Audio;
@@ -15,26 +17,26 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 namespace GoblinKart.Init {
-    class InitGame {
-        private SystemManager sm = SystemManager.Instance;
+    internal class InitGame {
+        private readonly SystemManager _sm = SystemManager.Instance;
 
         public InitGame(ECSEngine engine)
         {
-            sm.RegisterSystem("Game", new PhysicsSystem());
-            sm.RegisterSystem("Game", new TransformSystem());
-            sm.RegisterSystem("Game", new CalcModelSphereSystem());
-            sm.RegisterSystem("Game", new ModelRenderSystem(true));
+            _sm.RegisterSystem("Game", new PhysicsSystem());
+            _sm.RegisterSystem("Game", new TransformSystem());
+            _sm.RegisterSystem("Game", new CalcModelSphereSystem());
+            _sm.RegisterSystem("Game", new ModelRenderSystem(true));
 
             var modelCollisionSystem = new ModelCollisionSystem();
-            sm.RegisterSystem("Game", modelCollisionSystem);
+            _sm.RegisterSystem("Game", modelCollisionSystem);
 
             var meshToMeshCollisionSystem = new MeshToMeshCollision(modelCollisionSystem);
-            sm.RegisterSystem("Game", meshToMeshCollisionSystem);
+            _sm.RegisterSystem("Game", meshToMeshCollisionSystem);
 
-            sm.RegisterSystem("Game", new PowerupCollisionSystem(meshToMeshCollisionSystem));
+            _sm.RegisterSystem("Game", new PowerupCollisionSystem(meshToMeshCollisionSystem));
             InitKeyboard();
             InitKart(engine);
-            InitAI(engine);
+            InitAi(engine);
             InitCamera(engine);
             InitTerrain(engine);
             InitSkybox(engine);
@@ -47,60 +49,49 @@ namespace GoblinKart.Init {
 
         #region AI
 
-        private void InitAI(ECSEngine engine)
+        private void InitAi(ECSEngine engine)
         {
-            sm.RegisterSystem("Game", new AISystem());
+            _sm.RegisterSystem("Game", new AiSystem());
 
-            Entity aiKart = EntityFactory.Instance.NewEntityWithTag("AIKart");
-            ModelComponent aiModelComp = new ModelComponent(engine.LoadContent<Model>("Chopper"), true, false, false);
-            aiModelComp.staticModel = false;
-            ModelRenderSystem.AddMeshTransform(ref aiModelComp, 1, Matrix.CreateRotationY(0.2f));
-            ModelRenderSystem.AddMeshTransform(ref aiModelComp, 3, Matrix.CreateRotationY(0.5f));
-            ComponentManager.Instance.AddComponentToEntity(aiKart, aiModelComp);
+            var entity = EntityFactory.Instance.NewEntityWithTag("AiKart");
+            var modelC = new ModelComponent(engine.LoadContent<Model>("Chopper"), true, false, false)
+            {
+                staticModel = false
+            };
+            ModelRenderSystem.AddMeshTransform(ref modelC, 1, Matrix.CreateRotationY(0.2f));
+            ModelRenderSystem.AddMeshTransform(ref modelC, 3, Matrix.CreateRotationY(0.5f));
+            ComponentManager.Instance.AddComponentToEntity(entity, modelC);
 
             //Create waypoints and add the AIComponent.
-            List<Waypoint> waypoints = CreateWaypoints();
-            AISystem.Waypoints = waypoints;
-            var aiComp = new AIComponent(waypoints[0]);
-            ComponentManager.Instance.AddComponentToEntity(aiKart, aiComp);
+            var waypoints = CreateWaypoints();
+            AiSystem.Waypoints = waypoints;
+            var aiC = new AiComponent(waypoints[0]);
+            ComponentManager.Instance.AddComponentToEntity(entity, aiC);
 
-            ComponentManager.Instance.AddComponentToEntity(aiKart, new Collision3Dcomponent());
+            ComponentManager.Instance.AddComponentToEntity(entity, new Collision3Dcomponent());
 
-            TransformComponent aiKartTransform = new TransformComponent();
-            aiKartTransform.Position = new Vector3(-50.0f, 0.0f, -100.0f);
-            aiKartTransform.Rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitY, AISystem.GetRotation(aiKartTransform.Position, aiComp.Waypoint.TargetPosition));
+            var aiKartTransform = new TransformComponent {Position = new Vector3(0.0f, 0.0f, 0.0f)};
+            aiKartTransform.Rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitY, AiSystem.GetRotation(aiKartTransform.Position, aiC.Waypoint.TargetPosition));
             aiKartTransform.Scale = new Vector3(2.5f, 2.5f, 2.5f);
-            ComponentManager.Instance.AddComponentToEntity(aiKart, aiKartTransform);
+            ComponentManager.Instance.AddComponentToEntity(entity, aiKartTransform);
 
-            SceneManager.Instance.AddEntityToSceneOnLayer("Game", 3, aiKart);
+            SceneManager.Instance.AddEntityToSceneOnLayer("Game", 3, entity);
         }
 
-        private List<Waypoint> CreateWaypoints()
+        private static List<Waypoint> CreateWaypoints()
         {
+            var rand = new Random(32463);
             var waypoints = new List<Waypoint>();
-
-            //TODO: More user friendly.
-            var wp1 = new Waypoint
+            for (var i = 0; i < 10; i++)
             {
-                Id = 0,
-                WaypointPosition = new Vector2(-30.0f, 0.0f),
-                Radius = 20
-            };
-            var wp2 = new Waypoint
-            {
-                Id = 1,
-                WaypointPosition = new Vector2(-10.0f, -300.0f),
-                Radius = 20
-            };
-            var wp3 = new Waypoint
-            {
-                Id = 2,
-                WaypointPosition = new Vector2(-100.0f, -30.0f),
-                Radius = 20
-            };
-            waypoints.Add(wp1);
-            waypoints.Add(wp2);
-            waypoints.Add(wp3);
+                var wp = new Waypoint
+                {
+                    Id = i,
+                    WaypointPosition = new Vector2(rand.Next(15, 500), rand.Next(-500, -15)),
+                    Radius = 20
+                };
+                waypoints.Add(wp);
+            }
 
             return waypoints;
         }
@@ -108,11 +99,11 @@ namespace GoblinKart.Init {
         #endregion
 
         private void InitKeyboard() {
-            sm.RegisterSystem("Game", new KeyBoardSystem());
+            _sm.RegisterSystem("Game", new KeyBoardSystem());
 
-            Entity keyboardControl = EntityFactory.Instance.NewEntityWithTag("keyboard");
+            var keyboardControl = EntityFactory.Instance.NewEntityWithTag("keyboard");
             ComponentManager.Instance.AddComponentToEntity(keyboardControl, new KeyBoardComponent());
-            KeyBoardComponent k = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(keyboardControl);
+            var k = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(keyboardControl);
 
             KeyBoardSystem.AddKeyToAction(ref k, "forward", Keys.Up);
             KeyBoardSystem.AddKeyToAction(ref k, "back", Keys.Down);
@@ -127,7 +118,7 @@ namespace GoblinKart.Init {
         }
 
         private void InitKart(ECSEngine engine) {
-            sm.RegisterSystem("Game", new KartControlSystem(engine));
+            _sm.RegisterSystem("Game", new KartControlSystem());
 
             Entity kart = EntityFactory.Instance.NewEntityWithTag("Kart");
             ModelComponent modelComp = new ModelComponent(engine.LoadContent<Model>("kart"), true, false,false);
@@ -152,7 +143,7 @@ namespace GoblinKart.Init {
         }
 
         private void InitCamera(ECSEngine engine) {
-            sm.RegisterSystem("Game", new CameraSystem());
+            _sm.RegisterSystem("Game", new CameraSystem());
 
             Entity camera = EntityFactory.Instance.NewEntityWithTag("3DCamera");
             CameraComponent cc = new CameraComponent(engine.GetGraphicsDeviceManager());
@@ -172,7 +163,7 @@ namespace GoblinKart.Init {
 
         private void InitSkybox(ECSEngine engine)
         {
-            sm.RegisterSystem("Game", new SkyboxRenderSystem());
+            _sm.RegisterSystem("Game", new SkyboxRenderSystem());
 
             Entity skyboxEnt = EntityFactory.Instance.NewEntityWithTag("Skybox");
             SkyboxComponent skyboxComp = new SkyboxComponent(engine.LoadContent<Model>("skyboxes/cube"),
@@ -185,7 +176,7 @@ namespace GoblinKart.Init {
 
         private void InitTerrain(ECSEngine engine)
         {
-            sm.RegisterSystem("Game", new TerrainMapRenderSystem());
+            _sm.RegisterSystem("Game", new TerrainMapRenderSystem());
 
             Texture2D terrainTex = engine.LoadContent<Texture2D>("Canyon");
             Texture2D defaultTex = engine.LoadContent<Texture2D>("grasstile");

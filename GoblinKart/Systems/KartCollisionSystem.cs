@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameEngine;
-using GameEngine.Source.Observers;
+using GameEngine.Engine;
+using GameEngine.Interfaces;
 
 namespace GoblinKart.Systems
 {

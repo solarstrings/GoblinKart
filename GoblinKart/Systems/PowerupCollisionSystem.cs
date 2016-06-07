@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameEngine;
-using GameEngine.Source.Observers;
+using GameEngine.Engine;
+using GameEngine.Interfaces;
+using GameEngine.Managers;
 using GoblinKart.Components;
 
 namespace GoblinKart.Systems

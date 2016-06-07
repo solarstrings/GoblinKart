@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using GameEngine;
+using GameEngine.Components;
+using GameEngine.Engine;
+using GameEngine.Engine.InputDefs;
+using GameEngine.Interfaces;
+using GameEngine.Managers;
 using Microsoft.Xna.Framework;
-using GameEngine.InputDefs;
 
-namespace GoblinKart
+namespace GoblinKart.Systems
 {
     class MainMenuSystem : IUpdateSystem
     {
@@ -34,7 +34,7 @@ namespace GoblinKart
         public void Update(GameTime gameTime)
         {
 
-            if (Utilities.CheckKeyboardAction("up", BUTTON_STATE.RELEASED, kbComp) )
+            if (Utilities.Utilities.CheckKeyboardAction("up", BUTTON_STATE.RELEASED, kbComp) )
             {
                 currentSelction--;
                 if (currentSelction < 0)
@@ -44,7 +44,7 @@ namespace GoblinKart
                 SetActiveOption();
             }
 
-            else if (Utilities.CheckKeyboardAction("down", BUTTON_STATE.RELEASED, kbComp))
+            else if (Utilities.Utilities.CheckKeyboardAction("down", BUTTON_STATE.RELEASED, kbComp))
             {
                 currentSelction++;
                 if (currentSelction > 2)
@@ -53,7 +53,7 @@ namespace GoblinKart
                 }
                 SetActiveOption();
             }
-            else if (Utilities.CheckKeyboardAction("apply", BUTTON_STATE.RELEASED, kbComp))
+            else if (Utilities.Utilities.CheckKeyboardAction("apply", BUTTON_STATE.RELEASED, kbComp))
             {
                 if (currentSelction == 0)
                 {
