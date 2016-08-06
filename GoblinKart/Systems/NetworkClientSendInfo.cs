@@ -71,6 +71,12 @@ namespace GoblinKart.Systems
                 message.Write(transformComponent.Forward.Y);
                 message.Write(transformComponent.Forward.Z);
 
+                message.Write(transformComponent.Rotation.X);
+                message.Write(transformComponent.Rotation.Y);
+                message.Write(transformComponent.Rotation.Z);
+                message.Write(transformComponent.Rotation.W);
+
+
                 // Might be implemented in the future
                 //message.Write(transformComponent.Velocity.X);
                 //message.Write(transformComponent.Velocity.Y);

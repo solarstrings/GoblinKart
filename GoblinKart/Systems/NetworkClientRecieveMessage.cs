@@ -116,16 +116,18 @@ namespace GoblinKart.Systems
 
             var nm = NetworkManager.Instance;
 
-           //Read the information
-           var info = new NetworkInformation
+            //Read the information
+            var info = new NetworkInformation
            {
                Id = inc.ReadInt32(),
                Name = inc.ReadString(),
                Scale = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat()),
                Position = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat()),
                Forward = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat()),
-               // Velocity = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat())
-           };
+               Rotation = new Quaternion(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat())
+
+            // Velocity = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat())
+        };
 
             //Debug.WriteLine(inc.ReadInt32());
             //Debug.WriteLine(inc.ReadString());
@@ -170,6 +172,8 @@ namespace GoblinKart.Systems
                         t.Position = info.Position;
                         t.Forward = info.Forward;
                         t.Scale = info.Scale;
+                        t.Rotation = Quaternion.Identity;
+                        t.Rotation *= info.Rotation;
                     }
                     else
                     {

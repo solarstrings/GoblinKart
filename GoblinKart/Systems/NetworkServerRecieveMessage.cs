@@ -96,7 +96,11 @@ namespace GoblinKart.Systems
             message.Write(inc.ReadFloat());
             message.Write(inc.ReadFloat());
 
+            message.Write(inc.ReadFloat());
+            message.Write(inc.ReadFloat());
+            message.Write(inc.ReadFloat());
 
+            message.Write(inc.ReadFloat());
             message.Write(inc.ReadFloat());
             message.Write(inc.ReadFloat());
             message.Write(inc.ReadFloat());
@@ -104,8 +108,6 @@ namespace GoblinKart.Systems
             //message.Write(inc.ReadFloat());
             //message.Write(inc.ReadFloat());
             //message.Write(inc.ReadFloat());
-
-            
 
             NetworkManager.Instance.ServerSend(message, inc.SenderConnection);
 

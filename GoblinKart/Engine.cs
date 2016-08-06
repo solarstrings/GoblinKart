@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace GoblinKart
     {
         public override void InitialiseContent()
         {
+            Debug.WriteLine(Quaternion.Identity);
             GraphicsDeviceManager gdm = this.GetGraphicsDeviceManager();
             gdm.PreferredBackBufferWidth = 1280;
             gdm.PreferredBackBufferHeight = 720;
