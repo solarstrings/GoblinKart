@@ -12,6 +12,7 @@ namespace GameEngine.Components {
         public Vector3 Forward { get; set; }
 
         public Vector3 Velocity;
+        public float Acceleration { get; set; }
 
         public float Angle { get; set; }
 

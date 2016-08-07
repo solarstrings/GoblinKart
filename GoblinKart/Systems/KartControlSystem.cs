@@ -40,16 +40,16 @@ namespace GoblinKart.Systems {
             CollisionSystem.TerrainMapCollision(ref transformC, ref _airborne, terrainC, KartGroundOffset);
 
             // Move these to the physicssystem? Friction/gravity components?
-            PhysicsSystem.ApplyFriction(ref transformC, _airborne);
-            PhysicsSystem.ApplyGravity(ref transformC, gameTime, _airborne);
+            //PhysicsSystem.ApplyFriction(ref transformC, _airborne);
+            //PhysicsSystem.ApplyGravity(ref transformC, gameTime, _airborne);
 
             var aiKart = ComponentManager.Instance.GetEntityWithTag("AiKart", sceneEntities);
             var transformC2 = ComponentManager.Instance.GetEntityComponent<TransformComponent>(aiKart);
             
             CollisionSystem.TerrainMapCollision(ref transformC2, ref _whateverAi, terrainC, KartGroundOffset);
 
-            PhysicsSystem.ApplyFriction(ref transformC2, _whateverAi);
-            PhysicsSystem.ApplyGravity(ref transformC2, gameTime, _whateverAi);
+            //PhysicsSystem.ApplyFriction(ref transformC2, _whateverAi);
+            //PhysicsSystem.ApplyGravity(ref transformC2, gameTime, _whateverAi);
         }
 
         private static Quaternion CreateRotation(Vector3 v3) {

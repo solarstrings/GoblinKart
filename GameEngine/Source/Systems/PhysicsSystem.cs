@@ -4,49 +4,120 @@ using GameEngine.Components;
 using GameEngine.Engine;
 using GameEngine.Interfaces;
 using GameEngine.Managers;
+using GameEngine.Source.Components;
 using Microsoft.Xna.Framework;
 
 namespace GameEngine.Systems {
     public class PhysicsSystem : IUpdateSystem {
 
         /* Updates position of entities with transformComponents by their respective velocities. */
-        public void Update(GameTime gameTime) {
-            List<Entity> entities = SceneManager.Instance.GetActiveScene().GetAllEntities();
+        public void Update(GameTime gameTime)
+        {
 
-            if (entities != null)
+            // Loop all entities with a PhysicsComponent
+            var physicsEntities = ComponentManager.Instance.GetAllEntitiesWithComponentType<PhysicsComponent>();
+
+            foreach (var physicsEntity in physicsEntities)
             {
-                List<TransformComponent> trsComps = ComponentManager.Instance.GetComponentsFromEntities<TransformComponent>(entities);
+                var pyhsicsComponent = ComponentManager.Instance.GetEntityComponent<PhysicsComponent>(physicsEntity);
 
-                foreach (var t in trsComps)
-                {
-                    var velForward = t.World.Forward;
-                    var velDownward = t.World.Down;
-                    velForward *= t.Velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    velDownward *= t.Velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                ApplyGravity(physicsEntity, pyhsicsComponent);
+                ApplyFriction(physicsEntity, pyhsicsComponent);
+                ApplyDrag(physicsEntity, pyhsicsComponent);
 
-                    t.Position += velForward;
-                    t.Position -= velDownward;
-                }
+                UpdatePosition();
+
+                
+            }
+
+            // Update position depending on velocity/acceleration etc.
+            
+            // vel += acc * delTime
+            // pos += vel * delTime
+            
+
+
+
+
+            //foreach (var t in trsComps)
+            //{
+            //    var velForward = t.World.Forward;
+            //    var velDownward = t.World.Down;
+            //    velForward *= t.Velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //    velDownward *= t.Velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            //    t.Position += velForward;
+            //    t.Position -= velDownward;
+            //}
+        }
+
+        private void UpdatePosition(Entity physicsEntity, GameTime gameTime)
+        {
+            var transformComponent = ComponentManager.Instance.GetEntityComponent<TransformComponent>(physicsEntity);
+
+            //transformComponent.Velocity += transformComponent.Acceleration*(float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            var velForward = transformComponent.World.Forward;
+            var velUpwards = transformComponent.World.Up;
+            velForward *= transformComponent.Velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            velUpwards *= transformComponent.Velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
+        }
+
+        public void ApplyDrag(Entity physicsEntity, PhysicsComponent physicsComponent)
+        {
+            var dragComponent = ComponentManager.Instance.GetEntityComponent<DragComponent>(physicsEntity);
+
+            if (dragComponent != null)
+            {
+                // Apply drag
+                
             }
         }
 
-        public static void ApplyGravity(ref TransformComponent trsComp, GameTime gameTime,bool airborne) {
-            if (airborne)
+        private void ApplyGravity(Entity physicsEntity, PhysicsComponent physicsComponent)
+        {
+            var gravityComponent = ComponentManager.Instance.GetEntityComponent<GravityComponent>(physicsEntity);
+
+            if (gravityComponent != null)
             {
-                trsComp.Velocity.Y += trsComp.Gravity;
+                // Apply gravity!
             }
+
+            //if (airborne)
+            //{
+            //    trsComp.Velocity.Y += trsComp.Gravity;
+            //}
         }
 
         /* Adds friction to the object, the amount depending on if it is in the air or not. */
-        public static void ApplyFriction(ref TransformComponent trsComp, bool airborne) {
-            if (airborne) {
-                trsComp.Velocity.X *= trsComp.Drag;
-                trsComp.Velocity.Z *= trsComp.Drag;
+        private void ApplyFriction(Entity physicsEntity, PhysicsComponent physicsComponent)
+        {
+            var frictionComponent = ComponentManager.Instance.GetEntityComponent<FrictionComponent>(physicsEntity);
+            var dragComponent = ComponentManager.Instance.GetEntityComponent<DragComponent>(physicsEntity);
+
+            if (frictionComponent != null)
+            {
+
+                if (dragComponent != null)
+                {
+                    // Apply drag
+                    //velocity += acceleration - friction * velocity
+                }
+                else
+                {
+                    // Apply friction
+                }
+
             }
-            else {
-                trsComp.Velocity.X *= trsComp.Friction;
-                trsComp.Velocity.Z *= trsComp.Friction;
-            }
+
+            //if (airborne) {
+            //    trsComp.Velocity.X *= trsComp.Drag;
+            //    trsComp.Velocity.Z *= trsComp.Drag;
+            //}
+            //else {
+            //    trsComp.Velocity.X *= trsComp.Friction;
+            //    trsComp.Velocity.Z *= trsComp.Friction;
+            //}
         }
     }
 }
