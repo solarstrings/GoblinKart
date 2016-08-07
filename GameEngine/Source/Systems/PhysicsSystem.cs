@@ -51,6 +51,7 @@ namespace GameEngine.Systems {
             //}
         }
 
+
         private void UpdatePosition(Entity physicsEntity, GameTime gameTime)
         {
             var transformComponent = ComponentManager.Instance.GetEntityComponent<TransformComponent>(physicsEntity);

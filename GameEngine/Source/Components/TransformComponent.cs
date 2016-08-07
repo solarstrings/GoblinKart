@@ -20,6 +20,7 @@ namespace GameEngine.Components {
         public float Friction = 0.95f;
         public float Drag = 0.999f;
 
+
         public TransformComponent() {
             Scale = Vector3.One;
             Rotation = Quaternion.Identity;
