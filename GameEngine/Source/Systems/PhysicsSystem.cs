@@ -74,6 +74,7 @@ namespace GameEngine.Systems {
             }
         }
 
+
         private void ApplyGravity(Entity physicsEntity, PhysicsComponent physicsComponent)
         {
             var gravityComponent = ComponentManager.Instance.GetEntityComponent<GravityComponent>(physicsEntity);
