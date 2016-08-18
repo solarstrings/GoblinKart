@@ -5,6 +5,9 @@ namespace GameEngine.Components
 {
     public class AiComponent : IComponent
     {
+        //This is our context.
+        //http://www.tutorialspoint.com/design_pattern/images/state_pattern_uml_diagram.jpg
+
         public Waypoint Waypoint { get; set; }
 
         private IState _state;
@@ -23,7 +26,7 @@ namespace GameEngine.Components
         {
             Waypoint = wp;
             wp.SetRandomTargetPosition();
-            SetState(new RaceState());
+            SetState(new CountdownState());
         }
     }
 }

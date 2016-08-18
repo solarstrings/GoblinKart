@@ -5,12 +5,11 @@ using Microsoft.Xna.Framework;
 
 namespace GameEngine.Engine
 {
-    public class IdleState : IState
+    public class RamState : IState
     {
         public void DoAction(Entity entity)
         {
-            var transformC = ComponentManager.Instance.GetEntityComponent<TransformComponent>(entity);
-            transformC.Velocity *= new Vector3(0.97f, 0, 0);
+            //TODO: Add functionality.
         }
     }
 }
