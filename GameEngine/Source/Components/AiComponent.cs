@@ -22,11 +22,11 @@ namespace GameEngine.Components
             return _state;
         }
 
-        public AiComponent(Waypoint wp)
+        public AiComponent(Waypoint wp, IState state)
         {
             Waypoint = wp;
             wp.SetRandomTargetPosition();
-            SetState(new CountdownState());
+            SetState(state);
         }
     }
 }

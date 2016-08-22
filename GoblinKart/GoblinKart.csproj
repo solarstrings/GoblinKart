@@ -38,10 +38,15 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\IdleState.cs" />
     <Compile Include="Components\KartComponent.cs" />
     <Compile Include="Components\NetworkShareComponent.cs" />
+    <Compile Include="Components\CountdownState.cs" />
+    <Compile Include="Components\PickupState.cs" />
     <Compile Include="Components\PowerupComponent.cs" />
     <Compile Include="Components\PowerupModelComponent.cs" />
+    <Compile Include="Components\RaceState.cs" />
+    <Compile Include="Components\RamState.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="Init\InitGame.cs" />
     <Compile Include="Init\InitHouses.cs" />
@@ -59,6 +64,7 @@
     <Compile Include="Systems\PowerupCollisionSystem.cs" />
     <Compile Include="Systems\NetworkServerRecieveMessage.cs" />
     <Compile Include="Systems\MainMenuSystem.cs" />
+    <Compile Include="Utilities\AiHelper.cs" />
     <Compile Include="Utilities\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>

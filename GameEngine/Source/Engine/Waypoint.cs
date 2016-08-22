@@ -15,7 +15,7 @@ namespace GameEngine.Engine
         public int Radius { get; set; }
         public Vector2 TargetPosition { get; set; }
 
-        internal void SetRandomTargetPosition()
+        public void SetRandomTargetPosition()
         {
             var x = WaypointPosition.X + Rand.Next(-Radius-1, Radius-1);
             var y = WaypointPosition.Y + Rand.Next(-Radius-1, Radius-1);

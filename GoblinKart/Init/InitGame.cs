@@ -65,7 +65,7 @@ namespace GoblinKart.Init {
             //Create waypoints and add the AIComponent.
             var waypoints = CreateWaypoints();
             AiSystem.Waypoints = waypoints;
-            var aiC = new AiComponent(waypoints[0]);
+            var aiC = new AiComponent(waypoints[0], new CountdownState());
             ComponentManager.Instance.AddComponentToEntity(entity, aiC);
 
             ComponentManager.Instance.AddComponentToEntity(entity, new Collision3Dcomponent());
@@ -80,19 +80,47 @@ namespace GoblinKart.Init {
 
         private static List<Waypoint> CreateWaypoints()
         {
-            var rand = new Random(32463);
+            //var rand = new Random(32463);
+            //var waypoints = new List<Waypoint>();
+            //for (var i = 0; i < 10; i++)
+            //{
+            //    var wp = new Waypoint
+            //    {
+            //        Id = i,
+            //        WaypointPosition = new Vector2(rand.Next(15, 500), rand.Next(-500, -15)),
+            //        Radius = 20
+            //    };
+            //    waypoints.Add(wp);
+            //}
             var waypoints = new List<Waypoint>();
-            for (var i = 0; i < 10; i++)
+            var wp1 = new Waypoint
             {
-                var wp = new Waypoint
-                {
-                    Id = i,
-                    WaypointPosition = new Vector2(rand.Next(15, 500), rand.Next(-500, -15)),
-                    Radius = 20
-                };
-                waypoints.Add(wp);
-            }
-
+                Id = 0,
+                WaypointPosition = new Vector2(50, -950),
+                Radius = 20
+            };
+            var wp2 = new Waypoint
+            {
+                Id = 1,
+                WaypointPosition = new Vector2(950, -950),
+                Radius = 20
+            };
+            var wp3 = new Waypoint
+            {
+                Id = 2,
+                WaypointPosition = new Vector2(950, -50),
+                Radius = 20
+            };
+            var wp4 = new Waypoint
+            {
+                Id = 3,
+                WaypointPosition = new Vector2(50, -50),
+                Radius = 20
+            };
+            waypoints.Add(wp1);
+            waypoints.Add(wp2);
+            waypoints.Add(wp3);
+            waypoints.Add(wp4);
             return waypoints;
         }
 
