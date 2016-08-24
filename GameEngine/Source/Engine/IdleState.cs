@@ -37,7 +37,7 @@ namespace GameEngine.Engine
                 transformC.Angle = curvedAngle;
             }
             if (transformC.Velocity.X < PhysicsManager.MaxSpeed)
-                transformC.Velocity += new Vector3(PhysicsManager.Acceleration, 0, 0);
+                transformC.Velocity.X += transformC.Acceleration.X;
             else
                 transformC.Velocity = new Vector3(PhysicsManager.MaxSpeed, 0, 0);
         }

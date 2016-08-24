@@ -10,5 +10,6 @@ namespace GoblinKart.Components
 {
     public class KartComponent : IComponent
     {
+        public float KartGroundOffset { get; set; } = 1.7f;
     }
 }
