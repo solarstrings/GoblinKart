@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameEngine;
 using GameEngine.Interfaces;
 
-namespace GoblinKart.Components
+namespace GameEngine.Source.Components
 {
-    public class KartComponent : IComponent
+    public class GravityComponent : IComponent
     {
-        public float KartGroundOffset { get; set; } = 2f;
     }
 }

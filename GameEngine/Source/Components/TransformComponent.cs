@@ -11,7 +11,9 @@ namespace GameEngine.Components {
         public Quaternion Rotation { get; set; }
         public Vector3 Forward { get; set; }
 
+        
         public Vector3 Velocity;
+        public Vector3 Acceleration { get; set; }
 
         public float Angle { get; set; }
 
@@ -19,14 +21,11 @@ namespace GameEngine.Components {
         public float Friction = 0.95f;
         public float Drag = 0.999f;
 
+
         public TransformComponent() {
             Scale = Vector3.One;
             Rotation = Quaternion.Identity;
             Position = Vector3.Zero;
-        }
-
-        public void LockModelToHeight(TerrainMapComponent terComp, float offset) {
-            Position = new Vector3(Position.X, offset + TerrainMapRenderSystem.GetTerrainHeight(terComp, Position.X, Math.Abs(Position.Z)), Position.Z);
         }
     }
 }

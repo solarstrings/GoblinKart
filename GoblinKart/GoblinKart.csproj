@@ -56,6 +56,7 @@
     <Compile Include="Network\NetworkInformation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Systems\CheckIfInAirSystem.cs" />
     <Compile Include="Systems\KartCollisionSystem.cs" />
     <Compile Include="Systems\KartControlSystem.cs" />
     <Compile Include="Systems\MultiPlayerMenuSystem.cs" />

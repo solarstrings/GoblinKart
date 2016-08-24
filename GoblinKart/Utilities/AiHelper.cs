@@ -14,11 +14,12 @@ namespace GoblinKart.Utilities
         public static Vector3 Accelerate(Vector3 velocity)
         {
             if (velocity.X < PhysicsManager.MaxSpeed)
-                velocity += new Vector3(PhysicsManager.Acceleration, 0, 0);
+                velocity += new Vector3(PhysicsManager.Instance.Acceleration, 0, 0);
             else
                 velocity = new Vector3(PhysicsManager.MaxSpeed, 0, 0);
             return velocity;
         }
+
         public static bool NearlyEqual(float a, float b, float epsilon)
         {
             var absA = Math.Abs(a);

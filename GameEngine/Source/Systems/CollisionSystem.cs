@@ -46,26 +46,6 @@ namespace GameEngine.Systems {
                 c.CollisionArea.SetX(p.Position.X);
                 c.CollisionArea.SetY(p.Position.Y);
             }
-        }
-
-        /* Flagges the object as flying if it is above the ground. If it only slightly above the ground
-        it will still be flagged as non flying to make such detection more responsive. */
-        public static void TerrainMapCollision(ref TransformComponent trsComp, ref bool airborne, TerrainMapComponent terComp, float groundOffset) {
-
-            float distanceToGround = -(TerrainMapRenderSystem.GetTerrainHeight(terComp, trsComp.Position.X, Math.Abs(trsComp.Position.Z)) - trsComp.Position.Y);
-
-            if (distanceToGround <= groundOffset) {
-                trsComp.LockModelToHeight(terComp, groundOffset);
-                trsComp.Velocity.Y = 0;
-                airborne = false;
-                return;
-            }
-            else if (distanceToGround > 10f) {
-                airborne = true;
-            }
-            else {
-                airborne = false;
-            }
-        }
+        } 
     }
 }

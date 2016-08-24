@@ -8,12 +8,19 @@ namespace GameEngine.Managers {
     /// Thread safe singleton without using locks
     /// See link: "http://csharpindepth.com/Articles/General/Singleton.aspx#nested-cctor"
     /// </summary>
-    public class PhysicsManager {
-        public const float MaxSpeed = 50f;
+    public class PhysicsManager
+    {
+
+        public float Gravity { get; set; } = 1.5f;
+        public float Friction { get; set; } = 0.95f;
+        public float Drag { get; set; } = 0.99f;
+        public float Acceleration { get; set; } = 2f;
+
+        public const float MaxSpeed = 85f;
         public const float MaxReverseSpeed = -30f;
-        public const float Acceleration = 2f;
+        //public const float Acceleration = 2f;
         public const float TurningAcceleration = 2.8f;
-        public const float JumpingAcceleration = 75f;
+        //public const float JumpingAcceleration = 75f;
 
         // Explicit static constructor to tell C# compiler
         // not to mark type as beforefieldinit

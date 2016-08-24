@@ -9,6 +9,7 @@ using GameEngine;
 using GameEngine.Components;
 using GameEngine.Engine;
 using GameEngine.Managers;
+using GameEngine.Source.Components;
 using GameEngine.Systems;
 using GoblinKart.Components;
 using GoblinKart.Systems;
@@ -19,7 +20,7 @@ using Microsoft.Xna.Framework.Media;
 namespace GoblinKart.Init {
     internal class InitGame {
         private readonly SystemManager _sm = SystemManager.Instance;
-
+        
         public InitGame(ECSEngine engine)
         {
             _sm.RegisterSystem("Game", new PhysicsSystem());
@@ -34,6 +35,8 @@ namespace GoblinKart.Init {
             _sm.RegisterSystem("Game", meshToMeshCollisionSystem);
 
             _sm.RegisterSystem("Game", new PowerupCollisionSystem(meshToMeshCollisionSystem));
+            _sm.RegisterSystem("Game", new CheckIfInAirSystem());
+
             InitKeyboard();
             InitKart(engine);
             InitAi(engine);
@@ -148,8 +151,8 @@ namespace GoblinKart.Init {
         private void InitKart(ECSEngine engine) {
             _sm.RegisterSystem("Game", new KartControlSystem());
 
-            Entity kart = EntityFactory.Instance.NewEntityWithTag("Kart");
-            ModelComponent modelComp = new ModelComponent(engine.LoadContent<Model>("kart"), true, false,false);
+            var kart = EntityFactory.Instance.NewEntityWithTag("Kart");
+            var modelComp = new ModelComponent(engine.LoadContent<Model>("kart"), true, false,false);
             modelComp.staticModel = false;
             //ModelRenderSystem.AddMeshTransform(ref modelComp, 1, Matrix.CreateRotationY(0.2f));
             //ModelRenderSystem.AddMeshTransform(ref modelComp, 3, Matrix.CreateRotationY(0.5f));
@@ -162,10 +165,22 @@ namespace GoblinKart.Init {
             // Create player comp
             ComponentManager.Instance.AddComponentToEntity(kart, new PlayerComponent {Name = "Player", Id = 1});
 
-            TransformComponent kartTransform = new TransformComponent();
-            kartTransform.Position = new Vector3(0.0f, 0.0f, 0.0f);
-            kartTransform.Scale = new Vector3(2.5f, 2.5f, 2.5f);
-            ComponentManager.Instance.AddComponentToEntity(kart, kartTransform);
+            ComponentManager.Instance.AddComponentToEntity(kart, new PhysicsComponent()
+            {
+                Mass = 5f,
+                Force = new Vector3(15f, 250f, 0)
+            });
+            ComponentManager.Instance.AddComponentToEntity(kart, new TransformComponent
+            {
+                Position = new Vector3(0.0f, 0.0f, 0.0f),
+                Scale = new Vector3(2.5f, 2.5f, 2.5f),
+                Acceleration = new Vector3(5f, 75f, 0)
+            });
+            ComponentManager.Instance.AddComponentToEntity(kart, new GravityComponent());
+            ComponentManager.Instance.AddComponentToEntity(kart, new FrictionComponent());
+            ComponentManager.Instance.AddComponentToEntity(kart, new DragComponent());
+            ComponentManager.Instance.AddComponentToEntity(kart, new KartComponent());
+            
 
             SceneManager.Instance.AddEntityToSceneOnLayer("Game", 3, kart);
         }
@@ -173,10 +188,12 @@ namespace GoblinKart.Init {
         private void InitCamera(ECSEngine engine) {
             _sm.RegisterSystem("Game", new CameraSystem());
 
-            Entity camera = EntityFactory.Instance.NewEntityWithTag("3DCamera");
-            CameraComponent cc = new CameraComponent(engine.GetGraphicsDeviceManager());
-            cc.position = new Vector3(0, 20, 60);
-            cc.camChasePosition = new Vector3(0f, 30f, 70f);
+            var camera = EntityFactory.Instance.NewEntityWithTag("3DCamera");
+            var cc = new CameraComponent(engine.GetGraphicsDeviceManager())
+            {
+                position = new Vector3(0, 20, 60),
+                camChasePosition = new Vector3(0f, 30f, 70f)
+            };
 
             ComponentManager.Instance.AddComponentToEntity(camera, cc);
             ComponentManager.Instance.AddComponentToEntity(camera, new TransformComponent());
@@ -206,12 +223,12 @@ namespace GoblinKart.Init {
         {
             _sm.RegisterSystem("Game", new TerrainMapRenderSystem());
 
-            Texture2D terrainTex = engine.LoadContent<Texture2D>("Canyon");
-            Texture2D defaultTex = engine.LoadContent<Texture2D>("grasstile");
+            var terrainTex = engine.LoadContent<Texture2D>("Canyon");
+            var defaultTex = engine.LoadContent<Texture2D>("grasstile");
 
-            Entity terrain = EntityFactory.Instance.NewEntityWithTag("Terrain");
-            TerrainMapComponent t = new TerrainMapComponent(engine.GetGraphicsDevice(), terrainTex, defaultTex, 10);
-            TransformComponent tf = new TransformComponent();
+            var terrain = EntityFactory.Instance.NewEntityWithTag("Terrain");
+            var t = new TerrainMapComponent(engine.GetGraphicsDevice(), terrainTex, defaultTex, 10);
+            var tf = new TransformComponent();
 
             TerrainMapRenderSystem.LoadHeightMap(ref t, terrainTex, defaultTex, engine.GetGraphicsDevice());
 
