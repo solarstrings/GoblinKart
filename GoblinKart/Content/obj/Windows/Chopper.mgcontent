@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>F:/GoblinKart/GoblinKart/GoblinKart/Content/Chopper.fbx</SourceFile>
+  <SourceFile>f:/GoblinKart/GoblinKart/GoblinKart/Content/Chopper.fbx</SourceFile>
   <SourceTime>2016-08-06T14:53:55.9448708+02:00</SourceTime>
-  <DestFile>F:/GoblinKart/GoblinKart/GoblinKart/Content/bin/Windows/Chopper.xnb</DestFile>
-  <DestTime>2016-09-27T20:09:37.7409207+02:00</DestTime>
+  <DestFile>f:/GoblinKart/GoblinKart/GoblinKart/Content/bin/Windows/Chopper.xnb</DestFile>
+  <DestTime>2016-09-27T20:39:17.8387365+02:00</DestTime>
   <Importer>FbxImporter</Importer>
   <ImporterTime>2016-03-30T08:36:08+02:00</ImporterTime>
   <Processor>ModelProcessor</Processor>

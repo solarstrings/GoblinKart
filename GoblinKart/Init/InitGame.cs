@@ -73,12 +73,21 @@ namespace GoblinKart.Init {
 
             ComponentManager.Instance.AddComponentToEntity(entity, new Collision3Dcomponent());
 
-            var aiKartTransform = new TransformComponent {Position = new Vector3(0.0f, 0.0f, 0.0f)};
+            var aiKartTransform = new TransformComponent {Position = new Vector3(0.0f, 5.0f, 0.0f)};
             aiKartTransform.Rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitY, AiSystem.GetRotation(aiKartTransform.Position, aiC.Waypoint.TargetPosition));
             aiKartTransform.Scale = new Vector3(2.5f, 2.5f, 2.5f);
             ComponentManager.Instance.AddComponentToEntity(entity, aiKartTransform);
 
             SceneManager.Instance.AddEntityToSceneOnLayer("Game", 3, entity);
+            ComponentManager.Instance.AddComponentToEntity(entity, new PhysicsComponent()
+            {
+                Mass = 5f,
+                Force = new Vector3(15f, 250f, 0)
+            });
+            ComponentManager.Instance.AddComponentToEntity(entity, new GravityComponent());
+            //ComponentManager.Instance.AddComponentToEntity(entity, new FrictionComponent());
+            //ComponentManager.Instance.AddComponentToEntity(entity, new DragComponent());
+            ComponentManager.Instance.AddComponentToEntity(entity, new KartComponent());
         }
 
         private static List<Waypoint> CreateWaypoints()

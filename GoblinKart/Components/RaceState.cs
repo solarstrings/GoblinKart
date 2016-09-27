@@ -20,8 +20,18 @@ namespace GameEngine.Engine
             var transformC = ComponentManager.Instance.GetEntityComponent<TransformComponent>(entity);
             var player = ComponentManager.Instance.GetFirstEntityOfType<PlayerComponent>();
             var playerTransform = ComponentManager.Instance.GetEntityComponent<TransformComponent>(player);
+
+            var distance = Vector2.Distance(AiHelper.V3ToV2(transformC.Position), aiC.Waypoint.WaypointPosition);
+            Debug.WriteLine("distance:" + distance + " tranform.pos:" + transformC.Position + " waypointpos:" + aiC.Waypoint.WaypointPosition);
+            if (distance <= aiC.Waypoint.Radius)
+            {
+                Debug.WriteLine("Reached Waypoint " + (aiC.Waypoint.Id + 1));
+                AiHelper.FindNextWaypoint(aiC);
+                aiC.Waypoint.SetRandomTargetPosition();
+            }
+            //TODO: Lös varför AI:n snurrar runt waypoints ibland.
             var distanceToPlayer = Vector2.Distance(AiHelper.V3ToV2(transformC.Position), AiHelper.V3ToV2(playerTransform.Position));
-            if (distanceToPlayer < 40)
+            if (distanceToPlayer < 40 && distance > aiC.Waypoint.Radius*2)
             {
                 //State change from within state as discussed here:
                 //https://sourcemaking.com/design_patterns/state
@@ -39,14 +49,6 @@ namespace GameEngine.Engine
                 Debug.WriteLine("Changing State to Pickup");
                 aiC.SetState(new PickupState());
                 return;
-            }
-            var distance = Vector2.Distance(AiHelper.V3ToV2(transformC.Position), aiC.Waypoint.WaypointPosition);
-            //Debug.WriteLine(distance);
-            if (distance <= aiC.Waypoint.Radius)
-            {
-                Debug.WriteLine("Reached Waypoint " + (aiC.Waypoint.Id + 1));
-                AiHelper.FindNextWaypoint(aiC);
-                aiC.Waypoint.SetRandomTargetPosition();
             }
 
             var angle = AiSystem.GetRotation(transformC.Position, aiC.Waypoint.TargetPosition);
