@@ -149,7 +149,7 @@ namespace GoblinKart.Init {
         }
 
         private void InitKart(ECSEngine engine) {
-            _sm.RegisterSystem("Game", new KartControlSystem());
+            _sm.RegisterSystem("Game", new KartControlSystem(engine));
 
             var kart = EntityFactory.Instance.NewEntityWithTag("Kart");
             var modelComp = new ModelComponent(engine.LoadContent<Model>("kart"), true, false,false);
