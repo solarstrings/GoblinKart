@@ -40,6 +40,7 @@ namespace GoblinKart.Init {
             InitKeyboard();
             InitKart(engine);
             InitAi(engine);
+            InitMap(engine);
             InitCamera(engine);
             InitTerrain(engine);
             InitSkybox(engine);
@@ -48,6 +49,18 @@ namespace GoblinKart.Init {
 
             SceneManager.Instance.SetActiveScene("Game");
             SystemManager.Instance.Category = "Game";
+        }
+
+        public void InitMap(ECSEngine engine)
+        {
+            var entity = EntityFactory.Instance.NewEntityWithTag("GameSettings");
+            ComponentManager.Instance.AddComponentToEntity(entity, new GameSettingsComponent()
+            {
+                Waypoints = CreateWaypoints()
+            });
+
+            _sm.RegisterSystem("Game", new CountLapsSystem());
+            _sm.RegisterSystem("Game", new CheckIfPlayerWonSystem());    
         }
 
         #region AI
@@ -109,25 +122,25 @@ namespace GoblinKart.Init {
             {
                 Id = 0,
                 WaypointPosition = new Vector2(50, -950),
-                Radius = 20
+                Radius = 50
             };
             var wp2 = new Waypoint
             {
                 Id = 1,
                 WaypointPosition = new Vector2(950, -950),
-                Radius = 20
+                Radius = 50
             };
             var wp3 = new Waypoint
             {
                 Id = 2,
                 WaypointPosition = new Vector2(950, -50),
-                Radius = 20
+                Radius = 50
             };
             var wp4 = new Waypoint
             {
                 Id = 3,
                 WaypointPosition = new Vector2(50, -50),
-                Radius = 20
+                Radius = 50
             };
             waypoints.Add(wp1);
             waypoints.Add(wp2);
@@ -189,6 +202,7 @@ namespace GoblinKart.Init {
             ComponentManager.Instance.AddComponentToEntity(kart, new FrictionComponent());
             ComponentManager.Instance.AddComponentToEntity(kart, new DragComponent());
             ComponentManager.Instance.AddComponentToEntity(kart, new KartComponent());
+            ComponentManager.Instance.AddComponentToEntity(kart, new LapComponent());
             
 
             SceneManager.Instance.AddEntityToSceneOnLayer("Game", 3, kart);

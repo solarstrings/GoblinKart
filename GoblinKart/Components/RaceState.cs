@@ -22,10 +22,10 @@ namespace GameEngine.Engine
             var playerTransform = ComponentManager.Instance.GetEntityComponent<TransformComponent>(player);
 
             var distance = Vector2.Distance(AiHelper.V3ToV2(transformC.Position), aiC.Waypoint.WaypointPosition);
-            Debug.WriteLine("distance:" + distance + " tranform.pos:" + transformC.Position + " waypointpos:" + aiC.Waypoint.WaypointPosition);
+            //Debug.WriteLine("distance:" + distance + " tranform.pos:" + transformC.Position + " waypointpos:" + aiC.Waypoint.WaypointPosition);
             if (distance <= aiC.Waypoint.Radius)
             {
-                Debug.WriteLine("Reached Waypoint " + (aiC.Waypoint.Id + 1));
+                Debug.WriteLine("Reached waypoint: " + (aiC.Waypoint.Id + 1));
                 AiHelper.FindNextWaypoint(aiC);
                 aiC.Waypoint.SetRandomTargetPosition();
             }

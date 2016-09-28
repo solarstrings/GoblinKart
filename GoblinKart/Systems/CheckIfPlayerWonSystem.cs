@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,10 +22,9 @@ namespace GoblinKart.Systems
             foreach (var e in playerEntities)
             {
                 var playerLapComp = ComponentManager.Instance.GetEntityComponent<LapComponent>(e);
-                if (playerLapComp.Lap >= gameSettings.NrOfLaps)
+                if (playerLapComp.Laps >= gameSettings.NrOfLaps)
                 {
-                    // A player has won
-                    // Handle it! Exit the game?
+                    Debug.WriteLine("Player has won!");
                 }
             }
         }

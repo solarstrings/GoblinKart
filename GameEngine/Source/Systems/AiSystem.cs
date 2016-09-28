@@ -16,7 +16,7 @@ namespace GameEngine.Systems
         /// 
         /// </summary>
         /// <param name="gameTime"></param>
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime) 
         {
             var entities = ComponentManager.Instance.GetAllEntitiesWithComponentType<AiComponent>();
 
