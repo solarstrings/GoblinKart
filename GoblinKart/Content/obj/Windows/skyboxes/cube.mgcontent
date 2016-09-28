@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
   <SourceFile>f:/GoblinKart/GoblinKart/GoblinKart/Content/skyboxes/cube.fbx</SourceFile>
   <SourceTime>2016-08-06T14:53:56.0268755+02:00</SourceTime>
   <DestFile>f:/GoblinKart/GoblinKart/GoblinKart/Content/bin/Windows/skyboxes/cube.xnb</DestFile>
   <DestTime>2016-09-27T20:39:18.4697726+02:00</DestTime>
+=======
+  <SourceFile>C:/Users/Andreas Karlsson/Source/Repos/GoblinKart4/GoblinKart/Content/skyboxes/cube.fbx</SourceFile>
+  <SourceTime>2016-09-27T19:31:57.3335893+02:00</SourceTime>
+  <DestFile>C:/Users/Andreas Karlsson/Source/Repos/GoblinKart4/GoblinKart/Content/bin/Windows/skyboxes/cube.xnb</DestFile>
+  <DestTime>2016-09-27T20:04:36.2357443+02:00</DestTime>
+>>>>>>> e32b1f016e3fd5e63f4f98a9eef3270cff18e3a0
   <Importer>FbxImporter</Importer>
   <ImporterTime>2016-03-30T08:36:08+02:00</ImporterTime>
   <Processor>ModelProcessor</Processor>
