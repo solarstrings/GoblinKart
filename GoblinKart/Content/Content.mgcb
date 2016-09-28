@@ -377,3 +377,9 @@
 /processorParam:TextureFormat=DxtCompressed
 /build:kart.fbx
 
+#begin Sounds/waypoint_reached.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/waypoint_reached.wav
+
