@@ -56,7 +56,6 @@ namespace GoblinKart.Systems
         public void LockModelToHeight(TerrainMapComponent terComp, TransformComponent trsComp, float offset)
         {
             trsComp.Position = new Vector3(trsComp.Position.X, offset + TerrainMapRenderSystem.GetTerrainHeight(terComp, trsComp.Position.X, Math.Abs(trsComp.Position.Z)), trsComp.Position.Z);
-            Debug.WriteLine("position y:" + trsComp.Position.Y);
         }
     }
 }

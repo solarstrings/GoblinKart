@@ -13,10 +13,10 @@ namespace GoblinKart.Utilities
     {
         public static Vector3 Accelerate(Vector3 velocity)
         {
-            if (velocity.X < PhysicsManager.MaxSpeed)
+            if (velocity.X < PhysicsManager.MaxSpeed - (PhysicsManager.MaxSpeed * 0.15))
                 velocity += new Vector3(PhysicsManager.Instance.Acceleration, 0, 0);
             else
-                velocity = new Vector3(PhysicsManager.MaxSpeed, 0, 0);
+                velocity = new Vector3((PhysicsManager.MaxSpeed - (PhysicsManager.MaxSpeed * 0.15f)),  0, 0);
             return velocity;
         }
 

@@ -37,7 +37,7 @@ namespace GameEngine.Engine
             {
                 //MathHelper.Lerp seems to cause some strange behaviour.
                 //var curvedAngle = MathHelper.Lerp(transformC.Angle, angle, 0.05f);
-                var curvedAngle = AiHelper.CurveAngle(transformC.Angle, angle, 0.05f);
+                var curvedAngle = AiHelper.CurveAngle(transformC.Angle, angle, 0.15f);
                 transformC.Rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitY, curvedAngle);
                 transformC.Angle = curvedAngle;
             }

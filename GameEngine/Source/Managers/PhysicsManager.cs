@@ -16,10 +16,10 @@ namespace GameEngine.Managers {
         public float Drag { get; set; } = 0.99f;
         public float Acceleration { get; set; } = 2f;
 
-        public const float MaxSpeed = 85f;
+        public const float MaxSpeed = 50f;
         public const float MaxReverseSpeed = -30f;
         //public const float Acceleration = 2f;
-        public const float TurningAcceleration = 2.8f;
+        public const float TurningAcceleration = 3.8f;
         //public const float JumpingAcceleration = 75f;
 
         // Explicit static constructor to tell C# compiler

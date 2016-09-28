@@ -14,7 +14,6 @@ namespace GoblinKart.Systems
 {
     class KartControlSystem : IUpdateSystem
     {
-        private bool _whateverAi = true;
         ECSEngine engine;
 
         public KartControlSystem(ECSEngine engine)
@@ -38,9 +37,6 @@ namespace GoblinKart.Systems
 
             var aiKart = ComponentManager.Instance.GetEntityWithTag("AiKart", sceneEntities);
             var transformC2 = ComponentManager.Instance.GetEntityComponent<TransformComponent>(aiKart);
-
-            //PhysicsSystem.ApplyFriction(ref transformC2, _whateverAi);
-            //PhysicsSystem.ApplyGravity(ref transformC2, gameTime, _whateverAi);
         }
 
         private static Quaternion CreateRotation(Vector3 v3)
