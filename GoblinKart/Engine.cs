@@ -30,7 +30,9 @@ namespace GoblinKart
             new InitMainMenu(this);
             new InitMultiplayerMenu(this);
             new InitGame(this);
-            new InitHouses(this);            
+            new InitHouses(this);
+            new InitWinScreen(this);
+            new InitYouLoose(this);  
            
             //once all models entities have been loaded, add the static ones to the chunks they stand upon.
             //added static models will now rendered by the terrain map render system.

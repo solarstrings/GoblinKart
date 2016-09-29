@@ -171,7 +171,8 @@ namespace GoblinKart.Init {
 
             ComponentManager.Instance.AddComponentToEntity(kart, new Collision3Dcomponent());
             ComponentManager.Instance.AddComponentToEntity(kart, new PowerupComponent());
-            
+            ComponentManager.Instance.AddComponentToEntity(kart, new LocalPlayerComponent());
+
             // Create player comp
             ComponentManager.Instance.AddComponentToEntity(kart, new PlayerComponent {Name = "Player", Id = 1});
 
@@ -302,7 +303,7 @@ namespace GoblinKart.Init {
         }
         private void InitSound(ECSEngine engine)
         {
-            SoundManager.Instance.SetMusicVolume(0.1f);
+            SoundManager.Instance.SetMusicVolume(0.0f);
             var song = engine.LoadContent<Song>("Sounds/song");
             SoundManager.Instance.AddSong("song", song);
             SoundManager.Instance.PlaySong("song");

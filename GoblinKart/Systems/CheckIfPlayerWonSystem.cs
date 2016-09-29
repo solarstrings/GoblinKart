@@ -28,17 +28,16 @@ namespace GoblinKart.Systems
                 {
                     if (localPlayerComp == null)
                     {
-                        //SceneManager.Instance.SetActiveScene("LooseScreen");
-                        //SystemManager.Instance.Category = "LooseScreen";
-                        Debug.WriteLine("Player has lost!");
+                        SceneManager.Instance.SetActiveScene("LooseScreen");
+                        SystemManager.Instance.Category = "LooseScreen";
+                        Debug.WriteLine("Player lost!");
                     }
                     else
                     {
-                        //SceneManager.Instance.SetActiveScene("WinScreen");
-                        //SystemManager.Instance.Category = "WinScreen";
-                        Debug.WriteLine("Player has won!");
+                        SceneManager.Instance.SetActiveScene("WinScreen");
+                        SystemManager.Instance.Category = "WinScreen";
+                        Debug.WriteLine("Player Won!");
                     }
-                    
                 }
             }
         }

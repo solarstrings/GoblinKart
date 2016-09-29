@@ -145,16 +145,6 @@ namespace GameEngine.Managers
         /// <param name="gameTime"></param>
         internal void RunAllRenderSystems(GraphicsDevice graphicsDevice,SpriteBatch spriteBatch, GameTime gameTime)
         {
-            if (render3DSystemDictionary.Count > 0)
-            {
-                if (render3DSystemDictionary.ContainsKey(Category))
-                {
-                    foreach (IRender3DSystem ren3Dsys in render3DSystemDictionary[Category].Values)
-                    {
-                        ren3Dsys.Render(graphicsDevice, gameTime);
-                    }
-                }
-            }
             if (renderSystemDictionary.Count > 0)
             {
                 if (renderSystemDictionary.ContainsKey(Category))
@@ -167,6 +157,17 @@ namespace GameEngine.Managers
                     spriteBatch.End();
                 }
             }
+            if (render3DSystemDictionary.Count > 0)
+            {
+                if (render3DSystemDictionary.ContainsKey(Category))
+                {
+                    foreach (IRender3DSystem ren3Dsys in render3DSystemDictionary[Category].Values)
+                    {
+                        ren3Dsys.Render(graphicsDevice, gameTime);
+                    }
+                }
+            }
+
         }
 
         /// <summary>
