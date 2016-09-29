@@ -54,6 +54,8 @@
     <Compile Include="Init\InitHouses.cs" />
     <Compile Include="Init\InitMainMenu.cs" />
     <Compile Include="Init\InitMultiplayerMenu.cs" />
+    <Compile Include="Init\InitWinScreen.cs" />
+    <Compile Include="Init\InitYouLoose.cs" />
     <Compile Include="Network\InitNetworkInformation.cs" />
     <Compile Include="Network\NetworkInformation.cs" />
     <Compile Include="Program.cs" />
@@ -69,6 +71,8 @@
     <Compile Include="Systems\PowerupCollisionSystem.cs" />
     <Compile Include="Systems\NetworkServerRecieveMessage.cs" />
     <Compile Include="Systems\MainMenuSystem.cs" />
+    <Compile Include="Systems\WinScreenSystem.cs" />
+    <Compile Include="Systems\YouLooseSystem.cs" />
     <Compile Include="Utilities\AiHelper.cs" />
     <Compile Include="Utilities\Utilities.cs" />
   </ItemGroup>

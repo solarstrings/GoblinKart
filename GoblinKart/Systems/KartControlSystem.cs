@@ -25,7 +25,8 @@ namespace GoblinKart.Systems
             var sceneEntities = SceneManager.Instance.GetActiveScene().GetAllEntities();
             var terrain = ComponentManager.Instance.GetEntityWithTag("Terrain", sceneEntities);
             var terrainC = ComponentManager.Instance.GetEntityComponent<TerrainMapComponent>(terrain);
-
+            
+            var winImage = ComponentManager.Instance.GetEntityWithTag("MP_Join", sceneEntities);
             var kart = ComponentManager.Instance.GetEntityWithTag("Kart", sceneEntities);
             var transformC = ComponentManager.Instance.GetEntityComponent<TransformComponent>(kart);
             var physComp = ComponentManager.Instance.GetEntityComponent<PhysicsComponent>(kart);
