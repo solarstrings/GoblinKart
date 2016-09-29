@@ -34,7 +34,7 @@ namespace GoblinKart.Systems
 
             _time = 0;
 
-            Debug.WriteLine("Sending information to the server!");
+            //Debug.WriteLine("Sending information to the server!");
 
             // Get all networkShareComponents (should be the component to entities with information necessary to send)
             var networkShareEntities = ComponentManager.Instance.GetAllEntitiesWithComponentType<NetworkShareComponent>();

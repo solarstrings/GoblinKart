@@ -162,7 +162,8 @@ namespace GoblinKart.Systems
 
                 if (p.Id == info.Id)
                 {
-                    TransformComponent t = ComponentManager.Instance.GetEntityComponent<TransformComponent>(e);
+                    var t = ComponentManager.Instance.GetEntityComponent<TransformComponent>(e);
+                    var l = ComponentManager.Instance.GetEntityComponent<LapComponent>(e);
 
                     var difference = Vector3.Distance(info.Position, t.Position);
 
@@ -177,6 +178,8 @@ namespace GoblinKart.Systems
                         t.Scale = info.Scale;
                         t.Rotation = Quaternion.Identity;
                         t.Rotation *= info.Rotation;
+                        l.Laps = info.Laps;
+
                     }
                     else
                     {

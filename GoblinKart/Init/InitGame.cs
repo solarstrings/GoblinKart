@@ -302,7 +302,7 @@ namespace GoblinKart.Init {
         }
         private void InitSound(ECSEngine engine)
         {
-            SoundManager.Instance.SetMusicVolume(0.1f);
+            SoundManager.Instance.SetMusicVolume(0.0f);
             var song = engine.LoadContent<Song>("Sounds/song");
             SoundManager.Instance.AddSong("song", song);
             SoundManager.Instance.PlaySong("song");
