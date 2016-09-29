@@ -59,8 +59,9 @@ namespace GoblinKart.Init {
                 Waypoints = CreateWaypoints()
             });
 
+            _sm.RegisterSystem("Game", new CheckIfPlayerWonSystem());
             _sm.RegisterSystem("Game", new CountLapsSystem());
-            _sm.RegisterSystem("Game", new CheckIfPlayerWonSystem());    
+            
         }
 
         #region AI
@@ -101,6 +102,8 @@ namespace GoblinKart.Init {
             //ComponentManager.Instance.AddComponentToEntity(entity, new FrictionComponent());
             //ComponentManager.Instance.AddComponentToEntity(entity, new DragComponent());
             ComponentManager.Instance.AddComponentToEntity(entity, new KartComponent());
+            ComponentManager.Instance.AddComponentToEntity(entity, new PlayerComponent());
+            ComponentManager.Instance.AddComponentToEntity(entity, new LapComponent());
         }
 
         private static List<Waypoint> CreateWaypoints()
@@ -110,25 +113,25 @@ namespace GoblinKart.Init {
             {
                 Id = 0,
                 WaypointPosition = new Vector2(77, -1017),
-                Radius = 20
+                Radius = 50
             };
             var wp2 = new Waypoint
             {
                 Id = 1,
                 WaypointPosition = new Vector2(1022, -998),
-                Radius = 20
+                Radius = 50
             };
             var wp3 = new Waypoint
             {
                 Id = 2,
                 WaypointPosition = new Vector2(1008, -68),
-                Radius = 20
+                Radius = 50
             };
             var wp4 = new Waypoint
             {
                 Id = 3,
                 WaypointPosition = new Vector2(62, -73),
-                Radius = 20
+                Radius = 50
             };
             waypoints.Add(wp1);
             waypoints.Add(wp2);

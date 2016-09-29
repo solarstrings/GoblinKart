@@ -22,8 +22,11 @@ namespace GameEngine.Systems
 
             Parallel.ForEach (entities, entity =>
             {
-                var aiC = ComponentManager.Instance.GetEntityComponent<AiComponent>(entity);
-                aiC.GetState().DoAction(entity);
+                if (entity.Updateable)
+                {
+                    var aiC = ComponentManager.Instance.GetEntityComponent<AiComponent>(entity);
+                    aiC.GetState().DoAction(entity);
+                }
             });
         }
 
