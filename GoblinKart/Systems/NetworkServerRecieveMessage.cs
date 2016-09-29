@@ -105,6 +105,8 @@ namespace GoblinKart.Systems
             message.Write(inc.ReadFloat());
             message.Write(inc.ReadFloat());
 
+            message.Write(inc.ReadInt32());
+
             //message.Write(inc.ReadFloat());
             //message.Write(inc.ReadFloat());
             //message.Write(inc.ReadFloat());

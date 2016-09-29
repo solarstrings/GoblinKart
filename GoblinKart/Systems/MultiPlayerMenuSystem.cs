@@ -64,6 +64,8 @@ namespace GoblinKart.Systems
                 if (currentSelction == 0)
                 {
                     Join();
+                    var ai = ComponentManager.Instance.GetAllEntitiesWithComponentType<AiComponent>()[0];
+                    ai.Visible = false;
                 }
                 if (currentSelction == 1)
                 {

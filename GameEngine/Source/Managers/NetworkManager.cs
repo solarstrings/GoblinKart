@@ -21,6 +21,7 @@ namespace GameEngine.Managers
         public NetClient Client { get; set; }
 
         public bool IamAServer = false;
+        public bool IsMultiplayer = false;
 
 
         // Explicit static constructor to tell C# compiler

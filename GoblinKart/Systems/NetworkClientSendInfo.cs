@@ -52,6 +52,7 @@ namespace GoblinKart.Systems
 
                 var playerComponent = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(e);
                 var transformComponent = ComponentManager.Instance.GetEntityComponent<TransformComponent>(e);
+                var lapComponent = ComponentManager.Instance.GetEntityComponent<LapComponent>(e);
 
                 message = NetworkManager.Instance.Client.CreateMessage();
                 message.Write((byte)PacketType.PlayerData);
@@ -75,6 +76,8 @@ namespace GoblinKart.Systems
                 message.Write(transformComponent.Rotation.Y);
                 message.Write(transformComponent.Rotation.Z);
                 message.Write(transformComponent.Rotation.W);
+
+                message.Write(lapComponent.Laps);
 
 
                 // Might be implemented in the future

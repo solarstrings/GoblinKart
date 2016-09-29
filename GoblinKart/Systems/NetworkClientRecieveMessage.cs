@@ -11,6 +11,7 @@ using GameEngine.Engine;
 using GameEngine.Engine.Source.Engine;
 using GameEngine.Managers;
 using GameEngine.Systems;
+using GoblinKart.Components;
 using GoblinKart.Network;
 using Lidgren.Network;
 using Microsoft.Xna.Framework;
@@ -96,6 +97,7 @@ namespace GoblinKart.Systems
 
                 cm.AddComponentToEntity(e, player);
                 cm.AddComponentToEntity(e, new TransformComponent());
+                cm.AddComponentToEntity(e, new LapComponent());
 
                 var modelComp = new ModelComponent(_engine.LoadContent<Model>("kart"), true, false, false)
                 {
@@ -124,7 +126,8 @@ namespace GoblinKart.Systems
                Scale = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat()),
                Position = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat()),
                Forward = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat()),
-               Rotation = new Quaternion(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat())
+               Rotation = new Quaternion(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat()),
+               Laps = inc.ReadInt32()
 
             // Velocity = new Vector3(inc.ReadFloat(), inc.ReadFloat(), inc.ReadFloat())
         };

@@ -105,42 +105,30 @@ namespace GoblinKart.Init {
 
         private static List<Waypoint> CreateWaypoints()
         {
-            //var rand = new Random(32463);
-            //var waypoints = new List<Waypoint>();
-            //for (var i = 0; i < 10; i++)
-            //{
-            //    var wp = new Waypoint
-            //    {
-            //        Id = i,
-            //        WaypointPosition = new Vector2(rand.Next(15, 500), rand.Next(-500, -15)),
-            //        Radius = 20
-            //    };
-            //    waypoints.Add(wp);
-            //}
             var waypoints = new List<Waypoint>();
             var wp1 = new Waypoint
             {
                 Id = 0,
-                WaypointPosition = new Vector2(50, -950),
-                Radius = 50
+                WaypointPosition = new Vector2(77, -1017),
+                Radius = 20
             };
             var wp2 = new Waypoint
             {
                 Id = 1,
-                WaypointPosition = new Vector2(950, -950),
-                Radius = 50
+                WaypointPosition = new Vector2(1022, -998),
+                Radius = 20
             };
             var wp3 = new Waypoint
             {
                 Id = 2,
-                WaypointPosition = new Vector2(950, -50),
-                Radius = 50
+                WaypointPosition = new Vector2(1008, -68),
+                Radius = 20
             };
             var wp4 = new Waypoint
             {
                 Id = 3,
-                WaypointPosition = new Vector2(50, -50),
-                Radius = 50
+                WaypointPosition = new Vector2(62, -73),
+                Radius = 20
             };
             waypoints.Add(wp1);
             waypoints.Add(wp2);
