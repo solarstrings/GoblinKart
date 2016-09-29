@@ -22,11 +22,26 @@ namespace GoblinKart.Systems
             foreach (var e in playerEntities)
             {
                 var playerLapComp = ComponentManager.Instance.GetEntityComponent<LapComponent>(e);
+                var localPlayerComp = ComponentManager.Instance.GetEntityComponent<LocalPlayerComponent>(e);
+
                 if (playerLapComp.Laps >= gameSettings.NrOfLaps)
                 {
-                    Debug.WriteLine("Player has won!");
+                    if (localPlayerComp == null)
+                    {
+                        //SceneManager.Instance.SetActiveScene("LooseScreen");
+                        //SystemManager.Instance.Category = "LooseScreen";
+                        Debug.WriteLine("Player has lost!");
+                    }
+                    else
+                    {
+                        //SceneManager.Instance.SetActiveScene("WinScreen");
+                        //SystemManager.Instance.Category = "WinScreen";
+                        Debug.WriteLine("Player has won!");
+                    }
+                    
                 }
             }
         }
     }
 }
+                    

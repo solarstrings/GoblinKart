@@ -191,6 +191,7 @@ namespace GoblinKart.Init {
             ComponentManager.Instance.AddComponentToEntity(kart, new DragComponent());
             ComponentManager.Instance.AddComponentToEntity(kart, new KartComponent());
             ComponentManager.Instance.AddComponentToEntity(kart, new LapComponent());
+            ComponentManager.Instance.AddComponentToEntity(kart, new LocalPlayerComponent());
             
 
             SceneManager.Instance.AddEntityToSceneOnLayer("Game", 3, kart);

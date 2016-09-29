@@ -42,6 +42,7 @@
     <Compile Include="Components\IdleState.cs" />
     <Compile Include="Components\KartComponent.cs" />
     <Compile Include="Components\LapComponent.cs" />
+    <Compile Include="Components\LocalPlayerComponent.cs" />
     <Compile Include="Components\NetworkShareComponent.cs" />
     <Compile Include="Components\CountdownState.cs" />
     <Compile Include="Components\PickupState.cs" />
