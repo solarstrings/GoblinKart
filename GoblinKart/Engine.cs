@@ -37,8 +37,8 @@ namespace GoblinKart
             //once all models entities have been loaded, add the static ones to the chunks they stand upon.
             //added static models will now rendered by the terrain map render system.
             TerrainMapRenderSystem.AddStaticModelsToChunks();
-            SceneManager.Instance.SetActiveScene("LooseScreen");
-            SystemManager.Instance.Category = "LooseScreen";
+            SceneManager.Instance.SetActiveScene("MainMenu");
+            SystemManager.Instance.Category = "MainMenu";
         }
     }
 }
