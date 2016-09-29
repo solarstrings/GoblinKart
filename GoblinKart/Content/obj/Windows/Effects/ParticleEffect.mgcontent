@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>f:/GoblinKart/GoblinKart/GoblinKart/Content/Effects/ParticleEffect.fx</SourceFile>
-  <SourceTime>2016-08-06T14:53:55.9448708+02:00</SourceTime>
-  <DestFile>f:/GoblinKart/GoblinKart/GoblinKart/Content/bin/Windows/Effects/ParticleEffect.xnb</DestFile>
-  <DestTime>2016-09-28T22:21:04.8541239+02:00</DestTime>
+  <SourceFile>C:/Users/Andreas Karlsson/Source/Repos/GoblinKart4/GoblinKart/Content/Effects/ParticleEffect.fx</SourceFile>
+  <SourceTime>2016-09-27T19:31:57.2506371+02:00</SourceTime>
+  <DestFile>C:/Users/Andreas Karlsson/Source/Repos/GoblinKart4/GoblinKart/Content/bin/Windows/Effects/ParticleEffect.xnb</DestFile>
+  <DestTime>2016-09-28T22:57:22.8002481+02:00</DestTime>
   <Importer>EffectImporter</Importer>
   <ImporterTime>2016-03-30T08:36:08+02:00</ImporterTime>
   <Processor>EffectProcessor</Processor>

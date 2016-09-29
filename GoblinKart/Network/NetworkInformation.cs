@@ -16,5 +16,6 @@ namespace GoblinKart.Network
         public Vector3 Forward { get; set; }
         public Quaternion Rotation { get; set; }
         public Vector3 Velocity { get; set; }
+        public int Laps { get; set; }
     }
 }

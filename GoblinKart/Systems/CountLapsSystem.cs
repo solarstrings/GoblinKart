@@ -24,7 +24,7 @@ namespace GoblinKart.Systems
             {
                 var transformC = ComponentManager.Instance.GetEntityComponent<TransformComponent>(e);
                 var lapC = ComponentManager.Instance.GetEntityComponent<LapComponent>(e);
-                                 
+                
                 var distance = Vector2.Distance(AiHelper.V3ToV2(transformC.Position), gameSettings.Waypoints[lapC.CurrentWaypoint].WaypointPosition);
                 if (distance <= gameSettings.Waypoints[lapC.CurrentWaypoint].Radius)
                 {
@@ -34,9 +34,8 @@ namespace GoblinKart.Systems
                 if (lapC.CurrentWaypoint == gameSettings.Waypoints.Count)
                 {
                     lapC.Laps++;
-                    lapC.CurrentWaypoint = 0;                 
+                    lapC.CurrentWaypoint = 0;
                 }
-                
             }
         }
     }
